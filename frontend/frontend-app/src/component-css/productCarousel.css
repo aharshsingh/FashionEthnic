@@ -1,0 +1,18 @@
+.product-carousel-image {
+    margin-left: 700px;
+    margin-top: 50px;
+    width: 540px; /* Set the desired width */
+    height: 800px; /* Set the desired height */
+  }
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    width: 50px; /* Set the desired width */
+    height: 50px; /* Set the desired height */
+    background-size: 50px 50px; /* Ensure the background image scales correctly */
+  }
+  .crossImg{
+    height: 30px;
+    width: 30px;
+    margin-left: 1800px;
+    margin-top: 50px;
+  }

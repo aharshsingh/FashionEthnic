@@ -4,6 +4,23 @@
 .outer-container1{
     display: flex;
     column-gap: 1400px;
+    position: fixed; /* Fixes the navbar to the top */
+    width: 100%; /* Ensures the navbar spans the full width */
+    top: 0; /* Positions the navbar at the top */
+    left: 0; /* Align the navbar left */
+    z-index: 1000; /* Ensures the navbar stays on top of other content */
+    background-color: white; /* Adds background color to ensure content doesn't show through */
+    transition: box-shadow 0.3s; /* Smooth transition for the shadow */
+
+}
+.nav-shadow {
+    transition: 1s;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    /* border-bottom: 1px solid #ccc; Bottom border */
+    background-color: #132C48;
+}
+.nav-scrolled .link.wishlist-link {
+    color: #FF4500; /* New color when scrolled */
 }
 .inner-container{
     display: flex;

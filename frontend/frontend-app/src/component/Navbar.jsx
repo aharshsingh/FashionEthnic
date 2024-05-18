@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React,{useContext, useState, useEffect} from 'react';
 import {Link} from 'react-router-dom'; 
 import heartimg from '../photo/heart-solid.svg'
 import cartimg from '../photo/cart-shopping-solid.svg'
@@ -11,12 +11,25 @@ import {CartContext} from '../Context/CartContext.jsx'
 export default function Navbar() {
 
   const {cart} = useContext(CartContext);
-  // console.log(cart);
   const {isAuthenticated, user} = useAuth0();
-
+  const [scrolled, setScrolled] = useState(false);
+  const handleScroll = () => {
+    const offset = window.scrollY;
+    if (offset > 50) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
     <>
-    <div className='outer-container1'>
+    <div className={`outer-container1 ${scrolled ? 'nav-shadow' : ''}`}>
      <div className='burger-img'>
       < NavDrawer/>
      </div>
@@ -25,7 +38,7 @@ export default function Navbar() {
     {isAuthenticated && <img className='profile-img' src={user.picture} alt={user.name} />}
     <Link className='link' to="/Profile">{ isAuthenticated && <p className='name' id='name1'>{user.name}</p>}</Link>
     <img className='heart-img' src={heartimg} alt="logo" />
-    <Link className='link' to="/Wishlist"><p className='name' id='name2'>Wishlist</p></Link>
+    <Link className={`link ${scrolled ? 'wishlist-link' : ''}`} to="/Wishlist"><p className='name' id='name2'>Wishlist</p></Link>
     <Link to='/Cart'><img className='cart-img' src={cartimg} alt="logo" /></Link>
     <p className='name' id='name3'>{cart.totalitems}</p>
     </div>

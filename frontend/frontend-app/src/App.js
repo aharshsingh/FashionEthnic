@@ -21,11 +21,14 @@ import UpdatePhone from './component/UpdatePhone.jsx'
 import UpdateGender from './component/UpdateGender.jsx'
 import UpdateDOB from './component/UpdateDOB.jsx'
 import UpdateAltPhone from './component/UpdateAltPhone.jsx'
+import ProductCarousel from './component/ProductCarousel.jsx'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { CartContext } from './Context/CartContext.jsx';
+import { UserContext } from './Context/UserContext.jsx';
+// import axios from 'axios';
 function App(){
-
+    const [ user, setUser ] = useState({});
     const [ cart, setCart ] = useState({});
-
     useEffect(() => {
         const cart = window.localStorage.getItem('cart');
         setCart(JSON.parse(cart));
@@ -34,17 +37,21 @@ function App(){
     useEffect(() => {
         window.localStorage.setItem('cart' , JSON.stringify(cart));
     },[cart])
-
+    // useEffect(()=>{
+    //     axios.get('http://localhost:7000/userInfo')
+    //     .
+    // },[]);
     return(
         <>
             <BrowserRouter>
+            <UserContext.Provider value={ {user, setUser} }>
             <CartContext.Provider value={ {cart, setCart} }>
                 <Routes>
                     <Route path="/" Component={Home}></Route>
                     <Route path="/Signin" Component={Signin}></Route> 
                     <Route path="/Navbar" Component={Navbar}></Route>
                     <Route path="/Product" Component={Product}></Route>
-                    <Route path="/Productdetails/:name" Component={Productdetails}></Route>
+                    <Route path="/Productdetails/:id" Component={Productdetails}></Route>
                     <Route path="/Cart" Component={Cart}></Route>
                     <Route path="/Bill" Component={Bill}></Route>
                     <Route path='/Profile' Component={Profile}></Route>
@@ -62,9 +69,11 @@ function App(){
                     <Route path='/UpdateGender' Component={UpdateGender}></Route>
                     <Route path='/UpdateDOB' Component={UpdateDOB}></Route>
                     <Route path='/UpdateAltPhone' Component={UpdateAltPhone}></Route>
+                    <Route path='/productCarousel/:id' Component={ProductCarousel}></Route>
                     <Route path="*" element={<Navigate to="/Home" replace />} />
                 </Routes>
                 </CartContext.Provider>
+                </UserContext.Provider>
             </BrowserRouter>
         </>
     )

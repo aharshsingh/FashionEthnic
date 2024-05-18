@@ -5,12 +5,11 @@ import {CartContext} from '../Context/CartContext'
 import Productsnippet from './Product_snippet'
 import '../component-css/Cart.css'
 import {Link} from 'react-router-dom'
-import axios from 'axios'
 
 export default function Cart() {
 
   const { cart } = useContext(CartContext);
-
+  // const { setUserId } = useContext(UserContext);
   useEffect(() =>{
     if(!cart.items)
       return;

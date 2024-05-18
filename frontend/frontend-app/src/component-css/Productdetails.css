@@ -1,6 +1,7 @@
 .detail-container{
     display: flex;
-    column-gap: 150px;
+    column-gap: 800px;
+    margin-top: 50px;
 }
 .product-image{
     height: 500px;

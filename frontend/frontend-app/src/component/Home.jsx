@@ -7,13 +7,38 @@ import Footer from './Footer'
 import Products from './Products'
 import Pagination from './Paginationcount'
 import Dropdown from './Dropdown'
-// import { useState } from 'react'
-// import axios from 'axios';
-// import  { useEffect } from 'react'
+// import CardCarousel from './CardCarousel'
+import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from 'react';
+import axios from 'axios';
 
 
 export default function Home() {
+  
+  // const [userInfo, setUserInfo] = useState({});
+  const {isAuthenticated, user} = useAuth0();
 
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      axios.post('http://localhost:7000/register', {
+        userName: user.name,
+        email: user.email
+      })
+      .then(response => {
+        console.log('User data saved successfully:', response.data);
+      })
+      .catch(error => {
+        console.error('Error saving user data:', error.response ? error.response.data : error);
+    });
+    }
+    // axios.get('http://localhost:7000/userInfo')
+    // .then((response) =>{
+    //   setUserInfo(response.data);
+    // })
+    // .catch((error)=>{
+    //   console.log('Error in fetching the user data');
+    // });
+  }, [isAuthenticated, user]);
   return (
     <>
     <Navbar/>
@@ -36,6 +61,7 @@ export default function Home() {
     <div className='paginationcount'>
     <Pagination/>
     </div>
+    {/* <CardCarousel/> */}
     <Footer/>
     </>
   )
