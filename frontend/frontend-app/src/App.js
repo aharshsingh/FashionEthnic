@@ -24,10 +24,11 @@ import UpdateAltPhone from './component/UpdateAltPhone.jsx'
 import ProductCarousel from './component/ProductCarousel.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CartContext } from './Context/CartContext.jsx';
-import { UserContext } from './Context/UserContext.jsx';
+import { UserProvider } from './Context/UserContext.jsx';
 // import axios from 'axios';
+
 function App(){
-    const [ user, setUser ] = useState({});
+  
     const [ cart, setCart ] = useState({});
     useEffect(() => {
         const cart = window.localStorage.getItem('cart');
@@ -44,7 +45,7 @@ function App(){
     return(
         <>
             <BrowserRouter>
-            <UserContext.Provider value={ {user, setUser} }>
+            <UserProvider>
             <CartContext.Provider value={ {cart, setCart} }>
                 <Routes>
                     <Route path="/" Component={Home}></Route>
@@ -73,7 +74,7 @@ function App(){
                     <Route path="*" element={<Navigate to="/Home" replace />} />
                 </Routes>
                 </CartContext.Provider>
-                </UserContext.Provider>
+                </UserProvider>
             </BrowserRouter>
         </>
     )

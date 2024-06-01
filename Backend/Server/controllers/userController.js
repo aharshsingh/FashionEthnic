@@ -52,6 +52,16 @@ const userController = {
         } catch (error) {
             return next(error);
         }
+    },
+
+    async userCartDetails(req,res,next){
+        let document;
+        try {
+            document = await User.findOne({_id : req.params.id}).select('-_id -userName -email -role -address -phoneNumber -__v -createdAt -updatedAt');
+        } catch (error) {
+            return next(CustomErrorHandler.notFound("User not Found!"));
+        }
+        return res.json(document);
     }
 }
 

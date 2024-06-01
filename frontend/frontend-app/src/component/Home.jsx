@@ -9,17 +9,19 @@ import Pagination from './Paginationcount'
 import Dropdown from './Dropdown'
 // import CardCarousel from './CardCarousel'
 import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import axios from 'axios';
+import { UserContext } from '../Context/UserContext';
 
 
 export default function Home() {
   
   // const [userInfo, setUserInfo] = useState({});
   const {isAuthenticated, user} = useAuth0();
-
+  const { setId } = useContext(UserContext);
   useEffect(() => {
     if (isAuthenticated && user) {
+      setId(user._id);
       axios.post('http://localhost:7000/register', {
         userName: user.name,
         email: user.email
@@ -38,7 +40,7 @@ export default function Home() {
     // .catch((error)=>{
     //   console.log('Error in fetching the user data');
     // });
-  }, [isAuthenticated, user]);
+  }, [isAuthenticated, user, setId]);
   return (
     <>
     <Navbar/>

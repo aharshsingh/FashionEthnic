@@ -107,7 +107,7 @@ const productController = {
     },
 
     async productDetails(req,res,next){
-        console.log('Fetching product details for ID:', req.params.id)
+        //console.log('Fetching product details for ID:', req.params.id)
         let document;
         try {
             document = await product.findOne({_id : req.params.id});

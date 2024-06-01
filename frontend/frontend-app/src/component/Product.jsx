@@ -11,7 +11,6 @@ export default function Product(props) {
     <>
   <Link className='product-link' to={`productDetails/${product._id}`}>
       <div className='card'>
-        {console.log(product.image)}
         <img className='product-img' src={product.image} alt="Product" />
         <div className='card-container'>
           <p className='product-name'>{product.name}</p>
