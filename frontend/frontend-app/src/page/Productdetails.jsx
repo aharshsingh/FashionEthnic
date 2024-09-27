@@ -1,8 +1,8 @@
 import React, { useState,useEffect, useContext } from 'react'
 import { useParams, Link} from 'react-router-dom'
 import axios from 'axios'
-import Navbar from './Navbar'
-import Footer from './Footer'
+import Navbar from '../component/Navbar'
+import Footer from '../component/Footer'
 import bagimg from '../photo/bag-shopping-solid.svg'
 import likeimg from '../photo/heart-regular.svg'
 import '../component-css/Productdetails.css'
@@ -19,6 +19,7 @@ export default function Productdetails() {
     await axios.get(`http://localhost:7000/productDetails/${params.id}`)
     .then((response) => {
       setProduct(response.data);
+      console.log(response.data);
     })
     .catch((error) => {
       console.error(`Error fetching product details:`, error);

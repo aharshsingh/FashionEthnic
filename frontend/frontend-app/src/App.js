@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter,Routes, Route, Navigate} from "react-router-dom";
-import Home from "./component/Home"
+import Home from "./page/Home.jsx"
 import Signin from "./component/Signin"
 import Navbar from './component/Navbar'
 import Product from './component/Product'
-import Productdetails from './component/Productdetails'
+import Productdetails from './page/Productdetails.jsx'
 import Cart from './component/Cart'   
 import Bill from './component/Bill'
 import Profile from './component/Profile'
-import Dashboard from './component/Dashboard'  
+import Dashboard from './page/Dashboard.jsx'  
 import ContactUs from './component/ContactUs'
 import FAQ from './component/FAQ'
 import PrivacyPolicy from './component/PrivacyPolicy'

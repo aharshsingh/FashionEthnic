@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
 import Logoutbtn from './Logoutbtn';
-import Dashboard from './Dashboard';
+import Dashboard from '../page/Dashboard.jsx';
 import Orders from './Orders';
 import ShippingAddress from './Shippingaddress.jsx';
 import '../component-css/Profile.css';

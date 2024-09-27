@@ -1,12 +1,12 @@
 import React from 'react'
-import Navbar from './Navbar'
+import Navbar from '../component/Navbar'
 import '../component-css/Home.css'
 import homeimg from '../photo/K15R-_1_600x.webp'
 import {Link} from 'react-router-dom'
-import Footer from './Footer'
-import Products from './Products'
-import Pagination from './Paginationcount'
-import Dropdown from './Dropdown'
+import Footer from '../component/Footer'
+import Products from '../component/Products'
+import Pagination from '../component/Paginationcount'
+import Dropdown from '../component/Dropdown'
 // import CardCarousel from './CardCarousel'
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useContext } from 'react';
