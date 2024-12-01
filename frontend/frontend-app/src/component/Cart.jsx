@@ -34,9 +34,10 @@ export default function Cart() {
       <Navbar />
       <div className='cart-outer-container'>
         <div className='cart-inner-container1'>
-          {cartProduct.map((product) => (
+          {/* {cartProduct.map((product) => (
           <Productsnippet key={product._id} product={product}/>
-          ))}  
+          ))}   */}
+          <Productsnippet/>
         </div>
         <div className='cart-inner-container2'>
           <p className='snippet-text1' id='txt'>Check delivery services: </p>

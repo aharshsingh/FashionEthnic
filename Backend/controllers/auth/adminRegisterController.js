@@ -1,6 +1,6 @@
 const { adminRegisterSchema } = require('../../services/validators');
-const Userbase = require('../../models/user');
-const CustomErrorHandler = require('../../customErrorHandler/customErrorHandler');
+const User = require('../../models/user');
+const CustomErrorHandler = require('../../services/customErrorHandler');
 const bcrypt = require('bcrypt');
 
 const adminAuth = {
@@ -11,13 +11,13 @@ const adminAuth = {
         }
 
         try {
-            const exists = await Userbase.exists({ email: req.body.email});
+            const exists = await User.exists({ email: req.body.email});
             if(exists){
                 return next(CustomErrorHandler.alreadyExists('User already exists!'));
             }
             const { email, password, role } = req.body;
                 const hashedPassword = await bcrypt.hash(password, 10);
-                const admin = new Userbase({
+                const admin = new User({
                     email,
                     password: hashedPassword,
                     role

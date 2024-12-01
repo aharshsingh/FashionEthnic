@@ -15,6 +15,7 @@
 .product-img{
     width: 250px;
     height: 400px;
+    border-radius: 5px 5px 0px 0px;
 }
 .product-img:hover{
     scale: 1.05;

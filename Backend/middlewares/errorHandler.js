@@ -1,5 +1,5 @@
 const { ValidationError } = require('joi');
-const CustomErrorHandler = require('../middlewares/customErrorHandler');
+const CustomErrorHandler = require('../services/customErrorHandler');
 
 const errorHandler = (err, req, res, next) => {
     let statusCode = 500;

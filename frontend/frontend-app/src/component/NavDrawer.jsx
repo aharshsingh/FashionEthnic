@@ -60,7 +60,9 @@ export default function NavDrawer() {
       <List>
         <ListItem disablePadding>
           <ListItemButton component="div">
+            <div style={{border:'none'}}>
             <Logoutbtn />
+            </div>
           </ListItemButton>
         </ListItem>
       </List>

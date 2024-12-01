@@ -5,7 +5,6 @@ const {APP_PORT, DB_URL} = require('./config');
 const routes = require('./routes');
 const cors = require("cors");
 const errorHandler = require('./middlewares/errorHandler')
-// const color = require("cli-color");
 
 mongoose.connect(DB_URL);
 const db = mongoose.connection;
@@ -19,6 +18,7 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowable methods
   credentials: true // Allow credentials (cookies, authorization headers, etc.)
 }));
+
 app.use(express.json());
 app.use(routes);
 app.use(errorHandler);

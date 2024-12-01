@@ -7,12 +7,30 @@ import bagimg from '../photo/bag-shopping-solid.svg'
 import likeimg from '../photo/heart-regular.svg'
 import '../component-css/Productdetails.css'
 import { CartContext } from '../Context/CartContext'
-
+import { UserContext } from '../Context/UserContext'
 
 export default function Productdetails() {
 
+  const { id } = useContext(UserContext);
   const [product,setProduct] = useState({});
   const params = useParams();
+
+  const handleWishList = async ()=>{
+    try{
+      console.log('User ID:', id); // Make sure `id` is valid
+      console.log('Product ID:', product._id); // Make sure `product._id` is valid
+    const response = await axios.post('http://localhost:7000/addProductWishList',{
+      userId: "66138742fb9b650d94cf9de6",
+      productId: params.id
+    }) 
+    if(response.status === 200){
+      alert('Product WishListed');
+    }
+  } catch (error) {
+    console.error('Error adding product to wishlist:', error);
+    alert('Failed to add product to wishlist');
+  }
+  }
 
   useEffect(() =>{
     const fetchProductDetails = async () => {
@@ -69,7 +87,7 @@ export default function Productdetails() {
         <p className='short-detail'>{product.about}</p>
         <p className='product_price'>Rs.{product.price}<span className='discount'>  ({product.discount}% OFF)</span></p>
         <p className='tax'>inclusive of all taxes</p>
-        <p className='detail-line'>__________________________________________</p>
+        <div className='detail-line'></div>
         <p className='size-text'>SELECT SIZE <span className='chart'>SIZE CHART</span></p>
         <div className='size'> 
           <button className='size-button'>S</button>
@@ -80,9 +98,9 @@ export default function Productdetails() {
         </div>
         <div className='button-container'>
           <button className='detail-button' onClick={(event) => addToCart(event,product)}><img className='bag-img' src={bagimg} alt='logo' />Add to bag</button>
-          <button className='detail-button'><img className='bag-img' src={likeimg} alt="logo" />Wishlist</button>
+          <button className='detail-button' onClick={handleWishList}><img className='bag-img' src={likeimg} alt="logo" />Wishlist</button>
         </div>
-        <p className='detail-line'>__________________________________________</p>
+        <div className='detail-line'></div>
         <ul className='product_detail_list'>PRODUCT DETAILS
           <li className='p_d_l'>Colour: {product.colour}</li>
           <li className='p_d_l'>{product.fit}</li>
@@ -91,12 +109,14 @@ export default function Productdetails() {
           <li className='p_d_l'>{product.material}</li>
           <li className='p_d_l'>{product.care}</li>
         </ul>
-        <p className='detail-line'>__________________________________________</p>
+        <div className='detail-line'></div>
         <p className='product-rating'>RATINGS</p>
         <p className='rate-num'>{product.rating}</p>
       </div>
     </div>
+    <div style={{marginTop: '250px'}}>
     <Footer/>
+    </div>
     </>
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Navbar from '../component/Navbar'
 import '../component-css/Home.css'
 import homeimg from '../photo/K15R-_1_600x.webp'
@@ -19,6 +19,8 @@ export default function Home() {
   // const [userInfo, setUserInfo] = useState({});
   const {isAuthenticated, user} = useAuth0();
   const { setId } = useContext(UserContext);
+  const [filter, setFilter] = useState('');
+
   useEffect(() => {
     if (isAuthenticated && user) {
       setId(user._id);
@@ -52,13 +54,13 @@ export default function Home() {
       </div>
       <img className='home-img' src={homeimg} alt="img" />
     </div>
-    <p className='line'>_________________________________________________________________________________________________________________________________________________________________</p>
+    <div className='line'></div>
     <div className='filter-container'>
       <button className='filter'>FILTERS</button>
-      <Dropdown/>
+      <Dropdown setFilter={setFilter} />
     </div>
     <div className='product-container'>
-    <Products/>
+    <Products filter={filter} />
     </div>
     <div className='paginationcount'>
     <Pagination/>

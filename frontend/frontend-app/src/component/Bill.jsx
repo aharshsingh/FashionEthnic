@@ -17,7 +17,7 @@ export default function Bill() {
            Ayodhya - 224001 
            Uttar Pradesh</p>
         <p className='phone'>Phone no. 8005198273</p>
-        <button className='edit'>Edit</button>
+        {/* <button className='edit'>Edit</button> */}
       </div>
       <div className='button-div'>
         <button className='address-button'>+Add New Address</button>

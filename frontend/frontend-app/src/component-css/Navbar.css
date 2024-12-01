@@ -3,24 +3,23 @@
 }
 .outer-container1{
     display: flex;
-    column-gap: 1400px;
-    position: fixed; /* Fixes the navbar to the top */
-    width: 100%; /* Ensures the navbar spans the full width */
-    top: 0; /* Positions the navbar at the top */
-    left: 0; /* Align the navbar left */
-    z-index: 1000; /* Ensures the navbar stays on top of other content */
-    background-color: white; /* Adds background color to ensure content doesn't show through */
-    transition: box-shadow 0.3s; /* Smooth transition for the shadow */
+    column-gap: 1300px;
+    position: fixed; 
+    width: 100%; 
+    top: 0; 
+    left: 0; 
+    z-index: 1000; 
+    background-color: white; 
+    transition: box-shadow 0.3s; 
 
 }
 .nav-shadow {
     transition: 1s;
-    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    /* border-bottom: 1px solid #ccc; Bottom border */
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1); 
     background-color: #132C48;
 }
 .nav-scrolled .link.wishlist-link {
-    color: #FF4500; /* New color when scrolled */
+    color: #FF4500; 
 }
 .inner-container{
     display: flex;
@@ -43,8 +42,12 @@
     font-size: 20px;
     margin-top: 5px;
     color: #132C48;
-    font-weight: 700px;
-
+    font-weight:lighter;
+}
+.nav-shadow .name {
+    color: white; 
+    transition: color 0.3s;
+    font-weight:lighter; 
 }
 #name1{
     margin-left: 5px;

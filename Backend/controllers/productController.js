@@ -1,4 +1,4 @@
-const CustomErrorHandler = require('../middlewares/customErrorHandler');
+const CustomErrorHandler = require('../services/customErrorHandler');
 const Product  = require('../models/product')
 const multer = require('multer');
 const path = require('path');

@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const User = require('../models/user');
 const registerSchema = require('../validators/userValidator')
-const CustomErrorHandler = require('../middlewares/customErrorHandler');
+const CustomErrorHandler = require('../services/customErrorHandler');
 
 const userController = {
     async register(req,res,next) {

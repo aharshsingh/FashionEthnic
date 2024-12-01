@@ -14,7 +14,13 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Product'
         },
-        quantity: {type: Number, default: 1}
+        quantity: {type: Number}
+    }],
+    wishList: [{
+        product: {
+            type: Schema.Types.ObjectId,
+            ref: 'Product'
+            }
     }]
 }, { timestamps: true });
 

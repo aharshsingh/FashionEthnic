@@ -36,7 +36,7 @@
     border: dashed 1px black;
     padding:40px;
     margin-top: 50px;
-    width: 370px;
+    width: 450px;
     margin-left: 400px;
 }
 .address-button{
@@ -44,7 +44,7 @@
     color: #132C48;
     background-color: #FE8551;
     border: 1px solid ;
-    margin-left: 80px;
+    margin-left: 90px;
     width: 200px;
     border-radius: 5px;
 }

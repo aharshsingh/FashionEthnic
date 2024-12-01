@@ -4,8 +4,8 @@ import ratingimg from '../photo/star-solid.svg'
 import '../component-css/Products.css'
 
 export default function Product(props) {
-  // debugger;
-  const { product } = props; // Destructuring for easier access
+  
+  const { product } = props;
 
   return (
     <>

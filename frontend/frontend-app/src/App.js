@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter,Routes, Route, Navigate} from "react-router-dom";
 import Home from "./page/Home.jsx"
-import Signin from "./component/Signin"
+import Signin from "./page/Signin.jsx"
 import Navbar from './component/Navbar'
 import Product from './component/Product'
 import Productdetails from './page/Productdetails.jsx'

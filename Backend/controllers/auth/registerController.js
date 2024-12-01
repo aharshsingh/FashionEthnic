@@ -1,4 +1,4 @@
-const CustomErrorHandler = require('../../customErrorHandler/customErrorHandler');
+const CustomErrorHandler = require('../../services/customErrorHandler');
 const User = require('../../models/user');
 const bcrypt = require('bcrypt');
 const { registerSchema } = require('../../services/validators');

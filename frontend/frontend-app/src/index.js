@@ -2,6 +2,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import React from 'react'
 import { Auth0Provider } from '@auth0/auth0-react';
+import './component-css/tailwindCss.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <Auth0Provider
