@@ -4,8 +4,8 @@
     margin-top: 50px;
 }
 .product-image{
-    height: 500px;
-    width: 350px;
+    height: 500px !important;
+    width: 350px !important;
 }
 .image-div{
     margin-left: 300px;
@@ -14,11 +14,16 @@
 .image-container1{
     display: flex;
     column-gap: 20px;
+    width: 700px;
+    height: 500px;
 }
 .image-container2{
     display: flex;
     column-gap: 20px;
     margin-top: 20px;
+    width: 700px;
+    height: 500px;
+
 }
 .text-detail-container{
     margin-top: 100px;

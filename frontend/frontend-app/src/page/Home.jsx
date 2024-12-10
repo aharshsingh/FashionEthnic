@@ -6,43 +6,12 @@ import {Link} from 'react-router-dom'
 import Footer from '../component/Footer'
 import Products from '../component/Products'
 import Pagination from '../component/Paginationcount'
-import Dropdown from '../component/Dropdown'
-// import CardCarousel from './CardCarousel'
-import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect, useContext } from 'react';
-import axios from 'axios';
-import { UserContext } from '../Context/UserContext';
-
+import Dropdown from '../component/Dropdown';
 
 export default function Home() {
-  
-  // const [userInfo, setUserInfo] = useState({});
-  const {isAuthenticated, user} = useAuth0();
-  const { setId } = useContext(UserContext);
   const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    if (isAuthenticated && user) {
-      setId(user._id);
-      axios.post('http://localhost:7000/register', {
-        userName: user.name,
-        email: user.email
-      })
-      .then(response => {
-        console.log('User data saved successfully:', response.data);
-      })
-      .catch(error => {
-        console.error('Error saving user data:', error.response ? error.response.data : error);
-    });
-    }
-    // axios.get('http://localhost:7000/userInfo')
-    // .then((response) =>{
-    //   setUserInfo(response.data);
-    // })
-    // .catch((error)=>{
-    //   console.log('Error in fetching the user data');
-    // });
-  }, [isAuthenticated, user, setId]);
+
   return (
     <>
     <Navbar/>

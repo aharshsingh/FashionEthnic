@@ -19,7 +19,8 @@ const wishListController = {
 
       const productExists = wishlist.item.find((item) => item.product.toString() === productId);
       if (productExists) {
-        return res.status(400).json({ error: 'Product already in wishlist' });
+        //console.log("product is added already!")
+        return res.status(201).json({ error: 'Product already in wishlist' });
       }
 
       wishlist.item.push({ product: productId });
@@ -31,6 +32,19 @@ const wishListController = {
       return res.status(500).json({ error: 'Internal Server Error' });
     }
   },
+
+  async getwishlist(req,res,next){
+    try {
+      const id = req.params.id;
+      const result = await WishList.findOne({userId: id}).select('-__v -userId -_id')
+      if(!result){
+        console.log("no wishlist available");
+      }
+      return res.status(200).json(result);  
+    } catch (error) {
+      return next(error);
+    }
+  }
 };
 
 module.exports = wishListController;

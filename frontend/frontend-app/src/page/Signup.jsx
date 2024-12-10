@@ -2,32 +2,24 @@ import React, {useState} from 'react'
 import '../component-css/Signup.css'
 import signupImage from '../photo/64e74bb7657e506338faa8c9_1692879799068.jpg'
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate, Link} from 'react-router-dom';
 export default function Signin() {
 
 const [email, setEmail] = useState('');
+const [userName, setUserName] = useState('');
 const [password, setPassword] = useState('');
 const navigate = useNavigate(); 
 
-const setUserContext = async(token)=>{
-  const response = await axios.post('http://localhost:7000/userId',{
-    token
-  })
-  localStorage.setItem('userId', response.data._id);
-  console.log("User ID set in context:", response.data._id);
-}
-const handleFormSubmission = async(e) =>{
+const handleFormSubmission = async (e) =>{
   e.preventDefault();
   try {
-    const response = await axios.post('http://localhost:7000/signin',{
+    const response = await axios.post('http://localhost:7000/signup',{
+      userName,
       email,
       password
     })
-    localStorage.setItem("token" , response.data.token);
-    setUserContext(response.data.token);
     if (response.status === 200) {
-      navigate('/');
+      navigate('/signin');
     }
   } catch (error) {
     console.log(error);
@@ -43,9 +35,21 @@ const handleFormSubmission = async(e) =>{
     />
     <div className="fadeOverlay"></div>
   </div>
-      <div className='LoginFormContainer'>
-        <p className='FormHeading'>Welcome, Login here</p>
+      <div className='registerFormContainer'>
+        <p className='FormHeading'>Create an account</p>
+        <Link to='/signin'><p className='FormSubHeading'>Already have an account? Log in</p></Link>
         <form>
+            <div className='inputDiv'>
+            <label >What should we call you?</label><br/>
+            <input 
+            type='text' 
+            placeholder='Enter your profile name'
+            className='userInput'
+            required
+            onChange={(event) => {
+              setUserName(event.target.value);
+            }}/>
+            </div>
             <div className='inputDiv'>
             <label>What's your email?</label><br/>
             <input 
@@ -58,7 +62,7 @@ const handleFormSubmission = async(e) =>{
             }}/>
             </div>
             <div className='inputDiv'>
-            <label>Your password</label><br/>
+            <label>Create your password</label><br/>
             <input 
             type='text' 
             placeholder='Enter your password'
@@ -68,7 +72,8 @@ const handleFormSubmission = async(e) =>{
               setPassword(event.target.value);
             }}/>
             </div>
-            <button type='submit' className='submitLoginForm' onClick={handleFormSubmission}>Create an account</button>
+            <p className='rgisterLabel'>By creating an account, you agree to the <span className='termsSpan'>Terms of use</span> and <span className='termsSpan'>Privacy Policy</span></p>
+            <button type='submit' className='submitRegisterForm' onClick={handleFormSubmission}>Create an account</button>
         </form>
     </div>
     </div>

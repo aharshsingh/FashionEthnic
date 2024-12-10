@@ -4,5 +4,6 @@ const registerController = require('./auth/registerController');
 const productController = require('./productController');
 const userController = require('./userController');
 const wishListController = require('./wishListController');
+const cartController = require('./cartController');
 
-module.exports = { adminRegisterController, loginController, registerController, productController, userController, wishListController }
+module.exports = { adminRegisterController, loginController, registerController, productController, userController, wishListController, cartController }

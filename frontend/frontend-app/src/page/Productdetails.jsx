@@ -11,20 +11,22 @@ import { UserContext } from '../Context/UserContext'
 
 export default function Productdetails() {
 
-  const { id } = useContext(UserContext);
+  const id = localStorage.getItem("userId");
   const [product,setProduct] = useState({});
   const params = useParams();
 
   const handleWishList = async ()=>{
     try{
-      console.log('User ID:', id); // Make sure `id` is valid
-      console.log('Product ID:', product._id); // Make sure `product._id` is valid
     const response = await axios.post('http://localhost:7000/addProductWishList',{
-      userId: "66138742fb9b650d94cf9de6",
+      userId: id,
       productId: params.id
     }) 
     if(response.status === 200){
       alert('Product WishListed');
+    }
+    if(response.status === 201){
+      alert("product is added already!");
+      return;
     }
   } catch (error) {
     console.error('Error adding product to wishlist:', error);
@@ -49,8 +51,6 @@ export default function Productdetails() {
   const { cart,setCart } = useContext(CartContext);
 
   const addToCart = (event,product) =>{
-    // console.log(event)
-    // console.log(product)
     let _cart = {...cart};
     if(!_cart.items)
       _cart.items = {}
@@ -75,11 +75,11 @@ export default function Productdetails() {
       <div className='image-div'>
       <div className='image-container1'>
         <Link to={`/productCarousel/${product._id}`}><img className='product-image' src={product.image} alt="logo" /></Link>
-        <img className='product-image' src={product.image} alt="logo" />
+        <Link to={`/productCarousel/${product._id}`}><img className='product-image' src={product.image} alt="logo" /></Link>
       </div>
       <div className='image-container2'>
-        <img className='product-image' src={product.image} alt="logo" />
-        <img className='product-image' src={product.image} alt="logo" />
+      <Link to={`/productCarousel/${product._id}`}><img className='product-image' src={product.image} alt="logo" /></Link>
+      <Link to={`/productCarousel/${product._id}`}><img className='product-image' src={product.image} alt="logo" /></Link>
       </div>
       </div>
       <div className='text-detail-container'>

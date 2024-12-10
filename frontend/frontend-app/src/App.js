@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { BrowserRouter,Routes, Route, Navigate} from "react-router-dom";
 import Home from "./page/Home.jsx"
 import Signin from "./page/Signin.jsx"
+import Signup from "./page/Signup.jsx"
 import Navbar from './component/Navbar'
 import Product from './component/Product'
 import Productdetails from './page/Productdetails.jsx'
@@ -25,30 +26,18 @@ import ProductCarousel from './component/ProductCarousel.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CartContext } from './Context/CartContext.jsx';
 import { UserProvider } from './Context/UserContext.jsx';
-// import axios from 'axios';
+import WishList from './page/WishList.jsx';
 
 function App(){
-  
-    const [ cart, setCart ] = useState({});
-    useEffect(() => {
-        const cart = window.localStorage.getItem('cart');
-        setCart(JSON.parse(cart));
-        // console.log(JSON.parse(cart));
-    },[])
-    useEffect(() => {
-        window.localStorage.setItem('cart' , JSON.stringify(cart));
-    },[cart])
-    // useEffect(()=>{
-    //     axios.get('http://localhost:7000/userInfo')
-    //     .
-    // },[]);
+    
     return(
         <>
             <BrowserRouter>
             <UserProvider>
-            <CartContext.Provider value={ {cart, setCart} }>
+            <CartContext.Provider>
                 <Routes>
                     <Route path="/" Component={Home}></Route>
+                    <Route path="/Signup" Component={Signup}></Route> 
                     <Route path="/Signin" Component={Signin}></Route> 
                     <Route path="/Navbar" Component={Navbar}></Route>
                     <Route path="/Product" Component={Product}></Route>
@@ -71,6 +60,7 @@ function App(){
                     <Route path='/UpdateDOB' Component={UpdateDOB}></Route>
                     <Route path='/UpdateAltPhone' Component={UpdateAltPhone}></Route>
                     <Route path='/productCarousel/:id' Component={ProductCarousel}></Route>
+                    <Route path='/wishlist' Component={WishList}></Route> 
                     <Route path="*" element={<Navigate to="/Home" replace />} />
                 </Routes>
                 </CartContext.Provider>

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { CartContext } from '../Context/CartContext';
-import Productsnippet from './Product_snippet';
+import Productsnippet from './ProductSnippet';
 import '../component-css/Cart.css';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../Context/UserContext';

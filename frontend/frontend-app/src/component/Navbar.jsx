@@ -5,13 +5,25 @@ import cartimg from '../photo/cart-shopping-solid.svg'
 import '../component-css/Navbar.css'
 import downimg from '../photo/caret-down-solid.svg'
 import NavDrawer from './NavDrawer'
-import { useAuth0 } from "@auth0/auth0-react";
-import {CartContext} from '../Context/CartContext.jsx'
+import {CartContext} from '../Context/CartContext.jsx';
+import axios from 'axios';
 
 export default function Navbar() {
+  const { cart } = useContext(CartContext);
+  const [userInfo, setUserInfo] = useState('');
+  useEffect(() => {
+    const getUserInfo = async()=>{
+      try {
+        const id = localStorage.getItem("userId");
+        const response = await axios.get(`http://localhost:7000/userDetails/${id}`);
+        setUserInfo(response.data);
+      } catch (error) {
+        console.error("Error fetching user details:", error.response?.data || error.message);
+      }
+    }
+    getUserInfo();
+  },[]);
 
-  const {cart} = useContext(CartContext);
-  const {isAuthenticated, user} = useAuth0();
   const [scrolled, setScrolled] = useState(false);
   const handleScroll = () => {
     const offset = window.scrollY;
@@ -34,13 +46,13 @@ export default function Navbar() {
       < NavDrawer/>
      </div>
     <div className='inner-container'>
-    <img className='down-img' src={downimg} alt="logo" />
-    {isAuthenticated && <img className='profile-img' src={user.picture} alt={user.name} />}
-    <Link className='link' to="/Profile">{ isAuthenticated && <p className='name' id='name1'>{ user.nickname || user.given_name}</p>}</Link>
+    {/* <img className='down-img' src={downimg} alt="logo" /> */}
+    {/* <img className='profile-img' src={userInfo.picture} alt={userInfo.userName} /> */}
+    <Link className='link' to="/Profile"><p className='name' id='name1'>{userInfo.userName}</p></Link>
     <img className='heart-img' src={heartimg} alt="logo" />
-    <Link className={`link ${scrolled ? 'wishlist-link' : ''}`} to="/Wishlist"><p className='name' id='name2'>Wishlist</p></Link>
+    <Link className={`link ${scrolled ? 'wishlist-link' : ''}`} to="/wishlist/"><p className='name' id='name2'>Wishlist</p></Link>
     <Link to='/Cart'><img className='cart-img' src={cartimg} alt="logo" /></Link>
-    <p className='name' id='name3'>{cart.totalitems}</p>
+    <p className='name' id='name3'>{cart?.totalitems || 0}</p>
     </div>
     </div>
     </>

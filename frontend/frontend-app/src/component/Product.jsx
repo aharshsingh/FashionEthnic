@@ -10,6 +10,7 @@ export default function Product(props) {
   return (
     <>
   <Link className='product-link' to={`productDetails/${product._id}`}>
+      {/* {console.log(product._id)} */}
       <div className='card'>
         <img className='product-img' src={product.image} alt="Product" />
         <div className='card-container'>

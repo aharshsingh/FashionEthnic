@@ -2,6 +2,7 @@ const Joi = require('joi');
 const User = require('../models/user');
 const registerSchema = require('../validators/userValidator')
 const CustomErrorHandler = require('../services/customErrorHandler');
+const JwtService = require('../services/JwtScervice');
 
 const userController = {
     async register(req,res,next) {
@@ -39,11 +40,13 @@ const userController = {
         res.json({result});
     },
 
-    async userInfo(req,res,next){
+    async userId(req,res,next){
         try {
-            const exist = await User.exists({ email: req.params.email });
+            const token = req.body.token;
+            const payload = JwtService.verify(token);
+            const exist = await User.exists({ _id: payload._id });
             if(exist){
-                const user = await User.findOne({ email: req.params.email }).select('-__v -createdAt -updatedAt -cartItems._id');
+                const user = await User.findOne({ _id: payload._id }).select('-__v -createdAt -updatedAt -userName -email -role -address -phoneNumber -password -cartItems -wishList');
                 res.json(user);
             }
             else{
@@ -52,6 +55,16 @@ const userController = {
         } catch (error) {
             return next(error);
         }
+    },
+
+    async userDetails(req,res,next){
+        let document;
+        try {
+            document = await User.findOne({_id : req.params.id}).select('-__v -createdAt -updatedAt');
+        } catch (error) {
+            return next(CustomErrorHandler.notFound("User not Found!"));
+        }
+        return res.json(document);
     },
 
     async userCartDetails(req,res,next){

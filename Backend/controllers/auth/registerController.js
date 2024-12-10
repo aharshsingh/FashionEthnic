@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const { registerSchema } = require('../../services/validators');
 
 const registerController = {
-    async register(req, res, next) {
+    async signup(req, res, next) {
         
         const { error } = registerSchema.validate(req.body);
         if (error) {
@@ -22,7 +22,7 @@ const registerController = {
 
         const { userName, email, password } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new Userdata({
+        const user = new User({
             userName,
             email,
             password: hashedPassword,

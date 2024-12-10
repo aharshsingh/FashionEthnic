@@ -1,4 +1,4 @@
-const { loginSchema, tokenSchema } = require('../../services/validators');
+const { loginSchema } = require('../../services/validators');
 const customErrorHandler = require('../../services/customErrorHandler');
 const bcrypt = require('bcrypt');
 const JwtService = require('../../services/JwtScervice');
@@ -12,12 +12,12 @@ const loginController = {
                 return next(error);
             }
 
-            const res = await User.findOne({ email: req.body.email });
-            if (!res) {
+            const user = await User.findOne({ email: req.body.email });
+            if (!user) {
                 return next(customErrorHandler.wrongCredentials('Username or password is wrong'));
             }
 
-            const match = await bcrypt.compare(req.body.password, res.password);
+            const match = await bcrypt.compare(req.body.password, user.password);
             if (!match) {
                 return next(customErrorHandler.wrongCredentials('Username or password is wrong'));
             }

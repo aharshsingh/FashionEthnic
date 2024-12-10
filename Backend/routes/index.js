@@ -1,19 +1,22 @@
 const express = require('express');
 const router = express.Router();
-const {adminRegisterController, loginController, registerController, adminController, productController, userController, wishListController } = require('../controllers/index')
+const {adminRegisterController, loginController, registerController, adminController, productController, userController, wishListController, cartController} = require('../controllers/index')
 const auth = require('../middlewares/auth');
 const admin = require('../middlewares/admin');
 
-router.post("/register", registerController.register);
-router.post("/register", loginController.login);
+router.post("/signup", registerController.signup);
+router.post("/signin", loginController.login);
 router.post("/adminRegister", adminRegisterController.adminRegister);
 router.post("/addInfo", userController.register);
-router.get("/userInfo/:email", userController.userInfo);
+router.post("/userId", userController.userId);
+router.get("/userDetails/:id", userController.userDetails);
 router.get("/showProducts", productController.showProducts);
 router.get("/productDetails/:id", productController.productDetails);
 router.post('/addProducts', productController.addProducts);
 router.put('/updateProducts/:id', productController.updateProducts);
 router.get("/userCartDetails/:id", userController.userCartDetails);
 router.post('/addProductWishList', wishListController.addProduct);
+router.get('/getwishlist/:id', wishListController.getwishlist);
+router.post('/updateCart/:id', cartController.updateCart);
 module.exports = router;
 
