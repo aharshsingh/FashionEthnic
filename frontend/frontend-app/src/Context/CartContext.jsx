@@ -1,42 +1,34 @@
-import { useState, useEffect, createContext, useContext } from 'react';
-import { UserContext } from './UserContext';
-import axios from 'axios';
+import {useState, useEffect, useContext, createContext} from 'react';
 
 export const CartContext = createContext();
 
-export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
-  const { userLoggedIn } = useContext(UserContext);
-
+export const CartProvider = ({children}) =>{
+  const [cart, setCart] = useState({
+    productArray: [], 
+    totalItems: 0,    
+  });
   useEffect(() => {
-    const storedCart = window.localStorage.getItem('cart');
-    if (storedCart) {
-      setCart(JSON.parse(storedCart));
+    try {
+      const savedCartString = localStorage.getItem("userCart");
+      const savedCart = savedCartString
+        ? JSON.parse(savedCartString)
+        : { productArray: [], totalItems: 0 }; 
+      setCart(savedCart);
+    } catch (error) {
+      console.error("Failed to parse cart from localStorage:", error);
+      setCart({ productArray: [], totalItems: 0 }); 
     }
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem("userCart", JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = async (item) => {
-    const existingItemIndex = cart.findIndex(
-      (cartItem) => cartItem.product === item.product && cartItem.size === item.size
-    );
-    setCart((prevCart) => [...prevCart, item]);
-
-    if (userLoggedIn) {
-      try {
-        await axios.patch('', { item }); 
-      } catch (error) {
-        console.error('Error updating cart on backend:', error);
-      }
-    }
-  };
-
   return (
-    <CartContext.Provider value={{ cart, addToCart }}>
+    <CartContext.Provider value={{ cart, setCart }}>
       {children}
     </CartContext.Provider>
   );
 };
+
+export const useCart = () => useContext(CartContext);

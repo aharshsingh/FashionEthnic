@@ -1,22 +1,16 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import '../component-css/Signup.css'
 import signupImage from '../photo/64e74bb7657e506338faa8c9_1692879799068.jpg'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import {UserContext} from '../Context/UserContext'
 export default function Signin() {
 
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const navigate = useNavigate(); 
+const { updateUserId } = useContext(UserContext);
 
-const setUserContext = async(token)=>{
-  const response = await axios.post('http://localhost:7000/userId',{
-    token
-  })
-  localStorage.setItem('userId', response.data._id);
-  console.log("User ID set in context:", response.data._id);
-}
 const handleFormSubmission = async(e) =>{
   e.preventDefault();
   try {
@@ -25,7 +19,7 @@ const handleFormSubmission = async(e) =>{
       password
     })
     localStorage.setItem("token" , response.data.token);
-    setUserContext(response.data.token);
+    await updateUserId(response.data.token);
     if (response.status === 200) {
       navigate('/');
     }
@@ -68,7 +62,7 @@ const handleFormSubmission = async(e) =>{
               setPassword(event.target.value);
             }}/>
             </div>
-            <button type='submit' className='submitLoginForm' onClick={handleFormSubmission}>Create an account</button>
+            <button type='submit' className='submitLoginForm' onClick={handleFormSubmission}>Log into account</button>
         </form>
     </div>
     </div>

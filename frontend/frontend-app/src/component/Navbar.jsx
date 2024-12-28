@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import heartimg from '../photo/heart-solid.svg'
 import cartimg from '../photo/cart-shopping-solid.svg'
 import '../component-css/Navbar.css'
-import downimg from '../photo/caret-down-solid.svg'
+// import downimg from '../photo/caret-down-solid.svg'
 import NavDrawer from './NavDrawer'
 import {CartContext} from '../Context/CartContext.jsx';
 import axios from 'axios';
@@ -52,7 +52,7 @@ export default function Navbar() {
     <img className='heart-img' src={heartimg} alt="logo" />
     <Link className={`link ${scrolled ? 'wishlist-link' : ''}`} to="/wishlist/"><p className='name' id='name2'>Wishlist</p></Link>
     <Link to='/Cart'><img className='cart-img' src={cartimg} alt="logo" /></Link>
-    <p className='name' id='name3'>{cart?.totalitems || 0}</p>
+    <p className='name' id='name3'>{cart?.totalItems || 0}</p>
     </div>
     </div>
     </>

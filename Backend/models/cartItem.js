@@ -24,9 +24,29 @@ const cartItemSchema = new Schema({
           size: {
             type: String,
             required: true
+          },
+          name: {
+            type: String,
+            required: true
+          },
+          about: {
+            type: String,
+            required: true
+          },
+          price:{
+            type: Number,
+            required: true
+          },
+          discount:{
+            type: Number,
+            required: true
           }
         }
-    ]
+    ],
+    totalItems: {
+      type: Number,
+            required: true
+    }
 });
-
+cartItemSchema.path('item').schema.set('_id', false);
 module.exports = mongoose.model('CartItem', cartItemSchema, 'cartItems');

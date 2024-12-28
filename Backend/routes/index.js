@@ -17,6 +17,7 @@ router.put('/updateProducts/:id', productController.updateProducts);
 router.get("/userCartDetails/:id", userController.userCartDetails);
 router.post('/addProductWishList', wishListController.addProduct);
 router.get('/getwishlist/:id', wishListController.getwishlist);
-router.post('/updateCart/:id', cartController.updateCart);
+router.post('/updatecart/:id', cartController.updateCart);
+router.get('/getcart/:userId', cartController.getCart); 
 module.exports = router;
 

@@ -1,31 +1,25 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import axios from 'axios';
+
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [id, setId] = useState('');
-  const [userLoggedIn, setUserLoggedIn] = useState(false);
-  
-  const checkLoggedIn = async()=>{
+
+  const updateUserId = async (token) => {
     try {
-      const token = localStorage.getItem("token");
-      const response = await axios.post('',{
-        token
-      });
-      if(response.status === 200){
-        setUserLoggedIn(true);
+      const response = await axios.post('http://localhost:7000/userId', { token });
+      if (response.status === 200) {
+        setId(response.data._id);
+        localStorage.setItem('userId', response.data._id);
       }
     } catch (error) {
-      console.log(error);
+      console.error('Error updating user ID:', error);
     }
-  }
-
-  useEffect(()=>{
-    checkLoggedIn();
-  },[]);
+  };
 
   return (
-    <UserContext.Provider value={{ id, setId, userLoggedIn, setUserLoggedIn }}>
+    <UserContext.Provider value={{ id, setId, updateUserId }}>
       {children}
     </UserContext.Provider>
   );

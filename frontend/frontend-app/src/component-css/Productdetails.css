@@ -32,10 +32,27 @@
     display: flex;
     column-gap: 20px;
 }
-.size-button{
-    padding: 20px;
-    border-radius: 100%;
-}
+.size-button {
+    width: 50px; 
+    height: 50px; 
+    border: #132C48 1px solid; 
+    border-radius: 50%; 
+    text-align: center;
+    line-height: 50px;
+    font-size: 16px; 
+    cursor: pointer; 
+    background-color: white; 
+    color: #132C48;
+  }
+  .size-button:hover {
+    background-color: white;
+    border-color: #FE8551;
+  }
+  .size-button.selected {
+    background-color: #FE8551;
+    color: white;
+    border-color: #FE8551;
+  }
 .name{
     color: #132C48;
     font-weight: 600;
@@ -115,4 +132,8 @@
     border-top: 1px solid black;
     opacity: 0.3;
     width: 400px;
+}
+.error-message{
+    margin-top: 15px;
+    color: #FE8551;
 }

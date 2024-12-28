@@ -6,13 +6,16 @@ import Footer from '../component/Footer'
 import bagimg from '../photo/bag-shopping-solid.svg'
 import likeimg from '../photo/heart-regular.svg'
 import '../component-css/Productdetails.css'
-import { CartContext } from '../Context/CartContext'
-import { UserContext } from '../Context/UserContext'
-
+import { useCart } from '../Context/CartContext'
+// import { UserContext } from '../Context/UserContext'
+import {addCart} from '../utlis/cart/AddCart'
 export default function Productdetails() {
 
   const id = localStorage.getItem("userId");
   const [product,setProduct] = useState({});
+  const [size, setSize] = useState('');
+  const [error, setError] = useState('');
+  const { setCart } = useCart();
   const params = useParams();
 
   const handleWishList = async ()=>{
@@ -48,26 +51,6 @@ export default function Productdetails() {
     fetchProductDetails();
   },[params.id])
 
-  const { cart,setCart } = useContext(CartContext);
-
-  const addToCart = (event,product) =>{
-    let _cart = {...cart};
-    if(!_cart.items)
-      _cart.items = {}
-
-    if(_cart.items[product.productName])
-      _cart.items[product.productName] = _cart.items[product.productName] + 1;
-    
-    else
-      _cart.items[product.productName] = 1;
-    
-    if(!_cart.totalitems)
-      _cart.totalitems = 0;
-
-    _cart.totalitems += 1;  
-    
-    setCart(_cart);
-  }
   return (
     <>
     <Navbar/>
@@ -90,14 +73,15 @@ export default function Productdetails() {
         <div className='detail-line'></div>
         <p className='size-text'>SELECT SIZE <span className='chart'>SIZE CHART</span></p>
         <div className='size'> 
-          <button className='size-button'>S</button>
-          <button className='size-button'>M</button>
-          <button className='size-button'>L</button>
-          <button className='size-button'>XL</button>
-          <button className='size-button'>XLL</button>
+          <button className='size-button' value='S' onClick={(event)=> {setSize(event.target.value); setError('')}}>S</button>
+          <button className='size-button' value='M' onClick={(event)=> {setSize(event.target.value); setError('')}}>M</button>
+          <button className='size-button' value='L' onClick={(event)=> {setSize(event.target.value); setError('')}}>L</button>
+          <button className='size-button' value='XL' onClick={(event)=> {setSize(event.target.value); setError('')}}>XL</button>
+          <button className='size-button' value='XXL' onClick={(event)=> {setSize(event.target.value); setError('')}}>XXL</button>
         </div>
+        {error && <p className="error-message">{error}</p>}
         <div className='button-container'>
-          <button className='detail-button' onClick={(event) => addToCart(event,product)}><img className='bag-img' src={bagimg} alt='logo' />Add to bag</button>
+          <button className='detail-button' onClick={ ()=> addCart(product._id, size, setCart, product.name, product.about, product.price, product.discount, setError) }><img className='bag-img' src={bagimg} alt='logo' />Add to bag</button>
           <button className='detail-button' onClick={handleWishList}><img className='bag-img' src={likeimg} alt="logo" />Wishlist</button>
         </div>
         <div className='detail-line'></div>

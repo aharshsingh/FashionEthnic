@@ -1,43 +1,42 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import { CartContext } from '../Context/CartContext';
+import { useCart } from '../Context/CartContext';
 import Productsnippet from './ProductSnippet';
 import '../component-css/Cart.css';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../Context/UserContext';
-import axios from 'axios';
+// import { UserContext } from '../Context/UserContext';
+// import axios from 'axios';
 
 export default function Cart() {
-  const { cart } = useContext(CartContext);
-  const { id } = useContext(UserContext);
-  const [cartProduct, setCartProduct] = useState({});
+    const { cart, setCart } = useCart();
+  // const { id } = useContext(UserContext);
 
-  useEffect(() => {
-    const fetchProductDetails = async () => {
-      try {
-        const response = await axios.get(`http://localhost:7000/userCartDetails/${id}`);
-        setCartProduct(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.error('Error fetching product details:', error);
-      }
-    };
-    if (id) {
-      fetchProductDetails();
-    }
-    if (!cart.items) return;
-  }, [id, cart.items]);
+  // useEffect(() => {
+  //   const fetchProductDetails = async () => {
+  //     try {
+  //       const response = await axios.get(`http://localhost:7000/userCartDetails/${id}`);
+  //       setCartProduct(response.data);
+  //       console.log(response.data);
+  //     } catch (error) {
+  //       console.error('Error fetching product details:', error);
+  //     }
+  //   };
+  //   if (id) {
+  //     fetchProductDetails();
+  //   }
+  //   if (!cart.items) return;
+  // }, [id, cart.items]);
 
   return (
     <>
       <Navbar />
       <div className='cart-outer-container'>
         <div className='cart-inner-container1'>
-          {/* {cartProduct.map((product) => (
-          <Productsnippet key={product._id} product={product}/>
-          ))}   */}
-          <Productsnippet/>
+        {cart.productArray.map((product) => {
+          console.log(product); 
+          return <Productsnippet key={product._id} product={product} />;
+        })}  
         </div>
         <div className='cart-inner-container2'>
           <p className='snippet-text1' id='txt'>Check delivery services: </p>
@@ -64,7 +63,9 @@ export default function Cart() {
           <Link to='/Bill'><button className='order-button'>PLACE ORDER</button></Link>
         </div>
       </div>
+      <div>
       <Footer />
+      </div>
     </>
   );
 }

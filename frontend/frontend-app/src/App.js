@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { BrowserRouter,Routes, Route, Navigate} from "react-router-dom";
 import Home from "./page/Home.jsx"
 import Signin from "./page/Signin.jsx"
@@ -24,17 +24,18 @@ import UpdateDOB from './component/UpdateDOB.jsx'
 import UpdateAltPhone from './component/UpdateAltPhone.jsx'
 import ProductCarousel from './component/ProductCarousel.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { CartContext } from './Context/CartContext.jsx';
-import { UserProvider } from './Context/UserContext.jsx';
+import { CartProvider } from "./Context/CartContext.jsx";
+import CartManager from './utlis/cart/CartManager.jsx'
+import { UserContext } from './Context/UserContext.jsx';
 import WishList from './page/WishList.jsx';
 
 function App(){
-    
+    const {id} = useContext(UserContext);
     return(
         <>
             <BrowserRouter>
-            <UserProvider>
-            <CartContext.Provider>
+            <CartProvider>
+            <CartManager userId={id} />
                 <Routes>
                     <Route path="/" Component={Home}></Route>
                     <Route path="/Signup" Component={Signup}></Route> 
@@ -63,8 +64,7 @@ function App(){
                     <Route path='/wishlist' Component={WishList}></Route> 
                     <Route path="*" element={<Navigate to="/Home" replace />} />
                 </Routes>
-                </CartContext.Provider>
-                </UserProvider>
+                </CartProvider>
             </BrowserRouter>
         </>
     )

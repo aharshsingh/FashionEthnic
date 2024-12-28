@@ -44,7 +44,9 @@ export default function WishList() {
             }
         </div>
       </div>
+      <div style={{marginTop:'400px'}}>
       <Footer/>
+      </div>
     </div>
   )
 }
