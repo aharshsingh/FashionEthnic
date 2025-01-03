@@ -71,7 +71,7 @@ export default function Productdetails() {
         <p className='product_price'>Rs.{product.price}<span className='discount'>  ({product.discount}% OFF)</span></p>
         <p className='tax'>inclusive of all taxes</p>
         <div className='detail-line'></div>
-        <p className='size-text'>SELECT SIZE <span className='chart'>SIZE CHART</span></p>
+        <p className='size-text'>SELECT SIZE <span className='chart'><Link to={`/sizechart/${product.gender}`}>SIZE CHART {'>'}</Link></span></p>
         <div className='size'> 
           <button className='size-button' value='S' onClick={(event)=> {setSize(event.target.value); setError('')}}>S</button>
           <button className='size-button' value='M' onClick={(event)=> {setSize(event.target.value); setError('')}}>M</button>

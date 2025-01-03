@@ -2,16 +2,21 @@ import React, {useState, useEffect} from 'react'
 import Navbar from '../component/Navbar';
 import Footer from '../component/Footer';
 import axios from 'axios';
-import Product from '../component/Product';
+import WishlistAnimation from '../component/WishListAnimation';
+import {Link} from 'react-router-dom';
+import WishListItem from '../component/WishListItem';
+import LoadingAnimation from '../component/LoadingAnimation';
 
 export default function WishList() {
     const [wishlistItems, setWhishlistItems] = useState([]);
-    const id = localStorage.getItem("userId");
+    const [isEmpty, setIsEmpty] = useState(true);
+    const [loading, setLoading] = useState(true);
+    const userId = localStorage.getItem("userId");
     
     useEffect(()=>{
         const getWishlistItems = async()=>{
             try {
-                const response = await axios.get(`http://localhost:7000/getwishlist/${id}`);
+                const response = await axios.get(`http://localhost:7000/getwishlist/${userId}`);
                 const array = response.data.item;  
                 let fetchedItem = [];
                 for(const item of array){
@@ -24,27 +29,62 @@ export default function WishList() {
                     }
                 }
                 setWhishlistItems(fetchedItem);
+                setIsEmpty(fetchedItem.length === 0); 
+                setLoading(false);
             } catch (error) {
                 console.log(error);
             }
         }
         getWishlistItems();
-    },[id])
+    },[userId])
+
+    const handleRemove = async (productId)=>{
+        try {
+            const response = await axios.patch('http://localhost:7000/removeproduct',{
+                userId,
+                productId
+            });
+            console.log('Product removed successfully');
+            if(response.status === 200)
+                window.location.reload();
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
 
     <div>
       <Navbar/>
       <div>
-        <p style={{marginTop:'150px', marginLeft:'180px', fontSize:'21px', fontWeight:'300'}}>My Wishlist</p>
-        <div style={{display:'flex', columnGap:'20px', marginLeft:'180px'}}>
-            {
-                wishlistItems.map((item)=>{
-                    return <Product key={item._id} product = {item} />
-                })
-            }
-        </div>
+        { loading ? (
+            <LoadingAnimation/>
+        ) : (
+            isEmpty ?
+                (<div style={{marginTop: '250px', textAlign: 'center'}}>
+                    <p style={{fontWeight:'bolder', fontSize:'20px'}}>YOUR WISHLIST IS EMPTY</p>
+                    {console.log(wishlistItems)}
+                    <p style={{marginTop:'25px', color:'grey'}}>Add items that you like to your wishlist. Review <br/>them anytime and easily move them to the bag.</p>
+                    <div style={{marginLeft:'805px', marginTop:'-50px'}}>
+                        <WishlistAnimation/>
+                    </div>
+                    <div style={{marginLeft:'-70px', marginTop:'-80px'}}>
+                        <Link className='link' to='/'><button className='button'><p className='para3'>Continue Shopping</p></button></Link>
+                    </div>
+                </div>
+                ) : (
+                <div>
+                <p style={{marginTop:'150px', marginLeft:'180px', fontSize:'21px', fontWeight:'300'}}>My Wishlist</p>
+                <div style={{display:'flex', columnGap:'20px', marginLeft:'180px', marginTop:'-50px'}}>
+                    {
+                        wishlistItems.map((item)=>{
+                            return <WishListItem key={item._id} product = {item} handleRemove={handleRemove}/>
+                        })
+                    }
+                </div>
+                </div>)
+        )}
       </div>
-      <div style={{marginTop:'400px'}}>
+      <div style={{marginTop:'300px'}}>
       <Footer/>
       </div>
     </div>

@@ -4,7 +4,6 @@ const cartController = {
     async updateCart(req, res, next) {
         const userId = req.params.id;
         const { productArray, totalItems } = req.body.cart; 
-    
         try {
             let existingCart = await Cart.findOne({ userId });
     

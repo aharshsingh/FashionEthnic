@@ -28,6 +28,7 @@ import { CartProvider } from "./Context/CartContext.jsx";
 import CartManager from './utlis/cart/CartManager.jsx'
 import { UserContext } from './Context/UserContext.jsx';
 import WishList from './page/WishList.jsx';
+import SizeChart from './component/SizeChart.jsx';
 
 function App(){
     const {id} = useContext(UserContext);
@@ -62,6 +63,7 @@ function App(){
                     <Route path='/UpdateAltPhone' Component={UpdateAltPhone}></Route>
                     <Route path='/productCarousel/:id' Component={ProductCarousel}></Route>
                     <Route path='/wishlist' Component={WishList}></Route> 
+                    <Route path='/sizechart/:gender' Component={SizeChart}></Route> 
                     <Route path="*" element={<Navigate to="/Home" replace />} />
                 </Routes>
                 </CartProvider>

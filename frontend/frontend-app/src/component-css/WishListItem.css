@@ -1,0 +1,46 @@
+.cardW{
+    width: 250px;
+    height: 600px; 
+    margin-top:100px;
+    position: relative;
+}
+.carContainerW{
+    display: flex;
+    column-gap: 40px;
+    margin-top: 35px;
+}
+.clg{
+    display: flex;
+    column-gap: 10px;
+}
+.productImg{
+    width: 250px;
+    height: 400px;
+    border-radius: 5px 5px 0px 0px;
+}
+.product-link{
+    text-decoration: none;
+}
+.product-intro{
+    margin-top: 10px;
+    font-size: 13px;
+}
+.priceW{
+    margin-top: 10px;
+}
+.discount{
+    color: #FE8551;
+}
+.productNameW{
+    color:#132C48;
+    font-weight: 800;
+    font-size: 20px;
+}
+.rating{
+    margin-top: 2px;
+}
+.rating-img{
+    height: 20px;
+    width: 20px;
+    margin-top: 2px;
+}

@@ -20,12 +20,12 @@ const CartManager = ({ userId }) => {
 
   useEffect(() => {
     const updateDBCart = async () => {
-      if (userId && !isInitialFetch && cart.productArray.length > 0) {
+      if (userId && !isInitialFetch) {
         await syncCartToDB(userId, cart); 
       }
     };
     updateDBCart();
-  }, [cart, userId, isInitialFetch]);
+  }, [cart, userId, isInitialFetch, setCart]);
 
   return null; 
 };

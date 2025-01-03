@@ -44,6 +44,25 @@ const wishListController = {
     } catch (error) {
       return next(error);
     }
+  },
+
+  async removeProduct(req,res,next){
+    const { userId, productId } = req.body;
+    try {
+      const updatedWishlist = await WishList.findOneAndUpdate(
+        {userId},
+        { $pull: { item: { product: productId } } },
+        {new: true});
+        if (!updatedWishlist) {
+          return res.status(404).json({ error: 'Wishlist not found for the given user' });
+        }
+        res.status(200).json({
+          message: 'Product removed from wishlist',
+          updatedWishlist,
+        });
+    } catch (error) {
+      return next(error);
+    }
   }
 };
 

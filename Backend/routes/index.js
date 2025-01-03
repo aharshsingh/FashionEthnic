@@ -19,5 +19,6 @@ router.post('/addProductWishList', wishListController.addProduct);
 router.get('/getwishlist/:id', wishListController.getwishlist);
 router.post('/updatecart/:id', cartController.updateCart);
 router.get('/getcart/:userId', cartController.getCart); 
+router.patch('/removeProduct', wishListController.removeProduct);
 module.exports = router;
 
