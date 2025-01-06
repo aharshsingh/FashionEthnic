@@ -9,8 +9,7 @@ export default function Product(props) {
 
   return (
     <>
-  <Link className='product-link' to={`productDetails/${product._id}`}>
-      {/* {console.log(product._id)} */}
+  <Link className='product-link' to={`Productdetails/${product._id}`}>
       <div className='card'>
         <img className='product-img' src={product.image} alt="Product" />
         <div className='card-container'>
@@ -20,8 +19,7 @@ export default function Product(props) {
           <img className='rating-img' src={ratingimg} alt="Rating" />
           </div>
         </div>
-        {/* <p className='product-intro'>{product.productShortDetail}</p> */}
-        <p className='price'>Rs.{product.price}<span className='discount'>(67% off)</span></p>
+        <p className='price'>Rs.{product.price}<span className='discount'>({product.discount} % off)</span></p>
       </div>
       </Link>
     </>

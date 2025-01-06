@@ -10,7 +10,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { Link } from 'react-router-dom';
-import Logoutbtn from './Logoutbtn';
 export default function NavDrawer() {
   const [state, setState] = React.useState({
     left: false,
@@ -57,15 +56,6 @@ export default function NavDrawer() {
         ))}
       </List>
       <Divider />
-      <List>
-        <ListItem disablePadding>
-          <ListItemButton component="div">
-            <div style={{border:'none'}}>
-            <Logoutbtn />
-            </div>
-          </ListItemButton>
-        </ListItem>
-      </List>
     </Box>
   );
 

@@ -74,3 +74,9 @@
 .link{
     text-decoration:none;
 }
+.login-button{
+    font-size: 5px;
+    margin-top: 5px;
+    color: #132C48;
+    font-weight:lighter;
+}

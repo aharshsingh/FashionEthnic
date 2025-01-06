@@ -114,6 +114,20 @@ const productController = {
             return next(CustomErrorHandler.notFound("Product not found!"));
         }
         return res.json(document);
+    },
+    
+    async getProductImage(req,res,next){
+        const idArray = req.body.idArray;
+        let result = [];
+        try {
+            for(let id of idArray){
+                const image = await product.findById(id).select('image');
+                result.push({id,image});
+            }
+            return res.status(200).json({result});
+        } catch (error) {
+            return next(error);
+        }
     }
 }
 

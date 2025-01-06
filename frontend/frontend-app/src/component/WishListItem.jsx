@@ -21,7 +21,8 @@ export default function Product({ product, handleRemove }) {
       cursor: 'pointer',
     }}
   />
-  <Link className='product-link' to={`productDetails/${product._id}`}>
+  <Link className='product-link' to={`productdetails/${product._id}`}>
+  {console.log(product._id)}
     <img className='productImg' src={product.image} alt="Product" />
     <div className='carContainerW'>
       <p className='productNameW'>{product.name}</p>

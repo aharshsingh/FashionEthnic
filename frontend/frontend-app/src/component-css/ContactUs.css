@@ -1,0 +1,51 @@
+.envelopeSection {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .envelopeContainer {
+    position: relative;
+    margin-top: 100px;
+  }
+  
+  .envelope {
+    width: 700px; 
+  }
+  
+  .textOnEnvelope {
+    margin-top: 50px;
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    text-align: center;
+    color: #ffffff; 
+    z-index: 10; 
+  }
+  
+  .ContactUsHead {
+    font-size: 45px;
+    font-weight: 200;
+    margin-bottom: 10px;
+    color: rgb(61, 61, 61);
+  }
+  
+  .ContactUsPara {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: rgb(131, 131, 131);
+  }
+  
+  .emailUs {
+    background-color: #FE8551; 
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }

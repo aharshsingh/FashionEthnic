@@ -1,24 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from './Navbar';
-import Footer from './Footer';
+import Navbar from '../component/Navbar';
+import Footer from '../component/Footer';
 import { useCart } from '../Context/CartContext';
-import Productsnippet from './ProductSnippet';
+import Productsnippet from '../component/ProductSnippet';
 import '../component-css/Cart.css';
 import { Link } from 'react-router-dom';
-import WishlistAnimation from './WishListAnimation';
+import WishlistAnimation from '../component/WishListAnimation';
+import axios from 'axios';
 // import { UserContext } from '../Context/UserContext';
 
 export default function Cart() {
     const { cart, setCart } = useCart();
     const [isEmpty, setIsEmpty] = useState(true)
+    const [CartProducts, setCartProducts] = useState([]);
 
     useEffect(() => {
         setIsEmpty(cart.productArray.length === 0);
+        let idArray = [];
+        cart.productArray.map((product) => {
+            idArray.push(product.product);
+        })
+        const getProductImage = async()=>{
+            try {
+                const response = await axios.post('http://localhost:7000/getProductImage', {
+                    idArray
+                })
+                setCartProducts(()=>{
+                    let arr = cart.productArray;
+                    arr.map((product)=>{
+                        const res = response.data.result.find(i => i.id === product.product)
+                        product.image = res.image.image;
+                    })
+                    return arr;
+                });
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getProductImage();
     }, [cart.productArray]);
 
-    useEffect(()=>{
-        console.log(cart);
-    })
     const handleRemove = (productId) => {
         const updatedProductArray = cart.productArray.filter(
             (item) => item.product !== productId
@@ -54,7 +75,7 @@ export default function Cart() {
             ) : (
                 <div className="cart-outer-container">
                     <div className="cart-inner-container1">
-                        {cart.productArray.map((product) => (
+                        {CartProducts.map((product) => (
                             <Productsnippet key={product._id} product={product} handleRemove={handleRemove} />
                         ))
                         }
