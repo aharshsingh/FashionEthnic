@@ -1,10 +1,33 @@
-import React from 'react'
-import Navbar from './Navbar'
-import Footer from './Footer'
+import React, {useState} from 'react'
+import Navbar from '../component/Navbar'
+import Footer from '../component/Footer'
 import '../component-css/Bill.css'
 import chat from '../photo/comment-solid.svg'
-import {Link} from 'react-router-dom'
+import { useLocation } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import axios from 'axios';
+
 export default function Bill() {
+  const location = useLocation();
+  const { order } = location.state || {};
+  const [orderDetails, setOrderDetails] = useState({});
+  const [address, setAddress] = useState('');
+
+  const handleOrder = async()=>{
+    try {
+        setAddress("heelo")
+        const updatedOrderDetails = { ...order, address }
+        setOrderDetails(updatedOrderDetails);
+        console.log(orderDetails)
+        const userId = localStorage.getItem('userId');
+        const response = await axios.post(`http://localhost:7000/addorder/${userId}`,{
+          order
+        })
+        console.log(response.data);
+    } catch (error) {
+        console.log(error);
+    }
+}
   return (
     <>
     <Navbar/>
@@ -42,7 +65,7 @@ export default function Bill() {
         <p className='snippet-text1'>Total Amount</p>
         <p className='snippet-text1'>Rs.1,199</p>
       </div>
-      <button className='order-button'>PAY NOW</button>
+      <button className='order-button' onClick={handleOrder}>PAY NOW</button>
       </div>
     </div>
     <div className='chat-div'>

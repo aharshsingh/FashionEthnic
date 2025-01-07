@@ -13,14 +13,54 @@ export default function Cart() {
     const { cart, setCart } = useCart();
     const [isEmpty, setIsEmpty] = useState(true)
     const [CartProducts, setCartProducts] = useState([]);
+    const [mrpAmount, setMrpAmount] = useState('');
+    const [discountAmount, setDiscountAmount] = useState('');
+    const [shipping] = useState(50);
+    const [totalAmount, setTotalAmount] = useState('')
+    const [orderArray, setOrderArray] = useState([]);
+    const [order, setOrder] = useState({});
+    
+    const handleOrder = async()=>{
+        setOrder({
+            items: orderArray,
+            mrpAmount,
+            discountAmount,
+            totalAmount
+        });
+    }
+    useEffect(() => {
+        const calAmount = async()=>{
+            let amount1 = 0;
+            let amount2 = 0;
+            let amount3 = 0;
+            cart.productArray.forEach((product)=>{
+                amount1 += product.price * product.quantity;
+                amount2 += ((product.price * product.discount) / 100) * product.quantity;
+                return 0;
+            });
+            setMrpAmount(amount1);
+            setDiscountAmount(amount2);
+            amount3 = amount1-amount2;
+            setTotalAmount(amount3);
+            if(totalAmount < 500)
+                setTotalAmount(amount3+50);
+        }
+        calAmount();
+    });
 
     useEffect(() => {
-        setIsEmpty(cart.productArray.length === 0);
-        let idArray = [];
-        cart.productArray.map((product) => {
-            idArray.push(product.product);
-        })
+        setIsEmpty(cart.productArray.length === 0);        
         const getProductImage = async()=>{
+            let idArray = [];
+            let orderArray = [];
+            cart.productArray.map((product) => {
+            idArray.push(product.product);
+            orderArray.push({
+                productId: product.product, 
+                quantity: product.quantity})
+            return 0;
+            });
+            setOrderArray(orderArray);
             try {
                 const response = await axios.post('http://localhost:7000/getProductImage', {
                     idArray
@@ -30,6 +70,7 @@ export default function Cart() {
                     arr.map((product)=>{
                         const res = response.data.result.find(i => i.id === product.product)
                         product.image = res.image.image;
+                        return 0;
                     })
                     return arr;
                 });
@@ -84,23 +125,23 @@ export default function Cart() {
                         <p className="snippet-text2">Price Details</p>
                         <div className="snippet-text-container1">
                             <p className="snippet-text1">Total MRP</p>
-                            <p className="snippet-text1">2999</p>
+                            <p className="snippet-text1">{mrpAmount}</p>
                         </div>
                         <div className="snippet-text-container2">
                             <p className="snippet-text1">Discount</p>
-                            <p className="snippet-text1">-1,299</p>
+                            <p className="snippet-text1">- {discountAmount}</p>
                         </div>
                         <div className="snippet-text-container3">
                             <p className="snippet-text1">Shipping Charges</p>
-                            <p className="snippet-text1">+50</p>
+                            <p className="snippet-text1">+{shipping}</p>
                         </div>
                         <p>________________________________</p>
                         <div className="snippet-text-container4">
                             <p className="snippet-text1">Total Amount</p>
-                            <p className="snippet-text1">Rs.1,199</p>
+                            <p className="snippet-text1">Rs.{totalAmount}</p>
                         </div>
-                        <Link to="/Bill">
-                            <button className="order-button">PLACE ORDER</button>
+                        <Link to={{pathname: "/Bill", state: order}}>
+                            <button className="order-button" onClick={handleOrder}>PLACE ORDER</button>
                         </Link>
                     </div>
                 </div>
