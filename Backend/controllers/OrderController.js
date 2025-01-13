@@ -3,10 +3,11 @@ const Order = require('../models/order');
 const OrderController = {
     async addOrder(req,res,next){
         try {
-            const {items, mrpAmount, discountAmount, totalAmount, address} = req.body;
+            const {userName, items, mrpAmount, discountAmount, totalAmount, address} = req.body;
             const {userId} = req.params;
             const order = new Order({
                 userId,
+                userName,
                 items, 
                 mrpAmount, 
                 discountAmount, 

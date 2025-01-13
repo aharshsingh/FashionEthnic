@@ -60,7 +60,7 @@ const userController = {
     async userDetails(req,res,next){
         let document;
         try {
-            document = await User.findOne({_id : req.params.id}).select('-__v -createdAt -updatedAt');
+            document = await User.findOne({_id : req.params.id}).select('-__v -createdAt -updatedAt -password -cartItems -wishList -totalItems -role');
         } catch (error) {
             return next(CustomErrorHandler.notFound("User not Found!"));
         }
@@ -75,6 +75,17 @@ const userController = {
             return next(CustomErrorHandler.notFound("User not Found!"));
         }
         return res.json(document);
+    },
+
+    async updateUser(req,res,next){
+        const address = req.body.address;
+        const {userId} = req.params;
+        try {
+            const result = await User.findByIdAndUpdate(userId, {address}, {new:true});
+            return res.status(200).json({result});
+        } catch (error) {
+            return next(error);
+        }
     }
 }
 

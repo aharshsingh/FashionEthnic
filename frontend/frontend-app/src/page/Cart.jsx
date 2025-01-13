@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Navbar from '../component/Navbar';
 import Footer from '../component/Footer';
 import { useCart } from '../Context/CartContext';
+import { UserContext } from '../Context/UserContext';
 import Productsnippet from '../component/ProductSnippet';
 import '../component-css/Cart.css';
 import { Link } from 'react-router-dom';
 import WishlistAnimation from '../component/WishListAnimation';
 import axios from 'axios';
-// import { UserContext } from '../Context/UserContext';
 
 export default function Cart() {
     const { cart, setCart } = useCart();
@@ -18,15 +18,13 @@ export default function Cart() {
     const [shipping] = useState(50);
     const [totalAmount, setTotalAmount] = useState('')
     const [orderArray, setOrderArray] = useState([]);
-    const [order, setOrder] = useState({});
+    const {user} = useContext(UserContext);
     
     const handleOrder = async()=>{
-        setOrder({
-            items: orderArray,
-            mrpAmount,
-            discountAmount,
-            totalAmount
-        });
+        localStorage.setItem('items', JSON.stringify(orderArray));
+        localStorage.setItem('mrpAmount', JSON.stringify(mrpAmount));
+        localStorage.setItem('discountAmount', JSON.stringify(discountAmount));
+        localStorage.setItem('totalAmount', JSON.stringify(totalAmount))
     }
     useEffect(() => {
         const calAmount = async()=>{
@@ -122,6 +120,11 @@ export default function Cart() {
                         }
                     </div>
                     <div className="cart-inner-container2">
+                        <div className='w-[500px] border-[#dddddd] border-1 p-2'>
+                            <p >Deliver to: {user.userName}</p>
+                            <p>Address: {user.address ? user.address : (<span>N/A</span>)}</p>
+                        </div>
+                        <div className='w-[500px] border-[#dddddd] border-1 pl-3 pb-4 mt-1'>
                         <p className="snippet-text2">Price Details</p>
                         <div className="snippet-text-container1">
                             <p className="snippet-text1">Total MRP</p>
@@ -140,9 +143,10 @@ export default function Cart() {
                             <p className="snippet-text1">Total Amount</p>
                             <p className="snippet-text1">Rs.{totalAmount}</p>
                         </div>
-                        <Link to={{pathname: "/Bill", state: order}}>
+                        <Link to='/bill'>
                             <button className="order-button" onClick={handleOrder}>PLACE ORDER</button>
                         </Link>
+                        </div>
                     </div>
                 </div>
             )}

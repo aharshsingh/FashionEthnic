@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import Navbar from '../component/Navbar';
 import Footer from '../component/Footer';
 import axios from 'axios';
@@ -6,12 +6,14 @@ import WishlistAnimation from '../component/WishListAnimation';
 import {Link} from 'react-router-dom';
 import WishListItem from '../component/WishListItem';
 import LoadingAnimation from '../component/LoadingAnimation';
+import { UserContext } from '../Context/UserContext';
 
 export default function WishList() {
     const [wishlistItems, setWhishlistItems] = useState([]);
     const [isEmpty, setIsEmpty] = useState(true);
     const [loading, setLoading] = useState(true);
-    const userId = localStorage.getItem("userId");
+    const {user} = useContext(UserContext);
+    const userId = user._id;
     
     useEffect(()=>{
         const getWishlistItems = async()=>{

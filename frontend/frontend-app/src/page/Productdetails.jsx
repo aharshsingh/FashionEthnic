@@ -7,11 +7,11 @@ import bagimg from '../photo/bag-shopping-solid.svg'
 import likeimg from '../photo/heart-regular.svg'
 import '../component-css/Productdetails.css'
 import { useCart } from '../Context/CartContext'
-// import { UserContext } from '../Context/UserContext'
+import { UserContext } from '../Context/UserContext'
 import {addCart} from '../utlis/cart/AddCart'
 export default function Productdetails() {
 
-  const id = localStorage.getItem("userId");
+  const {user} = useContext(UserContext);
   const [product,setProduct] = useState({});
   const [size, setSize] = useState('');
   const [error, setError] = useState('');
@@ -21,7 +21,7 @@ export default function Productdetails() {
   const handleWishList = async ()=>{
     try{
     const response = await axios.post('http://localhost:7000/addProductWishList',{
-      userId: id,
+      userId: user._id,
       productId: params.id
     }) 
     if(response.status === 200){

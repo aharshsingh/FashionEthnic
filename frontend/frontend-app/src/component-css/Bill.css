@@ -1,20 +1,19 @@
 .address-card{
-    border: 1px solid black;
+    border: 1px solid rgb(189, 189, 189);
     width: 450px;
     height: 180px;  
-    margin-top: 50px; 
+    margin-top: 20px; 
     margin-left: 400px;
 }
 #del{
     margin-left: 400px;
 }
 .edit{
-    background-color: #FE8551;
     color: #132C48;
     border: 1px soild black;
     padding:8px;
     width: 70px;
-    margin-left: 340px;
+    margin-left: 370px;
     border-radius: 15px;
 }
 #address{
@@ -33,18 +32,20 @@
     margin-left: 15px;
 }
 .button-div{
-    border: dashed 1px black;
-    padding:40px;
+    border: dashed 1px rgb(170, 170, 170);
+    padding:10px;
     margin-top: 50px;
     width: 450px;
     margin-left: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .address-button{
     padding: 15px;
     color: #132C48;
     background-color: #FE8551;
     border: 1px solid ;
-    margin-left: 90px;
     width: 200px;
     border-radius: 5px;
 }

@@ -5,32 +5,13 @@ import cartimg from '../photo/cart-shopping-solid.svg';
 import '../component-css/Navbar.css';
 import NavDrawer from './NavDrawer';
 import { CartContext } from '../Context/CartContext.jsx';
-import axios from 'axios';
+import { UserContext } from '../Context/UserContext.jsx';
 
 export default function Navbar() {
   const { cart } = useContext(CartContext);
-  const [userInfo, setUserInfo] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const getUserInfo = async () => {
-      const id = localStorage.getItem('userId');
-      if (id) {
-        setIsLoggedIn(true);
-        try {
-          const response = await axios.get(`http://localhost:7000/userDetails/${id}`);
-          setUserInfo(response.data);
-        } catch (error) {
-          console.error('Error fetching user details:', error.response?.data || error.message);
-        }
-      } else {
-        setIsLoggedIn(false);
-      }
-    };
-    getUserInfo();
-  }, []);
-
+  const { user, isLoggedIn } = useContext(UserContext);
   const [scrolled, setScrolled] = useState(false);
+
   const handleScroll = () => {
     const offset = window.scrollY;
     setScrolled(offset > 50);
@@ -52,7 +33,7 @@ export default function Navbar() {
         <div className="inner-container">
           {isLoggedIn ? (
             <Link className="link" to="/Profile">
-              <p className="name" id="name1">{userInfo.userName || 'User'}</p>
+              <p className="name" id="name1">{user.userName || 'User'}</p>
             </Link>
           ) : (
             <Link className="link login-link" to="/Signup">

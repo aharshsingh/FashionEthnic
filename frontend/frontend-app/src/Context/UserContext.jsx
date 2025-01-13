@@ -1,17 +1,31 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { getUser } from '../utlis/user/getUser';
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [id, setId] = useState('');
+const [user, setUser] = useState({});
+const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+useEffect(()=>{
+  const data = localStorage.getItem("user");
+  setUser(JSON.parse(data));
+  setIsLoggedIn((true));
+},[])
+
+useEffect(() =>{
+  localStorage.setItem('user', JSON.stringify(user));
+},[user])
   const updateUserId = async (token) => {
     try {
       const response = await axios.post('http://localhost:7000/userId', { token });
       if (response.status === 200) {
-        setId(response.data._id);
-        localStorage.setItem('userId', response.data._id);
+        const id = response.data._id
+        const result = await getUser(id);
+        setUser(result);
+        setIsLoggedIn(true);
+        localStorage.setItem('user', JSON.stringify(result));
       }
     } catch (error) {
       console.error('Error updating user ID:', error);
@@ -19,7 +33,7 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ id, setId, updateUserId }}>
+    <UserContext.Provider value={{ user, setUser, updateUserId, isLoggedIn }}>
       {children}
     </UserContext.Provider>
   );

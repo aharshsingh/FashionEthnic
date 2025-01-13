@@ -31,7 +31,8 @@ import WishList from './page/WishList.jsx';
 import SizeChart from './component/SizeChart.jsx';
 
 function App(){
-    const {id} = useContext(UserContext);
+    const {user} = useContext(UserContext);
+    const id = user._id;
     return(
         <>
             <BrowserRouter>
