@@ -25,11 +25,10 @@ export default function NavDrawer() {
 
   const options = [
     { text: 'Home', path: '/' }, 
-    { text: 'Dashboard', path: '/dashboard' },
-    { text: 'Order', path: '/order' },
+    { text: 'Dashboard', path: '/Profile' },
     { text: 'Wishlist', path: '/wishlist' },
     { text: 'Cart', path: '/cart' },
-    { text: 'Contact Us', path: '/contact' },
+    { text: 'Contact Us', path: '/contactus' },
     { text: 'About Us', path: '/about' },
   ];
 
@@ -46,8 +45,6 @@ export default function NavDrawer() {
             <Link to={option.path} style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
               <ListItemButton>
                 <ListItemIcon>
-                  {/* Optional icon logic (optional) */}
-                  {/* <Icon>{option.icon}</Icon> */}
                 </ListItemIcon>
                 <ListItemText primary={option.text} />
               </ListItemButton>

@@ -67,7 +67,6 @@ const handleAddAddress = async() => {
         <p id='name'>Aharsh Singh</p>
         <p id='address'>{user.address}</p>
         <p className='phone'>Phone no. {user.phoneNumber ? user.phoneNumber : <span>N/A</span>}</p>
-        <button className='edit'>Edit</button>
       </div>
       <div className='button-div'>
       <button className='address-button ' onClick={()=> setShow(true)}>+Add New Address</button>

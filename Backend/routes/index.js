@@ -23,5 +23,6 @@ router.patch('/removeProduct', wishListController.removeProduct);
 router.post('/getProductImage', productController.getProductImage);
 router.post('/addorder/:userId', OrderController.addOrder);
 router.patch('/updateuser/:userId', userController.updateUser);
+router.get('/getorder/:userId', OrderController.getOrder);
 module.exports = router;
 

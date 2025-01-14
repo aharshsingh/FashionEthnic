@@ -19,7 +19,7 @@ export default function Home() {
       <div>
       <p className='para1'>Vibrant. Cultural.<br/> Trendsetting.</p>
       <p className='para2'>Elevate your style, celebrate diversity-<br/>where tradition meets trends in every thread.</p>
-      <Link className='link' to='/Products'><button className='button'><p className='para3'>Shop New Arrivals</p></button></Link>
+      <Link className='link' to='/Products'><button className='bg-[#FE8551] text-lg p-3 w-64 rounded-full text-[#132C48] font-bold mt-14 m-20'>Shop New Arrivals</button></Link>
       </div>
       <img className='home-img' src={homeimg} alt="img" />
     </div>

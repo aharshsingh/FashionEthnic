@@ -19,6 +19,15 @@ const OrderController = {
         } catch (error) {
             return next(error);
         }
+    },
+    async getOrder(req,res,next){
+        const {userId} = req.params;
+        try {
+            const response = await Order.find({userId}).select('items address status orderDate -_id');
+            res.status(200).json(response);
+        } catch (error) {
+            return next(error);
+        }
     }
 }
 

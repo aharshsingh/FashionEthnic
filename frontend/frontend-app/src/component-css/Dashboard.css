@@ -1,14 +1,15 @@
 .dashboard-outer-container{
-    border: 1px black solid;
+    border: 1px rgb(223, 223, 223) solid;
     height: 650px;
     width: 650px;
 
 }
 .info-div{
     display: flex;
+    justify-content: center;
+    align-items: center;
     column-gap: 50px;
     margin-top: 50px;
-    margin-left: 40px;
 }
 .dash-list{
     list-style-type: none;
@@ -20,8 +21,9 @@
     width: 50px;
 }
 .dash-list-con{
-font-size: 20px;
+font-size: 16px;
 margin-bottom: 15px;
+color: #808080;
 }
 .update-btn{
     background-color: #FE8551;

@@ -68,7 +68,7 @@ export default function Productdetails() {
       <div className='text-detail-container'>
         <p className='name'>{product.name}</p>
         <p className='short-detail'>{product.about}</p>
-        <p className='product_price'>Rs.{product.price}<span className='discount'>  ({product.discount}% OFF)</span></p>
+        <p className='product_price'>Rs.{product.price}<span className='discount font-semibold'>  ({product.discount}% OFF)</span></p>
         <p className='tax'>inclusive of all taxes</p>
         <div className='detail-line'></div>
         <p className='size-text'>SELECT SIZE <span className='chart'><Link to={`/sizechart/${product.gender}`}>SIZE CHART {'>'}</Link></span></p>
@@ -85,7 +85,7 @@ export default function Productdetails() {
           <button className='detail-button' onClick={handleWishList}><img className='bag-img' src={likeimg} alt="logo" />Wishlist</button>
         </div>
         <div className='detail-line'></div>
-        <ul className='product_detail_list'>PRODUCT DETAILS
+        <ul className='product_detail_list'>Product details
           <li className='p_d_l'>Colour: {product.colour}</li>
           <li className='p_d_l'>{product.fit}</li>
         </ul>
@@ -98,7 +98,7 @@ export default function Productdetails() {
         <p className='rate-num'>{product.rating}</p>
       </div>
     </div>
-    <div style={{marginTop: '250px'}}>
+    <div style={{marginTop: '400px'}}>
     <Footer/>
     </div>
     </>

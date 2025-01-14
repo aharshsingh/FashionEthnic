@@ -11,8 +11,7 @@ import Bill from './page/Bill'
 import Profile from './page/Profile.jsx'
 import Dashboard from './component/Dashboard.jsx'  
 import ContactUs from './page/ContactUs.jsx'
-import FAQ from './component/FAQ'
-import PrivacyPolicy from './component/PrivacyPolicy'
+import PrivacyPolicy from './page/PrivacyPolicy'
 import Trackorder from './component/Trackorder.jsx'
 import TermsofUse from './page/TermsofUse.jsx'
 import Shippingaddress from './component/Shippingaddress.jsx'
@@ -21,7 +20,6 @@ import Orders from './component/Orders.jsx'
 import UpdatePhone from './component/UpdatePhone.jsx'
 import UpdateGender from './component/UpdateGender.jsx'
 import UpdateDOB from './component/UpdateDOB.jsx'
-import UpdateAltPhone from './component/UpdateAltPhone.jsx'
 import ProductCarousel from './component/ProductCarousel.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CartProvider } from "./Context/CartContext.jsx";
@@ -55,13 +53,11 @@ function App(){
                     <Route path='/TC' Component={TC}></Route>
                     <Route path='/TermsofUse' Component={TermsofUse}></Route>
                     <Route path='/Trackorder' Component={Trackorder}></Route>
-                    <Route path='/FAQ' Component={FAQ}></Route>
                     <Route path='/ContactUs' Component={ContactUs}></Route>
                     <Route path='/Orders' Component={Orders}></Route>
                     <Route path='/UpdatePhone' Component={UpdatePhone}></Route>
                     <Route path='/UpdateGender' Component={UpdateGender}></Route>
                     <Route path='/UpdateDOB' Component={UpdateDOB}></Route>
-                    <Route path='/UpdateAltPhone' Component={UpdateAltPhone}></Route>
                     <Route path='/productCarousel/:id' Component={ProductCarousel}></Route>
                     <Route path='/wishlist' Component={WishList}></Route> 
                     <Route path='/sizechart/:gender' Component={SizeChart}></Route> 

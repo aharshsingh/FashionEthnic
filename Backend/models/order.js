@@ -18,7 +18,9 @@ const orderSchema = new Schema({
     mrpAmount: {type: Number, required: true},
     discountAmount: {type: Number, required: true},
     totalAmount: {type: Number, required: true},
-    address: {type: String, required: true}
+    address: {type: String, required: true},
+    status: {type: String, default: "Delivery in process"},
+    orderDate: {type: Date, default: Date.now,}
 }, { timestamps: true });
 
 module.exports = mongoose.model('order', orderSchema, 'orders');

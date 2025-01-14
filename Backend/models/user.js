@@ -9,6 +9,8 @@ const userSchema = new Schema({
     role: { type: String, default: 'customer' },
     address: {type: String},
     phoneNumber: { type: Number},
+    dob: {type: Date},
+    gender: {type: String},
     totalItems: {type: Number, default: 0},
     cartItems: [{ 
         product: {
