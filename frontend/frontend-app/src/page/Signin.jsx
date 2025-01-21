@@ -14,7 +14,7 @@ const { updateUserId } = useContext(UserContext);
 const handleFormSubmission = async(e) =>{
   e.preventDefault();
   try {
-    const response = await axios.post('http://localhost:7000/signin',{
+    const response = await axios.post('https://fashionethnic.onrender.com/signin',{
       email,
       password
     })

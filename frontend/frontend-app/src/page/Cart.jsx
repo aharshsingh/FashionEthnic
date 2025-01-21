@@ -60,7 +60,7 @@ export default function Cart() {
             });
             setOrderArray(orderArray);
             try {
-                const response = await axios.post('http://localhost:7000/getProductImage', {
+                const response = await axios.post('https://fashionethnic.onrender.com/getProductImage', {
                     idArray
                 })
                 setCartProducts(()=>{

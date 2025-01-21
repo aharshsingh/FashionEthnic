@@ -7,7 +7,7 @@ export default function Products({ filter }) {
   const [sortedProducts, setSortedProducts] = useState([]);
 
   useEffect(()=>{
-    axios.get('http://localhost:7000/showProducts')
+    axios.get('https://fashionethnic.onrender.com/showProducts')
     .then((response) => {
       setProducts(response.data);
       setSortedProducts(response.data);

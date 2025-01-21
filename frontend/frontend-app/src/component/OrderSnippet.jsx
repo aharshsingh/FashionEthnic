@@ -7,7 +7,7 @@ export default function Ordersnippet({ order }) {
     useEffect(()=>{
         const getProduct = async()=>{
             try {
-                const response = await axios.get(`http://localhost:7000/productDetails/${order.productId}`);
+                const response = await axios.get(`https://fashionethnic.onrender.com/${order.productId}`);
                 setProduct(response.data)
             } catch (error) {
                 console.log(error);

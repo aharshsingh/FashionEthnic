@@ -10,7 +10,7 @@ export default function Dashboard() {
     const [customerinfo, setCustomerInfo] = useState(null);
     const {user} = useContext(UserContext);
     useEffect(() => {
-    axios.get(`http://localhost:3000/profile/${c_id}`)
+    axios.get(`https://fashionethnic.onrender.com/profile/${c_id}`)
     .then((response) => {
       setCustomerInfo(response.data);
     })
