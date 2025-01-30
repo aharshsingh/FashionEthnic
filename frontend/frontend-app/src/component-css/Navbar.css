@@ -1,6 +1,6 @@
 .outer-container1{
     display: flex;
-    column-gap: 1300px;
+    justify-content: space-between;
     position: fixed; 
     width: 100%; 
     top: 0; 
