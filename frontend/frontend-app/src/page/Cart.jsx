@@ -100,26 +100,26 @@ export default function Cart() {
                     <p style={{ marginTop: '25px', color: 'grey' }}>
                       Your cart is currently empty. Add items you love to your cart now.<br/> Review them anytime and proceed to checkout with ease
                     </p>
-                    <div style={{ marginLeft: '805px', marginTop: '-50px' }}>
+                    <div className='-mt-14 flex justify-center items-center '>
                         <WishlistAnimation />
                     </div>
-                    <div style={{ marginLeft: '-70px', marginTop: '-80px' }}>
+                    <div style={{ marginTop: '-80px' }}>
                         <Link className="link" to="/">
                             <button className="button">
-                                <p className="para3">Continue Shopping</p>
+                                <p className="para3 -mt-1">Continue Shopping</p>
                             </button>
                         </Link>
                     </div>
                 </div>
             ) : (
-                <div className="cart-outer-container">
+                <div className="mt-[200px] flex  gap-[50px]">
                     <div className="cart-inner-container1">
                         {CartProducts.map((product) => (
                             <Productsnippet key={product._id} product={product} handleRemove={handleRemove} />
                         ))
                         }
                     </div>
-                    <div className="cart-inner-container2">
+                    <div>
                         <div className='w-[500px] border-[#dddddd] border-1 p-2'>
                             <p >Deliver to: {user.userName}</p>
                             <p>Address: {user.address ? user.address : (<span>N/A</span>)}</p>
@@ -150,7 +150,9 @@ export default function Cart() {
                     </div>
                 </div>
             )}
+            <div className='mt-72'>
             <Footer />
+            </div>
         </>
     );
 }

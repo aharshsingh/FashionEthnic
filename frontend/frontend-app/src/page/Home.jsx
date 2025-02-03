@@ -28,7 +28,7 @@ export default function Home() {
       <button className='filter'>FILTERS</button>
       <Dropdown setFilter={setFilter} />
     </div>
-    <div className='product-container'>
+    <div className='flex justify-center items-center flex-wrap gap-[50px]'>
     <Products filter={filter} />
     </div>
     <div className='paginationcount'>

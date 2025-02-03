@@ -1,31 +1,30 @@
 import React from 'react'
-import '../component-css/Footer.css'
 import instaimg from '../photo/instagram (2).svg'
 import facebookimg from '../photo/facebook (2).svg'
 import twitterimg from '../photo/twitter (1).svg'
 import youtubeimg from '../photo/youtube.svg'
-
+import {Link} from 'react-router-dom'
 export default function Footer() {
   return (
-    <div className='footer-outer-container'>
-      <h1 className='footer-h'>CUSTOMER POLICIES</h1>
-      <div className='footer-container'>
-        <p id='p1' className='footer-p'>Contact Us</p>
-        <p  className='footer-p'>FAQ</p>
-        <p className='footer-p'>T&C</p>
-        <p className='footer-p'>Terms of use</p>
+    <div className='bg-[#132C48] h-[500px]'>
+      <h1 className='text-xl text-[#FFEFFF] text-center font-bold pt-36'>CUSTOMER POLICIES</h1>
+      <div className='flex justify-center items-center gap-14 mt-3 text-[#FFEFFF] text-base'>
+        <Link to='/ContactUs'><p>Contact Us</p></Link>
+        <p>FAQ</p>
+        <p>T&C</p>
+        <Link to='/TermsofUse'><p>Terms of use</p></Link>
       </div>
-      <div id='con'>
-        <p id='p2' className='footer-p'>About Us</p>
-        <p className='footer-p'>Track Order</p>
-        <p className='footer-p'>Privacy Policy</p>
+      <div className='flex justify-center items-center gap-10 text-[#FFEFFF] text-base'>
+        <p>About Us</p>
+        <p>Track Order</p>
+        <Link to='/PrivacyPolicy'><p>Privacy Policy</p></Link>
       </div>
-      <p className='lowerpara'>KEEP IN TOUCH</p>
-      <div className='footer-img-container'>
-        <img id='social-img' className='footer-img' src={instaimg} alt="logo" />
-        <img className='footer-img' src={facebookimg} alt="logo" />
-        <img className='footer-img' src={twitterimg} alt="logo" />
-        <img className='footer-img' src={youtubeimg} alt="logo" />
+      <p className='text-xl text-[#FFEFFF] text-center pt-14'>KEEP IN TOUCH</p>
+      <div className='flex justify-center items-center gap-14 mt-3'>
+        <img className='w-6 h-6' src={instaimg} alt="logo" />
+        <img className='w-6 h-6' src={facebookimg} alt="logo" />
+        <img className='w-6 h-6' src={twitterimg} alt="logo" />
+        <img className='w-6 h-6' src={youtubeimg} alt="logo" />
       </div>
     </div>
   )

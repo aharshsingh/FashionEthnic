@@ -1,9 +1,9 @@
 import React from 'react'
-import Navbar from './Navbar'
-import Footer from './Footer'
+import Navbar from '../component/Navbar'
+import Footer from '../component/Footer'
 import arrorimg from '../photo/greater-than-solid.svg'
 import '../component-css/UpdatePhone.css'
-import DropCode from './Dropdowncode'
+import DropCode from '../component/Dropdowncode'
 import {Link} from 'react-router-dom'
 export default function UpdatePhone() {
   return (

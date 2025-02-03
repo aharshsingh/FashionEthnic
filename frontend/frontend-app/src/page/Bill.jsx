@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useContext} from 'react'
 import Navbar from '../component/Navbar'
 import Footer from '../component/Footer'
 import '../component-css/Bill.css'
@@ -58,18 +58,18 @@ const handleAddAddress = async() => {
   return (
     <>
     <Navbar/>
-      <div className='cart-outer-container'>
-      <div className='cart-inner-container1'>
-      <p id='del' className='snippet-text2'>Select Delivery Address:</p>
+      <div className='mt-[200px] flex justify-center items-center gap-[50px]'>
+      <div className='border-r-[rgb(189, 189, 189)] border-r-2 pr-12'>
+      <p className='snippet-text2 text-left'>Select Delivery Address:</p>
       {user.address ? (
         <>
-        <div className='address-card'>
+        <div className='address-card items-center mt-10'>
         <p id='name'>Aharsh Singh</p>
         <p id='address'>{user.address}</p>
         <p className='phone'>Phone no. {user.phoneNumber ? user.phoneNumber : <span>N/A</span>}</p>
-      </div>
+        </div>
       <div className='button-div'>
-      <button className='address-button ' onClick={()=> setShow(true)}>+Add New Address</button>
+      <button className='address-button' onClick={()=> setShow(true)}>+Add New Address</button>
     </div>
     </>
       ):(
@@ -78,17 +78,17 @@ const handleAddAddress = async() => {
       </div>)}
       {show && (
             <div>
-              <p className='ml-[400px] mt-4'>Add Address:</p>
-              <div className='ml-[398px]'>
+              <p className='mt-4'>Add Address:</p>
+              <div className=''>
               <TextField
-              className='w-[400px] w-[452px] mt-3'
+              className=' w-[452px] mt-3'
                 label="Enter Address"
                 value={newAddress}
                 onChange={(e)=> setNewAddress(e.target.value)}
               /> <div>{error && <span style={{ color: 'red', marginTop:'5px' }}>*{error}</span>}</div>
               </div>
               <div>
-              <button className='ml-[740px] mt-2' variant="contained" color="primary" onClick={handleAddAddress}> Save Address </button>
+              <button className='mt-2' variant="contained" color="primary" onClick={handleAddAddress}> Save Address </button>
               </div>
             </div>
           )}

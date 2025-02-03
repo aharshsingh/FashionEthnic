@@ -17,9 +17,9 @@ import TermsofUse from './page/TermsofUse.jsx'
 import Shippingaddress from './component/Shippingaddress.jsx'
 import TC from './component/TC.jsx'
 import Orders from './component/Orders.jsx'
-import UpdatePhone from './component/UpdatePhone.jsx'
-import UpdateGender from './component/UpdateGender.jsx'
-import UpdateDOB from './component/UpdateDOB.jsx'
+import UpdatePhone from './page/UpdatePhone.jsx'
+import UpdateGender from './page/UpdateGender.jsx'
+import UpdateDOB from './page/UpdateDOB.jsx'
 import ProductCarousel from './component/ProductCarousel.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CartProvider } from "./Context/CartContext.jsx";

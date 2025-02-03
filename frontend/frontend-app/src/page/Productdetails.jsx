@@ -9,12 +9,14 @@ import '../component-css/Productdetails.css'
 import { useCart } from '../Context/CartContext'
 import { UserContext } from '../Context/UserContext'
 import {addCart} from '../utlis/cart/AddCart'
+import LoadingAnimation from '../component/LoadingAnimation';
 export default function Productdetails() {
 
   const {user} = useContext(UserContext);
   const [product,setProduct] = useState({});
   const [size, setSize] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
   const { setCart } = useCart();
   const params = useParams();
 
@@ -42,7 +44,7 @@ export default function Productdetails() {
     await axios.get(`https://fashionethnic.onrender.com/productDetails/${params.id}`)
     .then((response) => {
       setProduct(response.data);
-      console.log(response.data);
+      setLoading(false)
     })
     .catch((error) => {
       console.error(`Error fetching product details:`, error);
@@ -54,15 +56,19 @@ export default function Productdetails() {
   return (
     <>
     <Navbar/>
-    <div className='detail-container'>
-      <div className='image-div'>
-      <div className='image-container1'>
-        <Link to={`/productCarousel/${product._id}`}><img className='product-image' src={product.image} alt="logo" /></Link>
-        <Link to={`/productCarousel/${product._id}`}><img className='product-image' src={product.image} alt="logo" /></Link>
+    {
+      loading ? (
+      <LoadingAnimation/>
+    ) : (
+<div className='detail-container flex mt-24 justify-around'>
+      <div>
+      <div className='image-container1 flex gap-6 '>
+        <Link to={`/productCarousel/${product._id}`}><img className='w-[350px] h-[530px]' src={product.image} alt="logo" /></Link>
+        <Link to={`/productCarousel/${product._id}`}><img className='w-[350px] h-[530px]' src={product.image} alt="logo" /></Link>
       </div>
-      <div className='image-container2'>
-      <Link to={`/productCarousel/${product._id}`}><img className='product-image' src={product.image} alt="logo" /></Link>
-      <Link to={`/productCarousel/${product._id}`}><img className='product-image' src={product.image} alt="logo" /></Link>
+      <div className='image-container1 flex gap-6 mt-6'>
+      <Link to={`/productCarousel/${product._id}`}><img className='w-[350px] h-[530px]' src={product.image} alt="logo" /></Link>
+      <Link to={`/productCarousel/${product._id}`}><img className='w-[350px] h-[530px]' src={product.image} alt="logo" /></Link>
       </div>
       </div>
       <div className='text-detail-container'>
@@ -98,6 +104,8 @@ export default function Productdetails() {
         <p className='rate-num'>{product.rating}</p>
       </div>
     </div>
+    )
+    }
     <div style={{marginTop: '400px'}}>
     <Footer/>
     </div>
