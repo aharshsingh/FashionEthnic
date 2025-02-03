@@ -1,23 +1,25 @@
 import React from 'react'
 import Navbar from '../component/Navbar'
 import Footer from '../component/Footer'
-import arrorimg from '../photo/greater-than-solid.svg'
 import '../component-css/UpdatePhone.css'
 import DropCode from '../component/Dropdowncode'
-import {Link} from 'react-router-dom'
+import {useLocation } from 'react-router-dom'
+import ProgressBar from '../component/ProgressBar'
 export default function UpdatePhone() {
   return (
     <>
     <Navbar/>
-    <div className='update-container'>
-    <h3 className='update-heading'>Enter your Phone Number</h3>
-    <div className='phone-container'>
-        <DropCode/>
-        <input className='phone-input' type="tel" placeholder='0000-000-000'/>
-        <Link to='/UpdateGender'><img className='arrow-img' src={arrorimg} alt='img not loaded'/></Link>
-    </div>  
+    <div className='mt-40 flex justify-center items-center'>
+    <ProgressBar path={useLocation().pathname}/>
     </div>
-    <Footer/>
+    <div className='flex flex-col gap-2 justify-center items-center  mt-52'>
+      <p className='text-base font-medium -ml-44'>Phone Number</p>
+      <input className='border-1 border-[#a1a1a1] w-72 h-10 pl-3' type="tel" placeholder='00-0000-0000'/>
+      <button className='-ml-52 bg-[#FE8551] text-[#132C48] p-1 text-sm rounded-sm w-20 h-8'>Update</button>
+    </div>
+    <div className='mt-[400px]'>
+      <Footer/>
+    </div>
     </>
   )
 }

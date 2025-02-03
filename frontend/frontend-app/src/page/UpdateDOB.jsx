@@ -1,23 +1,24 @@
 import React from 'react'
 import Navbar from '../component/Navbar'
 import Footer from '../component/Footer'
-import arrorimg from '../photo/greater-than-solid.svg'
 import '../component-css/UpdateDOB.css'
-import {Link} from 'react-router-dom'
+import {useLocation } from 'react-router-dom'
+import ProgressBar from '../component/ProgressBar'
 export default function UpdatePhone() {
   return (
     <>
     <Navbar/>
-    <div className='update-container'>
-    <div className='phone-container'>
-        <fieldset >
-          <legend className='legend-input'>Date of Birth</legend>
-          <input className='dob-input' type='text' placeholder='DD/MM/YYYY'></input>
-        </fieldset>
-        <Link to='/UpdateAltPhone'><img className='arrow-img' src={arrorimg} alt='img not loaded'/></Link>
-    </div>  
+    <div className='mt-40 flex justify-center items-center'>
+            <ProgressBar path={useLocation().pathname}/>
     </div>
-    <Footer/>
+    <div className='flex flex-col gap-2 justify-center items-center  mt-52'>
+          <p className='text-base font-medium -ml-48'>Date of birth</p>
+          <input className='border-1 border-[#a1a1a1] w-72 h-10 pl-3' type="date" placeholder='00-0000-0000'/>
+          <button className='-ml-52 bg-[#FE8551] text-[#132C48] p-1 text-sm rounded-sm w-20 h-8'>Update</button>
+        </div>
+        <div className='mt-[400px]'>
+          <Footer/>
+        </div>
     </>
   )
 }
