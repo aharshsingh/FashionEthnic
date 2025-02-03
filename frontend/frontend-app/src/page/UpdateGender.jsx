@@ -10,10 +10,11 @@ import ProgressBar from '../component/ProgressBar';
 import axios from 'axios';
 import { UserContext } from '../Context/UserContext';
 import toast from 'react-hot-toast'
+import {getUser} from '../utlis/user/getUser';
 
 export default function UpdatePhone() {
   const [hoveredGender, setHoveredGender] = useState('');
-  const {user} = useContext(UserContext);
+  const {user, setUser} = useContext(UserContext);
   const renderGender = (gender) => {
     setHoveredGender(gender);
   };
@@ -27,6 +28,8 @@ export default function UpdatePhone() {
       const response = await axios.patch(`http://localhost:7000/updateuser/${user._id}`,{
         gender: hoveredGender
       })
+      const result = await getUser(user._id);
+      setUser(result);
       toast.success('Gender updated successfully!')
     } catch (error) {
       toast.error('Failed to update gender!')

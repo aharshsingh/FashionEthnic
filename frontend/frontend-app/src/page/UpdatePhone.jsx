@@ -7,10 +7,11 @@ import ProgressBar from '../component/ProgressBar'
 import axios from 'axios'
 import { UserContext } from '../Context/UserContext'
 import toast from 'react-hot-toast'
+import {getUser} from '../utlis/user/getUser';
 
 export default function UpdatePhone() {
   const [phoneNumber, setPhoneNumber] = useState('')
-  const { user } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
 
   const handlePhoneChange = (event) => {
     setPhoneNumber(event.target.value)
@@ -18,12 +19,12 @@ export default function UpdatePhone() {
 
   const handleSubmit = async () => {
     try {
-      console.log(user._id)
-
       const response = await axios.patch(`http://localhost:7000/updateuser/${user._id}`, {
         phoneNumber
       });
-      toast.success('Phone number updated successfully!')
+      const result = await getUser(user._id);
+      setUser(result);
+      toast.success('Phone number updated successfully!');
     } catch (error) {
       toast.error('Failed to update phone number!')
     }
