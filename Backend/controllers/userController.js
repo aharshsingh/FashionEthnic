@@ -78,10 +78,16 @@ const userController = {
     },
 
     async updateUser(req,res,next){
-        const address = req.body.address;
-        const {userId} = req.params;
         try {
-            const result = await User.findByIdAndUpdate(userId, {address}, {new:true});
+            const { address, phoneNumber, dob, gender } = req.body; 
+            const { userId } = req.params;
+            const updateFields = {};
+            if (address) updateFields.address = address;
+            if (phoneNumber) updateFields.phoneNumber= phoneNumber;
+            if (dob) updateFields.dob = dob;
+            if (gender) updateFields.gender = gender;
+            console.log(updateFields)
+            const result = await User.findByIdAndUpdate(userId, updateFields, {new:true});
             return res.status(200).json({result});
         } catch (error) {
             return next(error);
