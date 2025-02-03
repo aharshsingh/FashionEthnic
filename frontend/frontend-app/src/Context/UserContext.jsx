@@ -11,7 +11,8 @@ const [isLoggedIn, setIsLoggedIn] = useState(false);
 useEffect(()=>{
   const data = localStorage.getItem("user");
   setUser(JSON.parse(data));
-  setIsLoggedIn((true));
+  const res = localStorage.getItem("isLoggedIn");
+  setIsLoggedIn(JSON.parse(res));
 },[])
 
 useEffect(() =>{
@@ -25,6 +26,7 @@ useEffect(() =>{
         const result = await getUser(id);
         setUser(result);
         setIsLoggedIn(true);
+        localStorage.setItem('isLoggedIn', "true");
         localStorage.setItem('user', JSON.stringify(result));
       }
     } catch (error) {
