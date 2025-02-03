@@ -17,7 +17,7 @@ export default function Orders() {
     }
     
     getOrder();
-  },[])
+  },[user._id])
   return (
     <div>
       <div className='pl-6'>

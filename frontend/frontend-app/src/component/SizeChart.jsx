@@ -10,7 +10,7 @@ export default function SizeChart() {
     const [gender, setGender] = useState('');
     useEffect(()=>{
         setGender(params.gender);
-    },[])
+    },[params.gender])
     const handleClick = ()=>{
         navigate(-1);
       }

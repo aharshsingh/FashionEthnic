@@ -6,19 +6,20 @@ import { UserContext } from '../Context/UserContext';
 
 export default function Dashboard() {
 
-    const [c_id, setC_id] = useState(null);
+    const [c_id] = useState(null);
     const [customerinfo, setCustomerInfo] = useState(null);
     const {user} = useContext(UserContext);
+
     useEffect(() => {
     axios.get(`https://fashionethnic.onrender.com/profile/${c_id}`)
     .then((response) => {
       setCustomerInfo(response.data);
+      console.log(customerinfo);
     })
     .catch((error) => {
       console.error(`Error fetching customer details:`, error);
     });
-    },[])
-    console.log(customerinfo);
+    },[c_id, customerinfo])
     return (
     <>
       <div className='dashboard-outer-container'>
