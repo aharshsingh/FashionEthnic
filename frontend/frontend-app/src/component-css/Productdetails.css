@@ -22,10 +22,6 @@
     background-color: white; 
     color: #132C48;
   }
-  .size-button:hover {
-    background-color: white;
-    border-color: #FE8551;
-  }
   .size-button.selected {
     background-color: #FE8551;
     color: white;

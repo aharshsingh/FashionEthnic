@@ -10,6 +10,7 @@ import { useCart } from '../Context/CartContext'
 import { UserContext } from '../Context/UserContext'
 import {addCart} from '../utlis/cart/AddCart'
 import LoadingAnimation from '../component/LoadingAnimation';
+import toast from 'react-hot-toast'
 export default function Productdetails() {
 
   const {user} = useContext(UserContext);
@@ -27,10 +28,10 @@ export default function Productdetails() {
       productId: params.id
     }) 
     if(response.status === 200){
-      alert('Product WishListed');
+      toast.success('Added to wishlist');
     }
     if(response.status === 201){
-      alert("product is added already!");
+      toast.success('Already in wishlist');
       return;
     }
   } catch (error) {
@@ -79,15 +80,15 @@ export default function Productdetails() {
         <div className='detail-line'></div>
         <p className='size-text'>SELECT SIZE <span className='chart'><Link to={`/sizechart/${product.gender}`}>SIZE CHART {'>'}</Link></span></p>
         <div className='size'> 
-          <button className='size-button' value='S' onClick={(event)=> {setSize(event.target.value); setError('')}}>S</button>
-          <button className='size-button' value='M' onClick={(event)=> {setSize(event.target.value); setError('')}}>M</button>
-          <button className='size-button' value='L' onClick={(event)=> {setSize(event.target.value); setError('')}}>L</button>
-          <button className='size-button' value='XL' onClick={(event)=> {setSize(event.target.value); setError('')}}>XL</button>
-          <button className='size-button' value='XXL' onClick={(event)=> {setSize(event.target.value); setError('')}}>XXL</button>
+          <button className={`size-button ${size === 'S'? 'text-[#132C48] bg-[#FE8551] border-1 border-[#FE8551]':''}`} value='S' onClick={(event)=> {setSize(event.target.value); setError('')}}>S</button>
+          <button className={`size-button ${size === 'M'? 'text-[#132C48] bg-[#FE8551] border-1 border-[#FE8551]':''}`}value='M' onClick={(event)=> {setSize(event.target.value); setError('')}}>M</button>
+          <button className={`size-button ${size === 'L'? 'text-[#132C48] bg-[#FE8551] border-1 border-[#FE8551]':''}`} value='L' onClick={(event)=> {setSize(event.target.value); setError('')}}>L</button>
+          <button className={`size-button ${size === 'XL'? 'text-[#132C48] bg-[#FE8551] border-1 border-[#FE8551]':''}`} value='XL' onClick={(event)=> {setSize(event.target.value); setError('')}}>XL</button>
+          <button className={`size-button ${size === 'XXL'? 'text-[#132C48] bg-[#FE8551] border-1 border-[#FE8551]':''}`} value='XXL' onClick={(event)=> {setSize(event.target.value); setError('')}}>XXL</button>
         </div>
         {error && <p className="error-message">{error}</p>}
         <div className='button-container'>
-          <button className='detail-button' onClick={ ()=> addCart(product._id, size, setCart, product.name, product.about, product.price, product.discount, setError) }><img className='bag-img' src={bagimg} alt='logo' />Add to bag</button>
+          <button className='detail-button' onClick={ ()=> {addCart(product._id, size, setCart, product.name, product.about, product.price, product.discount, setError); toast.success('Added to cart')}}><img className='bag-img' src={bagimg} alt='logo' />Add to bag</button>
           <button className='detail-button' onClick={handleWishList}><img className='bag-img' src={likeimg} alt="logo" />Wishlist</button>
         </div>
         <div className='detail-line'></div>
