@@ -28,6 +28,7 @@ import { UserContext } from './Context/UserContext.jsx';
 import WishList from './page/WishList.jsx';
 import SizeChart from './component/SizeChart.jsx';
 import { Toaster } from 'react-hot-toast'; 
+import AddProduct from './page/AddProduct.jsx';
 
 function App() {
     const { user } = useContext(UserContext);
@@ -64,6 +65,7 @@ function App() {
                         <Route path='/productCarousel/:id' Component={ProductCarousel} />
                         <Route path='/wishlist' Component={WishList} /> 
                         <Route path='/sizechart/:gender' Component={SizeChart} /> 
+                        <Route path='/addproduct' Component={AddProduct} /> 
                         <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
                 </CartProvider>

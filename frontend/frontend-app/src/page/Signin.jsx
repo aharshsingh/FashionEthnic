@@ -4,6 +4,10 @@ import signupImage from '../photo/64e74bb7657e506338faa8c9_1692879799068.jpg'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {UserContext} from '../Context/UserContext'
+import googleImg from '../photo/google.png'
+import { auth, provider } from '../utlis/auth/Firebase';
+import { signInWithPopup } from 'firebase/auth';
+
 export default function Signin() {
 
 const [email, setEmail] = useState('');
@@ -11,6 +15,10 @@ const [password, setPassword] = useState('');
 const navigate = useNavigate(); 
 const { updateUserId } = useContext(UserContext);
 
+const googleLogin = async() => {
+  const response = await signInWithPopup(auth, provider);
+  console.log(response);
+}
 const handleFormSubmission = async(e) =>{
   e.preventDefault();
   try {
@@ -62,8 +70,12 @@ const handleFormSubmission = async(e) =>{
               setPassword(event.target.value);
             }}/>
             </div>
-            <button type='submit' className='submitLoginForm' onClick={handleFormSubmission}>Log into account</button>
-        </form>
+            <button type='submit' className='submitLoginForm transition-colors duration-300 ease-in-out' onClick={handleFormSubmission}>Log into account</button>
+            <div className='flex justify-center items-center'>
+            <div className='border-t-[#e4e4e4] border-1 w-96 mt-14'></div>
+            </div>
+            </form>
+            <button className='flex justify-center items-center gap-4 border-1 border-[#d8d8d8] mt-14 rounded-full w-[600px] h-[60px] hover:bg-[#4285F4] hover:text-white transition-colors duration-300 ease-in-out' onClick={googleLogin}><span className='text-lg '>Login with Google</span><img className='w-6 h-6' src={googleImg} alt='googleImg'/></button>
     </div>
     </div>
     

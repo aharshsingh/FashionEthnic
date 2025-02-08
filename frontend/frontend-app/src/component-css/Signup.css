@@ -1,10 +1,5 @@
-.registerFormContainer{
-    margin-top: 100px;
-    width: 600px;
-    height: 700px;
-}
 .LoginFormContainer{
-    margin-top: 180px;
+    margin-top: 140px;
     width: 600px;
     height: 700px;
 }
@@ -20,10 +15,8 @@
   }
   .FormSubHeading {
     color: rgb(90, 90, 90);
-    margin-left: 185px;
     padding-top: 10px;
     position: relative; 
-    cursor: pointer; 
     display: inline-block; 
   }
   
@@ -47,25 +40,20 @@
     font-size: 35px;
     text-align: center;
 }
-.inputDiv{
-    margin-top: 50px;
-}
 .rgisterLabel{
     margin-top: 50px;
 }
 .userInput{
-    border-radius: 10px;
-    width: 600px;
+    border-radius: 5px;
     height: 50px;
     border: solid 1px gray;
 }
 .userInput::placeholder{
-    padding: 10px;
     font-size: 15px;
 }
 .submitRegisterForm{
     border-radius: 100px;
-    background-color: gray;
+    background-color: black;
     width: 600px;
     height: 60px;
     font-size: 20px;
@@ -73,22 +61,17 @@
     color: white;
     margin-top: 10px;
 }
-.submitRegisterForm:hover{
-    background-color: black;
-}
+
 .termsSpan{
     text-decoration: underline;
 }
 .submitLoginForm{
     border-radius: 100px;
-    background-color: gray;
+    background-color: black;
     width: 600px;
     height: 60px;
     font-size: 20px;
     font-weight:bold;
     color: white;
     margin-top: 50px;
-}
-.submitLoginForm:hover{
-    background-color: black;
 }
