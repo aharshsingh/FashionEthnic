@@ -14,18 +14,18 @@ const loginController = {
 
             const user = await User.findOne({ email: req.body.email });
             if (!user) {
-                return next(customErrorHandler.wrongCredentials('Username or password is wrong'));
+                return next(customErrorHandler.notAuthrorised('Username or password is wrong'));
             }
 
             const match = await bcrypt.compare(req.body.password, user.password);
             if (!match) {
-                return next(customErrorHandler.wrongCredentials('Username or password is wrong'));
+                return next(customErrorHandler.notAuthrorised('Username or password is wrong'));
             }
 
             const token = JwtService.sign({ _id: user.id, role: user.role });
             res.json({ token });
         } catch (err) {
-            return next(err);
+            return res.status(500).json({ error: 'Internal server error' });
         }
     }
 };
