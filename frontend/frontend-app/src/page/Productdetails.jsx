@@ -80,7 +80,7 @@ export default function Productdetails() {
       <Link to={`/productCarousel/${product._id}`}><img className='w-[350px] h-[530px]' src={product.image} alt="logo" /></Link>
       </div>
       </div>
-      <div className=' lg:mt-[100px] -ml-10'>
+      <div className=' lg:mt-[100px]'>
         <p className='name ml-2'>{product.name}</p>
         <p className='short-detail ml-2 lg:text-base text-sm'>{product.about}</p>
         <p className='product_price ml-2'>Rs.{product.price}<span className='discount font-semibold'>  ({product.discount}% OFF)</span></p>

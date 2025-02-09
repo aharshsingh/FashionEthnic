@@ -75,8 +75,8 @@ export default function WishList() {
                 </div>
                 ) : (
                 <div>
-                <p style={{marginTop:'150px', marginLeft:'180px', fontSize:'21px', fontWeight:'300'}}>My Wishlist</p>
-                <div style={{display:'flex', columnGap:'20px', marginLeft:'180px', marginTop:'-50px'}}>
+                <p style={{fontSize:'21px', fontWeight:'300'}} className='lg:mt-[150px] lg:ml-[180px] mt-28 ml-10'>My Wishlist</p>
+                <div className='flex flex-wrap justify-center lg:justify-start lg:flex-nowrap gap-5 mt-[-50px] lg:ml-60'>
                     {
                         wishlistItems.map((item)=>{
                             return <WishListItem key={item._id} product = {item} handleRemove={handleRemove}/>

@@ -11,7 +11,7 @@ export default function ProductCarousel() {
   const [productImage, setImage] = useState({});
   useEffect(()=>{
     const fetchImage = async ()=>{
-       await axios.get(`http://localhost:7000/getProductImage/${params.id}`)
+       await axios.get(`https://fashionethnic.onrender.com/getProductImage/${params.id}`)
        .then((res) =>{
         setImage(res.data);
         console.log(res.data);
