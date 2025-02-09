@@ -11,9 +11,10 @@ export default function ProductCarousel() {
   const [productImage, setImage] = useState({});
   useEffect(()=>{
     const fetchImage = async ()=>{
-       await axios.get(`https://fashionethnic.onrender.com/${params.id}`)
+       await axios.get(`http://localhost:7000/getProductImage/${params.id}`)
        .then((res) =>{
         setImage(res.data);
+        console.log(res.data);
        })
        .catch((error) =>{
         console.log('Error in fetching details:', error);

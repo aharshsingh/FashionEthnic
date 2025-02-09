@@ -28,10 +28,14 @@ export default function Productdetails() {
       productId: params.id
     }) 
     if(response.status === 200){
-      toast.success('Added to wishlist');
+      toast.success('Added to wishlist', {
+        position: "top-center",
+      });
     }
     if(response.status === 201){
-      toast.success('Already in wishlist');
+      toast.success('Already in wishlist', {
+        position: "top-center",
+      });
       return;
     }
   } catch (error) {
@@ -61,8 +65,12 @@ export default function Productdetails() {
       loading ? (
       <LoadingAnimation/>
     ) : (
-<div className='detail-container flex mt-24 justify-around'>
-      <div>
+      <>
+      <div className='lg:hidden flex justify-center items-center mt-20'>
+      <Link to={`/productCarousel/${product._id}`}><img className='w-[250px] h-[400px]' src={product.image} alt="logo" /></Link>
+      </div>
+<div className='detail-container flex lg:mt-24 mt-5 justify-around'>
+      <div className='hidden lg:block mt-10'>
       <div className='image-container1 flex gap-6 '>
         <Link to={`/productCarousel/${product._id}`}><img className='w-[350px] h-[530px]' src={product.image} alt="logo" /></Link>
         <Link to={`/productCarousel/${product._id}`}><img className='w-[350px] h-[530px]' src={product.image} alt="logo" /></Link>
@@ -72,14 +80,14 @@ export default function Productdetails() {
       <Link to={`/productCarousel/${product._id}`}><img className='w-[350px] h-[530px]' src={product.image} alt="logo" /></Link>
       </div>
       </div>
-      <div className='text-detail-container'>
-        <p className='name'>{product.name}</p>
-        <p className='short-detail'>{product.about}</p>
-        <p className='product_price'>Rs.{product.price}<span className='discount font-semibold'>  ({product.discount}% OFF)</span></p>
-        <p className='tax'>inclusive of all taxes</p>
-        <div className='detail-line'></div>
-        <p className='size-text'>SELECT SIZE <span className='chart'><Link to={`/sizechart/${product.gender}`}>SIZE CHART {'>'}</Link></span></p>
-        <div className='size'> 
+      <div className=' lg:mt-[100px] -ml-10'>
+        <p className='name ml-2'>{product.name}</p>
+        <p className='short-detail ml-2 lg:text-base text-sm'>{product.about}</p>
+        <p className='product_price ml-2'>Rs.{product.price}<span className='discount font-semibold'>  ({product.discount}% OFF)</span></p>
+        <p className='tax ml-2'>inclusive of all taxes</p>
+        <div className='detail-line hidden lg:block'></div>
+        <p className='size-text ml-2'>SELECT SIZE <span className='chart'><Link to={`/sizechart/${product.gender}`}>SIZE CHART {'>'}</Link></span></p>
+        <div className='size ml-2'> 
           <button className={`size-button ${size === 'S'? 'text-[#132C48] bg-[#FE8551] border-1 border-[#FE8551]':''}`} value='S' onClick={(event)=> {setSize(event.target.value); setError('')}}>S</button>
           <button className={`size-button ${size === 'M'? 'text-[#132C48] bg-[#FE8551] border-1 border-[#FE8551]':''}`}value='M' onClick={(event)=> {setSize(event.target.value); setError('')}}>M</button>
           <button className={`size-button ${size === 'L'? 'text-[#132C48] bg-[#FE8551] border-1 border-[#FE8551]':''}`} value='L' onClick={(event)=> {setSize(event.target.value); setError('')}}>L</button>
@@ -87,24 +95,32 @@ export default function Productdetails() {
           <button className={`size-button ${size === 'XXL'? 'text-[#132C48] bg-[#FE8551] border-1 border-[#FE8551]':''}`} value='XXL' onClick={(event)=> {setSize(event.target.value); setError('')}}>XXL</button>
         </div>
         {error && <p className="error-message">{error}</p>}
-        <div className='button-container'>
-          <button className='detail-button' onClick={ ()=> {addCart(product._id, size, setCart, product.name, product.about, product.price, product.discount, setError); toast.success('Added to cart')}}><img className='bag-img' src={bagimg} alt='logo' />Add to bag</button>
-          <button className='detail-button' onClick={handleWishList}><img className='bag-img' src={likeimg} alt="logo" />Wishlist</button>
+        <div className='button-container ml-3'>
+          <button className='flex justify-center items-center gap-2 bg-[#132C48] lg:text-[15px] text-sm text-white lg:h-[50px] lg:w-[150px] h-[40px] w-[120px]'onClick={() => {
+          if (!size) {
+          setError('Please select a size');
+          return;
+          }
+          addCart(product._id, size, setCart, product.name, product.about, product.price, product.discount, setError);
+          toast.success('Added to cart', { position: "top-center" });
+          }}><img src={bagimg} alt='logo' />Add to bag</button>
+          <button className='flex justify-center items-center gap-2 bg-[#132C48] lg:text-[15px] text-sm text-white lg:h-[50px] lg:w-[150px] h-[40px] w-[120px]' onClick={handleWishList}><img src={likeimg} alt="logo" />Wishlist</button>
         </div>
-        <div className='detail-line'></div>
-        <ul className='product_detail_list'>Product details
+        <div className='detail-line hidden lg:block'></div>
+        <ul className='product_detail_list ml-2'>Product details
           <li className='p_d_l'>Colour: {product.colour}</li>
           <li className='p_d_l'>{product.fit}</li>
         </ul>
-        <ul className='product_detail_list'>Material & Care
+        <ul className='product_detail_list ml-2'>Material & Care
           <li className='p_d_l'>{product.material}</li>
           <li className='p_d_l'>{product.care}</li>
         </ul>
-        <div className='detail-line'></div>
-        <p className='product-rating'>RATINGS</p>
-        <p className='rate-num'>{product.rating}</p>
+        <div className='detail-line hidden lg:block'></div>
+        <p className='product-rating ml-2'>RATINGS</p>
+        <p className='rate-num ml-2'>{product.rating}</p>
       </div>
     </div>
+    </>
     )
     }
     <div style={{marginTop: '400px'}}>

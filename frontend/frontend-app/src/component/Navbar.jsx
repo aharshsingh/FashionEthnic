@@ -27,27 +27,31 @@ export default function Navbar() {
   return (
     <>
       <div className={`outer-container1 ${scrolled ? 'nav-shadow' : ''}`}>
-        <div className="burger-img">
+        <div className="mt-2 lg:ml-3 ml-1">
           <NavDrawer />
         </div>
-        <div className="inner-container">
+        <div className="flex mt-[15px] flex-row gap-4 lg:gap-16 lg:mr-12 mr-3">
           {isLoggedIn ? (
             <Link className="link" to="/Profile">
-              <p className="name" id="name1">{user.userName || 'User'}</p>
+              <p className="name lg:text-xl text-base">{user.userName || 'User'}</p>
             </Link>
           ) : (
             <Link className="link login-link" to="/Signup">
-              <button className="name" id="name1">Signup</button>
+              <button className="name lg:text-xl text-base">Signup</button>
             </Link>
           )}
-          <img className="heart-img" src={heartimg} alt="Wishlist Icon" />
+          <div className='flex'>
+          <img className="heart-img w-6 h-6" src={heartimg} alt="Wishlist Icon" />
           <Link className={`link ${scrolled ? 'wishlist-link' : ''}`} to="/wishlist/">
-            <p className="name" id="name2">Wishlist</p>
+          <p className="name lg:text-xl text-base">Wishlist</p>
           </Link>
+          </div>
+          <div className='flex'>
           <Link to="/Cart">
-            <img className="cart-img" src={cartimg} alt="Cart Icon" />
+            <img className="cart-img lg:w-5 lg:h-5" src={cartimg} alt="Cart Icon" />
           </Link>
-          <p className="name" id="name3">{cart?.totalItems || 0}</p>
+          <p className="name text-xl" id="name3">{cart?.totalItems || 0}</p>
+          </div>
         </div>
       </div>
     </>
