@@ -116,11 +116,24 @@ const productController = {
         return res.json(document);
     },
     
-    async getProductImage(req,res,next){
+    async getImage(req,res,next){
         const {id} = req.params;
         try {
             const result = await product.findById(id).select('image');
             return res.status(200).json(result);
+        } catch (error) {
+            return next(error);
+        }
+    }, 
+    async getProductImage(req,res,next){
+        const idArray = req.body.idArray;
+        let result = [];
+        try {
+            for(let id of idArray){
+                const image = await product.findById(id).select('image');
+                result.push({id,image});
+            }
+            return res.status(200).json({result});
         } catch (error) {
             return next(error);
         }
