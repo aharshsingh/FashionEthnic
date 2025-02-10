@@ -8,6 +8,7 @@ import '../component-css/Cart.css';
 import { Link } from 'react-router-dom';
 import WishlistAnimation from '../component/WishListAnimation';
 import axios from 'axios';
+import toast from 'react-hot-toast'
 
 export default function Cart() {
     const { cart, setCart } = useCart();
@@ -89,6 +90,7 @@ export default function Cart() {
             productArray: updatedProductArray,
             totalItems: updatedTotalItems,
         });
+        toast.success('Item removed from cart', { position: "top-center" });
     };
 
     return (
@@ -113,7 +115,7 @@ export default function Cart() {
                 </div>
             ) : (
                 <div className="lg:mt-[200px] mt-24 flex lg:flex-row lg:justify-center lg:gap-20 flex-col justify-center">
-                    <div className="cart-inner-container1 lg:h-[520px] h-[350px]">
+                    <div className="cart-inner-container1 lg:h-[520px] h-[350px] ">
                         {CartProducts.map((product) => (
                             <Productsnippet key={product._id} product={product} handleRemove={handleRemove} />
                         ))

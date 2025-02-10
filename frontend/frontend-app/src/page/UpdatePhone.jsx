@@ -7,7 +7,7 @@ import ProgressBar from '../component/ProgressBar'
 import axios from 'axios'
 import { UserContext } from '../Context/UserContext'
 import toast from 'react-hot-toast'
-import {getUser} from '../utlis/user/getUser';
+import { getUser } from '../utlis/user/getUser';
 
 export default function UpdatePhone() {
   const [phoneNumber, setPhoneNumber] = useState('')
@@ -17,7 +17,22 @@ export default function UpdatePhone() {
     setPhoneNumber(event.target.value)
   }
 
+  const validatePhoneNumber = (phone) => {
+    const phoneRegex = /^[0-9]{10}$/; 
+    return phoneRegex.test(phone);
+  }
+
   const handleSubmit = async () => {
+    if (!phoneNumber) {
+      toast.error('Phone number is required!', { position: "top-center" });
+      return;
+    }
+
+    if (!validatePhoneNumber(phoneNumber)) {
+      toast.error('Enter a valid 10-digit phone number!', { position: "top-center" });
+      return;
+    }
+
     try {
       await axios.patch(`https://fashionethnic.onrender.com/updateuser/${user._id}`, {
         phoneNumber
@@ -26,7 +41,7 @@ export default function UpdatePhone() {
       setUser(result);
       toast.success('Phone number updated successfully!');
     } catch (error) {
-      toast.error('Failed to update phone number!')
+      toast.error('Failed to update phone number!');
     }
   }
 
@@ -41,7 +56,7 @@ export default function UpdatePhone() {
         <input
           className='border-1 border-[#a1a1a1] w-72 h-10 pl-3'
           type='tel'
-          placeholder='00-0000-0000'
+          placeholder='0000000000'
           value={phoneNumber}
           onChange={handlePhoneChange}
         />

@@ -22,28 +22,30 @@ export default function Dashboard() {
     },[c_id, customerinfo])
     return (
     <>
-      <div className='dashboard-outer-container'>
-        <div className='pt-14 pl-20'>
-          <p className='ml-3 text-lg font-semibold'>Profile Details</p>
-          <div className='mt-3 border-[1px] w-[500px]'></div>
+      <div className='dashboard-outer-container lg:h-[650px] lg:w-[650px] w-[350px]'>
+        <div className='lg:pt-14 lg:pl-20 pt-5 pl-5'>
+          <p className='lg:ml-3 lg:text-lg text-base font-semibold'>Profile Details</p>
+          <div className='mt-3 border-[1px] lg:w-[500px] w-[300px]'></div>
         </div>
         <div className='info-div'>
-            <ul className='dash-list'>
-                <li className='dash-list-con'>Full Name</li>
-                <li className='dash-list-con'>Email ID</li>
-                <li className='dash-list-con'>Mobile Number</li>
-                <li className='dash-list-con'>Gender</li>
-                <li className='dash-list-con'>DOB</li>
+            <ul className='dash-list lg:ml-[50px] ml-0'>
+                <li className='dash-list-con lg:text-base text-[13px]'>Full Name</li>
+                <li className='dash-list-con lg:text-base text-[13px]'>Email ID</li>
+                <li className='dash-list-con lg:text-base text-[13px]'>Mobile Number</li>
+                <li className='dash-list-con lg:text-base text-[13px]'>Gender</li>
+                <li className='dash-list-con lg:text-base text-[13px]'>DOB</li>
             </ul>
             <ul className='dash-list'>
-                <li  className='dash-list-con'>{user.userName} </li>
-                <li  className='dash-list-con'>{user.email}</li>
-                <li  className='dash-list-con'>{user.phoneNumber? user.phoneNumber: "-Not added-"}</li>
-                <li  className='dash-list-con'>{user.gender? user.gender: "-Not added-"}</li>
-                <li  className='dash-list-con'>{user.dob? user.dob: "-Not added-"}</li>
+                <li  className='dash-list-con lg:text-base text-[13px]'>{user.userName} </li>
+                <li  className='dash-list-con lg:text-base text-[13px]'>{user.email}</li>
+                <li  className='dash-list-con lg:text-base text-[13px]'>{user.phoneNumber? user.phoneNumber: "-Not added-"}</li>
+                <li  className='dash-list-con lg:text-base text-[13px]'>{user.gender? user.gender: "-Not added-"}</li>
+                <li  className='dash-list-con lg:text-base text-[13px]'>{user.dob? user.dob: "-Not added-"}</li>
             </ul>
         </div>
-        <Link to='/UpdatePhone'><button className='bg-[#FE8551] w-[350px] p-3 text-base text-[#132C48] font-semibold mt-40 ml-36'>Update</button></Link>
+        <div className='flex justify-center items-center'>
+        <Link to='/UpdatePhone'><button className='bg-[#FE8551] lg:w-[350px] w-40 lg:p-3 p-2 text-base text-[#132C48] font-semibold mt-40 lg:mb-0 mb-4'>Update</button></Link>
+        </div>
       </div>
     </>
   )

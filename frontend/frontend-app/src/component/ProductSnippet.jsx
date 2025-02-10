@@ -4,8 +4,8 @@ import xmarkimg from '../photo/xmark-solid.svg'
 export default function Product_snippet({ product, handleRemove }) {
   return (
     <>
-    <div className='flex justify-center items-center'>
-    <div className='snippet-container lg:w-[550px] lg:h-[350px] w-80 h-52 flex mt-4'>
+    <div className='flex justify-center items-center lg:mt-14'>
+    <div className='snippet-container lg:w-[550px] lg:h-[350px] w-80 h-52 flex  mt-4 mb-4'>
         <img className='snippet-product-img lg:h-[280px] lg:w-[200px] w-20 lg:ml-10 lg:mt-10 mt-7 ml-5 h-40' src={product.image} alt="logo" />
         <div className='text-snippet-container'>
         <div className='flex justify-end'>

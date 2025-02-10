@@ -28,13 +28,13 @@ export default function Profile() {
   return (
     <>
       <Navbar />
-      <div className='mt-28 mb-2'>
-        <p className='ac font-semibold'>Account</p>
-        <p className='ml-[470px] text-sm'>{user.userName}</p>
+      <div className='lg:mt-28 mt-6 mb-2 flex flex-col justify-start'>
+        <p className='ac font-semibold lg:ml-[470px] ml-5'>Account</p>
+        <p className='text-sm lg:ml-[470px] ml-5'>{user.userName}</p>
       </div>
-      <div className='profile-underline border-[#dddddd]'></div>
+      <div className='profile-underline border-[#dddddd] lg:w-[1100px] w-[350px] lg:ml-[450px] ml-4'></div>
       <div className='profile-outer-container'>
-        <ul className='list'>
+        <ul className='list lg:block hidden'>
           <li className='list-content cursor-pointer' onClick={() => setActiveSection('Dashboard')}>Dashboard</li>
           <li className='list-content cursor-pointer' onClick={() => setActiveSection('Orders')}>Orders</li>
           <Link to='/Cart' className='link'><li className='list-content'>Cart</li></Link>
@@ -44,8 +44,8 @@ export default function Profile() {
           <Link to='/TermsofUse' className='link'><li className='list-content'>Terms of Use</li></Link>
           <Link to='/PrivacyPolicy' className='link'><li className='list-content'>Privacy Policy</li></Link>
         </ul>
-        <div className='profile-underline1 border-[#dddddd]'></div>
-        <div className='component-div'>
+        <div className='profile-underline1 border-[#dddddd] lg:block hidden'></div>
+        <div className='lg:p-14'>
           {renderSection()}
         </div>
       </div>

@@ -25,9 +25,9 @@ export default function UpdatePhone() {
       });
       const result = await getUser(user._id);
       setUser(result);
-      toast.success('Date of birth updated successfully!')
+      toast.success('Date of birth updated successfully!', { position: "top-center" })
     } catch (error) {
-      toast.error('Failed to update date of birth!')
+      toast.error('Failed to update date of birth!', { position: "top-center" })
     }
   }
   return (

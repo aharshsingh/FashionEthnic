@@ -30,9 +30,9 @@ export default function UpdatePhone() {
       })
       const result = await getUser(user._id);
       setUser(result);
-      toast.success('Gender updated successfully!')
+      toast.success('Gender updated successfully!', { position: "top-center" })
     } catch (error) {
-      toast.error('Failed to update gender!')
+      toast.error('Failed to update gender!', { position: "top-center" })
     }
   }
 
