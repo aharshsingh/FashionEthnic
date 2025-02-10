@@ -60,7 +60,7 @@ export default function Cart() {
             });
             setOrderArray(orderArray);
             try {
-                const response = await axios.post('http://localhost:7000/getProductImage', {
+                const response = await axios.post('https://fashionethnic.onrender.com/getProductImage', {
                     idArray
                 })
                 setCartProducts(()=>{
@@ -112,39 +112,39 @@ export default function Cart() {
                     </div>
                 </div>
             ) : (
-                <div className="mt-[200px] flex  gap-[50px]">
-                    <div className="cart-inner-container1">
+                <div className="lg:mt-[200px] mt-24 flex lg:flex-row lg:justify-center lg:gap-20 flex-col justify-center">
+                    <div className="cart-inner-container1 lg:h-[520px] h-[350px]">
                         {CartProducts.map((product) => (
                             <Productsnippet key={product._id} product={product} handleRemove={handleRemove} />
                         ))
                         }
                     </div>
-                    <div>
-                        <div className='w-[500px] border-[#dddddd] border-1 p-2'>
+                    <div className='mt-16'>
+                        <div className='ml-3 lg:ml-0 lg:w-[500px] lg:border-[#dddddd] lg:border lg:p-2 lg:text-base text-sm '>
                             <p >Deliver to: {user.userName}</p>
                             <p>Address: {user.address ? user.address : (<span>N/A</span>)}</p>
                         </div>
-                        <div className='w-[500px] border-[#dddddd] border-1 pl-3 pb-4 mt-1'>
-                        <p className="snippet-text2">Price Details</p>
-                        <div className="snippet-text-container1">
-                            <p className="snippet-text1">Total MRP</p>
-                            <p className="snippet-text1">{mrpAmount}</p>
+                        <div className='lg:w-[500px] lg:border-[#dddddd] lg:border pl-3 pb-4 mt-1'>
+                        <p className="mt-7 color-[#132C48] text-[18px] lg:text-lg font-medium">Price Details</p>
+                        <div className="flex justify-between mt-4 mr-6 lg:mr-36">
+                            <p className="text-sm lg:text-base">Total MRP</p>
+                            <p className="text-sm lg:text-base">{mrpAmount}</p>
                         </div>
-                        <div className="snippet-text-container2">
-                            <p className="snippet-text1">Discount</p>
-                            <p className="snippet-text1">- {discountAmount}</p>
+                        <div className="flex justify-between mr-6 lg:mr-36">
+                            <p className="text-sm lg:text-base">Discount</p>
+                            <p className="text-sm lg:text-base">- {discountAmount}</p>
                         </div>
-                        <div className="snippet-text-container3">
-                            <p className="snippet-text1">Shipping Charges</p>
-                            <p className="snippet-text1">+{shipping}</p>
+                        <div className="flex justify-between mr-6 lg:mr-36">
+                            <p className="text-sm lg:text-base">Shipping Charges</p>
+                            <p className="text-sm lg:text-base">+{shipping}</p>
                         </div>
-                        <p>________________________________</p>
-                        <div className="snippet-text-container4">
-                            <p className="snippet-text1">Total Amount</p>
-                            <p className="snippet-text1">Rs.{totalAmount}</p>
+                        <div className='border border-[#cecece] w-[345px] mt-2'></div>
+                        <div className="flex justify-between mt-2 mr-6 lg:mr-36">
+                            <p className="text-sm lg:text-base">Total Amount</p>
+                            <p className="text-sm lg:text-base">Rs.{totalAmount}</p>
                         </div>
-                        <Link to='/bill'>
-                            <button className="order-button" onClick={handleOrder}>PLACE ORDER</button>
+                        <Link className='flex justify-center items-center' to='/bill'>
+                            <button className="mt-[50px] p-[13px] w-96 -ml-3 lg:w-[400px] text-[#132C48] font-semibold text-base lg:font-bold lg:text-lg bg-[#FE8551] rounded-md" onClick={handleOrder}>PLACE ORDER</button>
                         </Link>
                         </div>
                     </div>

@@ -1,16 +1,11 @@
 .snippet-container{
-    margin-top: 100px;
-    margin-left: 290px;
-    display: flex;
     box-shadow: 0px 4px 4px 0px rgb(196, 196, 196) ;
-    width: 550px;
-    height: 350px;
-    column-gap:25px
+    column-gap:25px;
+    margin-right: 10px;
 }
 .snippet-name{
     color: #132C48;
     font-weight: 600;
-    font-size: 20px;
 }
 .snippet-short-detail{
     color: #132C48;
@@ -19,12 +14,10 @@
 .snippet-product-img{
     height: 280px;
     width: 200px;
-    margin-top: 30px;
-    margin-left: 50px;
     box-shadow: 0px 4px 4px 0px rgb(196, 196, 196) ;
 }
 .text-snippet-container{
-    margin-top:30px ; 
+    margin-top:20px; 
 }
 .inner-snippet-container{
     margin-top: 25px;
@@ -34,20 +27,7 @@
 }
 .snippet-product-size{
     border: #132C48 1px solid;
-    font-size: 13px;
-    padding: 5px;
-}
-.qunatity{
-    border: #132C48 1px solid;
-    font-size: 13px;
-    padding: 5px;
 }
 .snippet-product_price{
     margin-top:10px;
-}
-.xmark-img{
-    width: 25px;
-    height: 25px;
-    margin-left: 230px;
-    cursor: pointer;
 }
