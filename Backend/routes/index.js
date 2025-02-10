@@ -21,7 +21,7 @@ router.post('/updatecart/:id', cartController.updateCart);
 router.get('/getcart/:userId', cartController.getCart); 
 router.patch('/removeProduct', wishListController.removeProduct);
 router.post('/getProductImage/', productController.getProductImage);
-router.get('/getImage/', productController.getImage);
+router.get('/getImage/:id', productController.getImage);
 router.post('/addorder/:userId', OrderController.addOrder);
 router.patch('/updateuser/:userId', userController.updateUser);
 router.get('/getorder/:userId', OrderController.getOrder);
