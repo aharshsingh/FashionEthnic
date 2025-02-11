@@ -10,7 +10,9 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../Context/UserContext';
 export default function NavDrawer() {
+  const {isLoggedIn} = React.useContext(UserContext)
   const [state, setState] = React.useState({
     left: false,
   });
@@ -19,7 +21,6 @@ export default function NavDrawer() {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-
     setState({ ...state, [anchor]: open });
   };
 
@@ -31,6 +32,10 @@ export default function NavDrawer() {
     { text: 'Contact Us', path: '/contactus' },
     { text: 'About Us', path: '/about' },
   ];
+
+  if (isLoggedIn) {
+    options.push({ text: "Logout", path: "/logout" });
+  }
 
   const list = (anchor) => (
     <Box

@@ -6,4 +6,5 @@ const userController = require('./userController');
 const wishListController = require('./wishListController');
 const cartController = require('./cartController');
 const OrderController = require('./OrderController');
-module.exports = { adminRegisterController, loginController, registerController, productController, userController, wishListController, cartController, OrderController }
+const logoutController = require('./auth/logoutController')
+module.exports = { adminRegisterController, loginController, registerController, productController, userController, wishListController, cartController, OrderController, logoutController }

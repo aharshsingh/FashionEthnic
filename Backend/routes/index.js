@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {adminRegisterController, loginController, registerController, adminController, productController, userController, wishListController, cartController, OrderController} = require('../controllers/index')
+const {adminRegisterController, loginController, registerController, adminController, productController, userController, wishListController, cartController, OrderController, logoutController} = require('../controllers/index')
 const auth = require('../middlewares/auth');
 const admin = require('../middlewares/admin');
 
@@ -25,5 +25,6 @@ router.get('/getImage/:id', productController.getImage);
 router.post('/addorder/:userId', OrderController.addOrder);
 router.patch('/updateuser/:userId', userController.updateUser);
 router.get('/getorder/:userId', OrderController.getOrder);
+router.post('/logout', logoutController.logout);
 module.exports = router;
 
