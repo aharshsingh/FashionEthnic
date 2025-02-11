@@ -27,7 +27,7 @@ export default function Dashboard() {
           <p className='lg:ml-3 lg:text-lg text-base font-semibold'>Profile Details</p>
           <div className='mt-3 border-[1px] lg:w-[500px] w-[300px]'></div>
         </div>
-        <div className='info-div'>
+        <div className='info-div lg:gap-[180px] gap-[50px]'>
             <ul className='dash-list lg:ml-[50px] ml-0'>
                 <li className='dash-list-con lg:text-base text-[13px]'>Full Name</li>
                 <li className='dash-list-con lg:text-base text-[13px]'>Email ID</li>

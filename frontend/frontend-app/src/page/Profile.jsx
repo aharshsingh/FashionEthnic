@@ -28,11 +28,14 @@ export default function Profile() {
   return (
     <>
       <Navbar />
-      <div className='lg:mt-28 mt-6 mb-2 flex flex-col justify-start'>
-        <p className='ac font-semibold lg:ml-[470px] ml-5'>Account</p>
-        <p className='text-sm lg:ml-[470px] ml-5'>{user.userName}</p>
+      <div className='flex flex-col justify-center items-center lg:mt-28 mt-6'>
+      <div className="flex justify-start w-full lg:w-[1100px] px-5">
+        <div className="mb-2">
+          <p className="ac font-semibold">Account</p>
+          <p className="text-sm">{user.userName}</p>
+        </div>
       </div>
-      <div className='profile-underline border-[#dddddd] lg:w-[1100px] w-[350px] lg:ml-[450px] ml-4'></div>
+      <div className='profile-underline border-[#dddddd] lg:w-[1100px] w-[350px] ml-4'></div>
       <div className='profile-outer-container'>
         <ul className='list lg:block hidden'>
           <li className='list-content cursor-pointer' onClick={() => setActiveSection('Dashboard')}>Dashboard</li>
@@ -45,9 +48,10 @@ export default function Profile() {
           <Link to='/PrivacyPolicy' className='link'><li className='list-content'>Privacy Policy</li></Link>
         </ul>
         <div className='profile-underline1 border-[#dddddd] lg:block hidden'></div>
-        <div className='lg:p-14'>
+        <div className='lg:p-14 mt-4 mb-4 lg:mt-0 lg:mb-0'>
           {renderSection()}
         </div>
+      </div>
       </div>
       <Footer />
     </>
