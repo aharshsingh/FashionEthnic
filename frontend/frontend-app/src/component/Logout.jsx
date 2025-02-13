@@ -8,7 +8,7 @@ export default function Logout() {
     useEffect(() => {
         const logoutUser = async () => {
           try {
-              await axios.post("http://localhost:7000/logout",{
+              await axios.post("https://fashionethnic.onrender.com/logout",{
                 token 
               });
             localStorage.removeItem("token");
