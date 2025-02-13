@@ -6,5 +6,6 @@ module.exports = {
     DB_URL : process.env.DB_URL,
     JWT_SECRET : process.env.JWT_SECRET,
     APP_URL : process.env.APP_URL,
-    REDIS_URL: process.env.REDIS_URL
+    REDIS_URL: process.env.REDIS_URL,
+    REDIS_PASSWORD: process.env.REDIS_PASSWORD
 }

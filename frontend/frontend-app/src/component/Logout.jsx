@@ -15,7 +15,7 @@ export default function Logout() {
             localStorage.removeItem('user');
             localStorage.removeItem('userCart');
             localStorage.removeItem('isLoggedIn');
-            navigate("/login");
+            navigate("/signin");
             toast.success('Logout successfull');
           }catch (error) {
             console.error("Logout failed:", error);
