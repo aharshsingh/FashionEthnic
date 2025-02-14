@@ -2,6 +2,7 @@ const CustomErrorHandler = require('../../services/customErrorHandler');
 const User = require('../../models/user');
 const bcrypt = require('bcrypt');
 const { registerSchema } = require('../../services/validators');
+const redisClient = require('../../redisClient');
 
 const registerController = {
     async signup(req, res, next) {
@@ -30,6 +31,8 @@ const registerController = {
         
         try {
             const result = await user.save();
+            const userData = JSON.stringify({ username: userName, email });
+            redisClient.publish("user_registered", userData);
         } catch (err) {
             return next(err);
         }

@@ -13,6 +13,9 @@ const orderSchema = new Schema({
             },
         quantity: {
             type: Number
+        }, 
+        size: {
+            type: String
         }
     }],
     mrpAmount: {type: Number, required: true},
