@@ -33,6 +33,7 @@ const registerController = {
             const result = await user.save();
             const userData = JSON.stringify({ username: userName, email });
             redisClient.publish("user_registered", userData);
+            console.log("sent redis email")
         } catch (err) {
             return next(err);
         }

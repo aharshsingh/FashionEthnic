@@ -9,6 +9,7 @@ import { auth, provider } from '../utlis/auth/Firebase';
 import { signInWithPopup } from 'firebase/auth';
 import logo from '../photo/Screenshot_2025-02-08_232617-removebg-preview.png';
 import toast from 'react-hot-toast';
+import {Link} from 'react-router-dom'
 export default function Signin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -116,6 +117,7 @@ export default function Signin() {
                 onChange={(event) => setPassword(event.target.value)}
               />
             </div>
+            <Link to='/forgotpassword'><p className='text-xs lg:text-sm ml-60 lg:ml-[470px] mt-2 cursor-pointer'>Forgot Password?</p></Link>
             <div className='text-center'>{errors.auth && <p className='text-red-500 mt-4 -mb-5'>{errors.auth}</p>}</div>
             <button
               type='submit'
@@ -134,9 +136,8 @@ export default function Signin() {
               )}
             </button>
           </form>
-
           <button
-            className='flex justify-center items-center gap-4 border-1 border-[#d8d8d8] mt-14 rounded-full md:w-[400px] lg:w-[600px] w-[350px] h-[60px] hover:bg-[#4285F4] hover:text-white transition-colors duration-300 ease-in-out'
+            className='flex justify-center items-center gap-4 border-1 border-[#d8d8d8] mt-10 rounded-full md:w-[400px] lg:w-[600px] w-[350px] h-[60px] hover:bg-[#4285F4] hover:text-white transition-colors duration-300 ease-in-out'
             onClick={googleLogin}
           >
             <span className='text-lg'>Login with Google</span>
