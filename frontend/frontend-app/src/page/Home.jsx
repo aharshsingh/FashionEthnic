@@ -19,7 +19,7 @@ export default function Home() {
       <div>
       <p className='text-[#132C48] mt-28 text-5xl lg:font-bold lg:text-[90px] lg:mt-[150px]' style={{textShadow: "2px 2px rgba(0, 0, 0, 0.25)"}} >Vibrant. Cultural.<br/> Trendsetting.</p>
       <p className='lg:text-2xl ml-2 text-sm mt-3'>Elevate your style, celebrate diversity-<br/>where tradition meets trends in every thread.</p>
-      <Link className='-ml-[70px]' to='/Products'><button className='bg-[#FE8551] text-xs lg:text-lg p-2 lg:p-3 w-32 lg:w-64 rounded-full text-[#132C48] font-bold mt-14 m-20 lg:h-16'>Shop New Arrivals</button></Link>
+      <Link className='-ml-[70px]' to='/products'><button className='bg-[#FE8551] text-xs lg:text-lg p-2 lg:p-3 w-32 lg:w-64 rounded-full text-[#132C48] font-bold mt-14 m-20 lg:h-16'>Shop New Arrivals</button></Link>
       </div>
       <img className='mt-[100px] h-[750px] lg:block hidden' style={{boxShadow: "0px 10px 10px 0px rgba(0, 0, 0, 0.25)"}} src={homeimg} alt="img" />
     </div>
