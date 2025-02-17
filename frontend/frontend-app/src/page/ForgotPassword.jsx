@@ -34,7 +34,7 @@ export default function ForgotPassword() {
     setErrors({});
     setLoading(true);
     try {
-        await axios.post('http://localhost:7000/forgotpassword',{
+        await axios.post('https://fashionethnic.onrender.com/forgotpassword',{
             email
         });
         toast.success('OTP sent successfully');

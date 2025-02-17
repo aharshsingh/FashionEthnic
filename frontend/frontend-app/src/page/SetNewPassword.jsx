@@ -39,13 +39,15 @@ export default function ForgotPassword({ length = 6 }) {
     setLoading(true);
     try {
         console.log(enteredOtp, password, email)
-        await axios.patch('http://localhost:7000/resetpassword',{
+        await axios.patch('https://fashionethnic.onrender.com/resetpassword',{
             password,
             otp: enteredOtp,
             email
         });
-        toast.success('Password updated');
+
+        console.log(enteredOtp, password, email)
         setLoading(false);
+        toast.success('Password updated');
         navigate('/signin');
     } catch (error) {
         console.log(error);

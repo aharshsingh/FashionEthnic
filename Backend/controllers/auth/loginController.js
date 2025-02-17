@@ -46,10 +46,9 @@ const loginController = {
 
     async resetPassword(req,res,next){
         const {password, otp, email} = req.body;
-
         try {
         const storedOtp = await redisClient.get(email);
-        if(JSON.parse(storedOtp) !== otp){
+        if(storedOtp !== otp){
             return next(customErrorHandler.notAuthrorised('Otp is wrong'));
         }
         const hashedPassword = await bcrypt.hash(password, 10);
