@@ -11,6 +11,7 @@ import { UserContext } from '../Context/UserContext'
 import {addCart} from '../utlis/cart/AddCart'
 import LoadingAnimation from '../component/LoadingAnimation';
 import toast from 'react-hot-toast'
+import ProductCarouselPhone from '../component/ProductCarouselPhone'
 export default function Productdetails() {
 
   const {user} = useContext(UserContext);
@@ -67,7 +68,7 @@ export default function Productdetails() {
     ) : (
       <>
       <div className='lg:hidden flex justify-center items-center mt-20'>
-      <Link to={`/productCarousel/${product._id}`}><img className='w-[250px] h-[400px]' src={product.image} alt="logo" /></Link>
+      <ProductCarouselPhone productId={product._id} />
       </div>
 <div className='detail-container flex lg:mt-24 mt-5 justify-around'>
       <div className='hidden lg:block mt-10'>

@@ -1,8 +1,8 @@
 .product-carousel-image {
     margin-left: 700px;
     margin-top: 50px;
-    width: 540px; /* Set the desired width */
-    height: 800px; /* Set the desired height */
+    width: 540px;
+    height: 800px;
   }
   .carousel-control-prev-icon,
   .carousel-control-next-icon {
