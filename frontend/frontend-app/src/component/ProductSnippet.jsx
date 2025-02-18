@@ -9,7 +9,7 @@ export default function Product_snippet({ product, handleRemove }) {
         <img className='snippet-product-img lg:h-[280px] lg:w-[200px] w-20 lg:ml-10 lg:mt-10 mt-7 ml-5 h-40' src={product.image} alt="logo" />
         <div className='text-snippet-container'>
         <div className='flex justify-end'>
-        <img className='w-5 h-5 cursor-pointer ml-40' src={xmarkimg} alt="logo" onClick={()=> handleRemove(product.product)} />
+        <img className='w-5 h-5 cursor-pointer ml-40' src={xmarkimg} alt="logo" onClick={()=> handleRemove(product.id)} />
         </div>
         <p className='snippet-name lg:text-xl text-base'>{product.name}</p>
         <p className='snippet-short-detail lg:text-base lg:block hidden'>{product.about}</p>

@@ -82,9 +82,9 @@ export default function Cart() {
 
     const handleRemove = (productId) => {
         const updatedProductArray = cart.productArray.filter(
-            (item) => item.product !== productId
+            (item) => item.id !== productId
         );
-        const updatedTotalItems = cart.totalItems - (cart.productArray.find(item => item.product === productId)?.quantity || 0);
+        const updatedTotalItems = cart.totalItems - (cart.productArray.find(item => item.id === productId)?.quantity || 0);
 
         setCart({
             productArray: updatedProductArray,

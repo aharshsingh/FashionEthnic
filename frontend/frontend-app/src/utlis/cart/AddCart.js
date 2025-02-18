@@ -13,7 +13,8 @@ export const addCart = (product, size, setCart, name, about, price, discount, se
       if (existingIndex !== -1) {
         updatedProductArray[existingIndex].quantity += 1;
       } else {
-        updatedProductArray.push({ product, quantity: 1, size, name, about, price, discount,});
+        const uniqueId = Math.floor(Math.random() * 100000);
+        updatedProductArray.push({ id: uniqueId, product, quantity: 1, size, name, about, price, discount,});
       }
 
       const updatedTotalItems = totalItems + 1;
