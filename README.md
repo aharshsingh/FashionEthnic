@@ -16,9 +16,9 @@ Fashion Ethnic is a full-stack e-commerce web application built using the MERN s
 
 ## 🖥️ Deployment Links
 
-- **Frontend**: [Live Demo](https://your-frontend-link.com)
-- **Backend**: [API Server](https://your-backend-link.com)
-- **API Documentation**: [Swagger Docs](https://your-api-docs-link.com)
+- **Frontend**: [Live Demo](https://fashion-ethnic.vercel.app/)
+- **Backend**: [API Server](https://fashionethnic.onrender.com)
+- **API Documentation**: [Postman Docs](https://your-api-docs-link.com)
 
 ## 📦 Installation & Setup
 
