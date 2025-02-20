@@ -90,4 +90,4 @@ This project is licensed under the MIT License.
 ### 👨‍💻 Contributing
 Feel free to fork this repo and submit pull requests. Suggestions and improvements are welcome!
 
-📧 **Contact:** your-email@example.com
+📧 **Contact:** aharshsingh25@gmail.com
