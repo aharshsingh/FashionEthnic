@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import WishlistAnimation from '../component/WishListAnimation';
 import axios from 'axios';
 import toast from 'react-hot-toast'
+import LoadingAnimation from '../component/LoadingAnimation';
 
 export default function Cart() {
     const { cart, setCart } = useCart();
@@ -19,6 +20,7 @@ export default function Cart() {
     const [shipping] = useState(50);
     const [totalAmount, setTotalAmount] = useState('')
     const [orderArray, setOrderArray] = useState([]);
+    const [loading, setLoading] = useState(true)
     const {user} = useContext(UserContext);
     
     const handleOrder = async()=>{
@@ -41,8 +43,7 @@ export default function Cart() {
             setDiscountAmount(amount2);
             amount3 = amount1-amount2;
             setTotalAmount(amount3);
-            if(totalAmount < 500)
-                setTotalAmount(amount3+50);
+            setTotalAmount(()=> (amount3+50));
         }
         calAmount();
     });
@@ -73,6 +74,7 @@ export default function Cart() {
                     })
                     return arr;
                 });
+                setLoading(false)
             } catch (error) {
                 console.log(error)
             }
@@ -96,7 +98,10 @@ export default function Cart() {
     return (
         <>
             <Navbar />
-            {isEmpty ? (
+            { loading ? (
+                        <LoadingAnimation/>
+                    ) : (
+            isEmpty ? (
                 <div style={{ marginTop: '250px', textAlign: 'center' }}>
                     <p style={{ fontWeight: 'bolder', fontSize: '20px' }}>YOUR CART IS EMPTY</p>
                     <p style={{ marginTop: '25px', color: 'grey' }}>
@@ -151,7 +156,7 @@ export default function Cart() {
                         </div>
                     </div>
                 </div>
-            )}
+            ))}
             <div className='mt-72'>
             <Footer />
             </div>

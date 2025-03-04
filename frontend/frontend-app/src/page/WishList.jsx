@@ -58,9 +58,6 @@ export default function WishList() {
     <div>
       <Navbar/>
       <div>
-        { loading ? (
-            <LoadingAnimation/>
-        ) : (
             isEmpty ?
                 (<div style={{marginTop: '250px', textAlign: 'center'}}>
                     <p style={{fontWeight:'bolder', fontSize:'20px'}}>YOUR WISHLIST IS EMPTY</p>

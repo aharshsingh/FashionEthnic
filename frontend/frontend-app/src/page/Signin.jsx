@@ -136,13 +136,13 @@ export default function Signin() {
               )}
             </button>
           </form>
-          <button
+          {/* <button
             className='flex justify-center items-center gap-4 border-1 border-[#d8d8d8] mt-10 rounded-full md:w-[400px] lg:w-[600px] w-[350px] h-[60px] hover:bg-[#4285F4] hover:text-white transition-colors duration-300 ease-in-out'
             onClick={googleLogin}
           >
             <span className='text-lg'>Login with Google</span>
             <img className='w-6 h-6' src={googleImg} alt='googleImg' />
-          </button>
+          </button> */}
         </div>
       </div>
     </>
