@@ -33,6 +33,7 @@ import Logout from './component/Logout.jsx';
 import ForgotPassword from './page/ForgotPassword.jsx'
 import SetNewPassword from './page/SetNewPassword.jsx';
 import ProductsPage from './page/ProductsPage.jsx';
+import FeatureDemo from './page/admin/landing.jsx';
 function App() {
     const { user } = useContext(UserContext);
     const id = user?._id;
@@ -73,6 +74,7 @@ function App() {
                         <Route path='/forgotpassword' Component={ForgotPassword} /> 
                         <Route path='/setnewpassword' Component={SetNewPassword} /> 
                         <Route path='/products' Component={ProductsPage} />
+                        <Route path='/admin/landing' Component={FeatureDemo} />
                         <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
                 </CartProvider>
