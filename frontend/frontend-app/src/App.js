@@ -28,7 +28,7 @@ import { UserContext } from './Context/UserContext.jsx';
 import WishList from './page/WishList.jsx';
 import SizeChart from './component/SizeChart.jsx';
 import { Toaster } from 'react-hot-toast'; 
-import AddProduct from './page/AddProduct.jsx';
+import AddProduct from './page/admin/AddProduct.jsx';
 import Logout from './component/Logout.jsx';
 import ForgotPassword from './page/ForgotPassword.jsx'
 import SetNewPassword from './page/SetNewPassword.jsx';
@@ -69,7 +69,7 @@ function App() {
                         <Route path='/productCarousel/:id' Component={ProductCarousel} />
                         <Route path='/wishlist' Component={WishList} /> 
                         <Route path='/sizechart/:gender' Component={SizeChart} /> 
-                        <Route path='/addproduct' Component={AddProduct} /> 
+                        <Route path='/admin/addproduct' Component={AddProduct} /> 
                         <Route path='/logout' Component={Logout} /> 
                         <Route path='/forgotpassword' Component={ForgotPassword} /> 
                         <Route path='/setnewpassword' Component={SetNewPassword} /> 
