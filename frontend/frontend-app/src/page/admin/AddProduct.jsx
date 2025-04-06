@@ -24,78 +24,95 @@ export default function AddProduct() {
         </div>
         <div className='mt-5 lg:mt-10'>
           <form>
-            <div className='flex flex-row justify-between'>
-              <div>
+            <div className='flex flex-wrap justify-between lg:flex-nowrap'>
+              <div className='flex flex-wrap justify-center gap-5'>
                 <div>
-                  <p className='font-medium text-lg lg:text-2xl text-left'>Basic Info</p>
+                  <div>
+                    <p className='font-medium text-lg lg:text-2xl text-left'>Basic Info</p>
+                  </div>
+                  <div className='flex flex-col gap-3 mt-4'>
+                    <div className='flex flex-col gap-2'>
+                      <label className='text-base font-medium'>Product Name</label>
+                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
+                    </div>
+                    <div className='flex flex-col gap-2'>
+                      <label className='text-base font-medium'>About Product</label>
+                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
+                    </div>
+                    <div className='flex flex-col gap-2'>
+                      <label className='text-base font-medium'>Product Price</label>
+                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
+                    </div>
+                    <div className='flex flex-col gap-2'>
+                      <label className='text-base font-medium'>Discount on Product</label>
+                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
+                    </div>
+                  </div>
+                  <div>
+                    <p className='font-medium text-lg lg:text-2xl text-left mt-5'>Material & Care</p>
+                  </div>
+                  <div className='flex flex-col gap-3 mt-4'>
+                    <div className='flex flex-col gap-2'>
+                      <label className='text-base font-medium'>Product Material</label>
+                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
+                    </div>
+                    <div className='flex flex-col gap-2'>
+                      <label className='text-base font-medium'>Product Care <span className='text-sm lg:text-base text-gray-500'>(Enter the type of care material needs)</span></label>
+                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
+                    </div>
+                  </div>
                 </div>
-                <div className='flex flex-col gap-3 mt-4'>
-                  <div className='flex flex-col gap-2'>
-                    <label className='text-base font-medium'>Product Name</label>
-                    <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
+                <div>
+                  <div>
+                    <p className='font-medium text-lg lg:text-2xl text-left'>Appearance & Style</p>
                   </div>
-                  <div className='flex flex-col gap-2'>
-                    <label className='text-base font-medium'>About Product</label>
-                    <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
+                  <div className='flex flex-col gap-3 mt-4'>
+                    <div className='flex flex-col gap-2'>
+                      <label className='text-base font-medium'>Product Colour</label>
+                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
+                    </div>
+                    <div className='flex flex-col gap-2'>
+                      <label className='text-base font-medium'>Product Fit</label>
+                      <select id="fit" class="w-96 bg-white border-1 border-[#999999] text-gray-900 text-sm rounded-sm p-2 dark:bg-white dark:text-gray-900 dark:placeholder-gray-500 outline-none">
+                        <option selected>Choose a fit type</option>
+                        <option value="US">Slim fit</option>
+                        <option value="CA">Regular fit</option>
+                        <option value="FR">Loose fit</option>
+                      </select>
+                    </div>
+                    <div className='flex flex-col gap-2'>
+                      <label className='text-base font-medium'>Gender</label>
+                      <select id="gender" class="w-96 bg-white border-1 border-[#999999] text-gray-900 text-sm rounded-sm p-2 dark:bg-white dark:text-gray-900 dark:placeholder-gray-500 outline-none">
+                        <option selected>Choose a gender</option>
+                        <option value="US">Male</option>
+                        <option value="CA">Female</option>
+                      </select>
+                    </div>
+                    <div className='flex flex-col gap-2'>
+                      <label className='text-base font-medium'>Product Size</label>
+                      <select id="size" class="w-96 bg-white border-1 border-[#999999] text-gray-900 text-sm rounded-sm p-2 dark:bg-white dark:text-gray-900 dark:placeholder-gray-500 outline-none">
+                        <option selected>Choose a size</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                      </select>
+                    </div>
                   </div>
-                  <div className='flex flex-col gap-2'>
-                    <label className='text-base font-medium'>Product Price</label>
-                    <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
+                  <div>
+                    <p className='font-medium text-lg lg:text-2xl text-left mt-5'>Rating</p>
                   </div>
-                  <div className='flex flex-col gap-2'>
-                    <label className='text-base font-medium'>Discount on Product</label>
-                    <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
+                  <div className='flex flex-col gap-3 mt-4'>
+                    <div className='flex flex-col gap-2'>
+                      <label className='text-base font-medium'>Product Rating</label>
+                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
+                    </div>
                   </div>
                 </div>
               </div>
               <div>
-                <div>
-                  <p className='font-medium text-lg lg:text-2xl text-left'>Appearance & Style</p>
-                </div>
-                <div className='flex flex-col gap-3 mt-4'>
-                  <div className='flex flex-col gap-2'>
-                    <label className='text-base font-medium'>Product Colour</label>
-                    <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
-                  </div>
-                  <div className='flex flex-col gap-2'>
-                    <label className='text-base font-medium'>Product Fit</label>
-                    <select id="fit" class="w-96 bg-white border-1 border-[#999999] text-gray-900 text-sm rounded-sm p-2 dark:bg-white dark:text-gray-900 dark:placeholder-gray-500 outline-none">
-                      <option selected>Choose a fit type</option>
-                      <option value="US">Slim fit</option>
-                      <option value="CA">Regular fit</option>
-                      <option value="FR">Loose fit</option>
-                    </select>
-                  </div>
-                  <div className='flex flex-col gap-2'>
-                    <label className='text-base font-medium'>Gender</label>
-                    <select id="gender" class="w-96 bg-white border-1 border-[#999999] text-gray-900 text-sm rounded-sm p-2 dark:bg-white dark:text-gray-900 dark:placeholder-gray-500 outline-none">
-                      <option selected>Choose a gender</option>
-                      <option value="US">Male</option>
-                      <option value="CA">Female</option>
-                    </select>
-                  </div>
-                  <div className='flex flex-col gap-2'>
-                    <label className='text-base font-medium'>Product Size</label>
-                    <select id="size" class="w-96 bg-white border-1 border-[#999999] text-gray-900 text-sm rounded-sm p-2 dark:bg-white dark:text-gray-900 dark:placeholder-gray-500 outline-none">
-                      <option selected>Choose a size</option>
-                      <option value="S">S</option>
-                      <option value="M">M</option>
-                      <option value="L">L</option>
-                      <option value="XL">XL</option>
-                      <option value="XXL">XXL</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div className='flex flex-col gap-3'>
-                <div className='flex flex-row gap-3'>
-                  <ImageUploadDemo/>
-                  <ImageUploadDemo/>
-                </div>
-                <div className='flex flex-row gap-3'>
-                  <ImageUploadDemo/>
-                  <ImageUploadDemo/>
-                </div>
+                <ImageUploadDemo />
               </div>
             </div>
           </form>
