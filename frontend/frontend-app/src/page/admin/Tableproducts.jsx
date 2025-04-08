@@ -1,5 +1,5 @@
 "use client";
-
+import {Link} from 'react-router-dom';
 import { cn } from "../../lib/utils";
 import {
   AlertDialog,
@@ -12,28 +12,17 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../../components/ui/table/alert-dialog";
-import { Badge } from "../../components/ui/table/badge";
 import { Button } from "../../components/ui/table/button";
-import { Checkbox } from "../../components/ui/table/checkbox";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "../../components/ui/table/dropdown-menu";
 import { Input } from "../../components/ui/table/input";
 import { Label } from "../../components/ui/table/label";
 import { Pagination, PaginationContent, PaginationItem } from "../../components/ui/table/pagination";
-import { Popover, PopoverContent, PopoverTrigger } from "../../components/ui/table/popover";
 import {
   Select,
   SelectContent,
@@ -50,13 +39,6 @@ import {
   TableRow,
 } from "../../components/ui/table/table";
 import {
-  // ColumnDef,
-  // ColumnFiltersState,
-  // FilterFn,
-  // PaginationState,
-  // Row,
-  // SortingState,
-  // VisibilityState,
   flexRender,
   getCoreRowModel,
   getFacetedUniqueValues,
@@ -75,62 +57,29 @@ import {
   CircleAlert,
   CircleX,
   Columns3,
-  Ellipsis,
-  Filter,
   ListFilter,
   Plus,
   Trash,
 } from "lucide-react";
-import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
-// type Item = {
-//   id: string;
-//   name: string;
-//   email: string;
-//   location: string;
-//   flag: string;
-//   status: "Active" | "Inactive" | "Pending";
-//   balance: number;
-// };
-
-// Custom filter function for multi-column searching
 const multiColumnFilterFn = (row, columnId, filterValue) => {
   const searchableRowContent = `${row.original.name} ${row.original.email}`.toLowerCase();
   const searchTerm = (filterValue ?? "").toLowerCase();
   return searchableRowContent.includes(searchTerm);
 };
 
-const statusFilterFn = (row, columnId, filterValue) => {
-  if (!filterValue?.length) return true;
-  const status = row.getValue(columnId);
-  return filterValue.includes(status);
-};
-
 const columns = [
   {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    size: 28,
+    header: "",
+    id: "serial",
+    cell: () => <span className="text-xl">•</span>,
+    size: 60,
     enableSorting: false,
     enableHiding: false,
   },
   {
-    header: "Name",
+    header: "Product Name",
     accessorKey: "name",
     cell: ({ row }) => <div className="font-medium">{row.getValue("name")}</div>,
     size: 180,
@@ -138,58 +87,67 @@ const columns = [
     enableHiding: false,
   },
   {
-    header: "Email",
-    accessorKey: "email",
-    size: 220,
-  },
-  {
-    header: "Location",
-    accessorKey: "location",
+    header: "Discount",
+    accessorKey: "discount",
     cell: ({ row }) => (
       <div>
-        <span className="text-lg leading-none">{row.original.flag}</span> {row.getValue("location")}
+        <span className="text-lg leading-none">{row.original.flag}</span> {row.getValue("discount")}
       </div>
     ),
     size: 180,
   },
   {
-    header: "Status",
-    accessorKey: "status",
-    cell: ({ row }) => (
-      <Badge
-        className={cn(
-          row.getValue("status") === "Inactive" && "bg-muted-foreground/60 text-primary-foreground",
-        )}
-      >
-        {row.getValue("status")}
-      </Badge>
-    ),
-    size: 100,
-    filterFn: statusFilterFn,
+    header: "Product Colour",
+    accessorKey: "colour",
+    cell: ({ row }) => <div className="font-medium">{row.getValue("colour")}</div>,
+    size: 180,
+    filterFn: multiColumnFilterFn,
+    enableHiding: false,
   },
   {
-    header: "Performance",
-    accessorKey: "performance",
+    header: "Product Fit",
+    accessorKey: "fit",
+    cell: ({ row }) => <div className="font-medium">{row.getValue("fit")}</div>,
+    size: 180,
+    filterFn: multiColumnFilterFn,
+    enableHiding: false,
   },
   {
-    header: "Balance",
-    accessorKey: "balance",
+    header: "Gender",
+    accessorKey: "gender",
+    cell: ({ row }) => <div className="font-medium">{row.getValue("gender")}</div>,
+    size: 180,
+    filterFn: multiColumnFilterFn,
+    enableHiding: false,
+  },
+  {
+    header: "Product Material",
+    accessorKey: "material",
+    cell: ({ row }) => <div className="font-medium">{row.getValue("material")}</div>,
+    size: 180,
+    filterFn: multiColumnFilterFn,
+    enableHiding: false,
+  },
+  {
+    header: "Product Care",
+    accessorKey: "care",
+    cell: ({ row }) => <div className="font-medium">{row.getValue("care")}</div>,
+    size: 180,
+    filterFn: multiColumnFilterFn,
+    enableHiding: false,
+  },
+  {
+    header: "Price",
+    accessorKey: "price",
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("balance"));
+      const amount = parseFloat(row.getValue("price"));
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: "USD",
+        currency: "INR",
       }).format(amount);
       return formatted;
     },
     size: 120,
-  },
-  {
-    id: "actions",
-    header: () => <span className="sr-only">Actions</span>,
-    cell: ({ row }) => <RowActions row={row} />,
-    size: 60,
-    enableHiding: false,
   },
 ];
 
@@ -214,8 +172,9 @@ export default function Component() {
   useEffect(() => {
     async function fetchPosts() {
       const res = await fetch(
-        "https://res.cloudinary.com/dlzlfasou/raw/upload/users-01_fertyx.json",
+        "http://localhost:7000/showProducts",
       );
+      console.log(res.data);
       const data = await res.json();
       setData(data);
     }
@@ -252,45 +211,6 @@ export default function Component() {
     },
   });
 
-  // Get unique status values
-  const uniqueStatusValues = useMemo(() => {
-    const statusColumn = table.getColumn("status");
-
-    if (!statusColumn) return [];
-
-    const values = Array.from(statusColumn.getFacetedUniqueValues().keys());
-
-    return values.sort();
-  }, [table.getColumn("status")?.getFacetedUniqueValues()]);
-
-  // Get counts for each status
-  const statusCounts = useMemo(() => {
-    const statusColumn = table.getColumn("status");
-    if (!statusColumn) return new Map();
-    return statusColumn.getFacetedUniqueValues();
-  }, [table.getColumn("status")?.getFacetedUniqueValues()]);
-
-  const selectedStatuses = useMemo(() => {
-    const filterValue = table.getColumn("status")?.getFilterValue();
-    return filterValue ?? [];
-  }, [table.getColumn("status")?.getFilterValue()]);
-
-  const handleStatusChange = (checked, value) => {
-    const filterValue = table.getColumn("status")?.getFilterValue();
-    const newFilterValue = filterValue ? [...filterValue] : [];
-
-    if (checked) {
-      newFilterValue.push(value);
-    } else {
-      const index = newFilterValue.indexOf(value);
-      if (index > -1) {
-        newFilterValue.splice(index, 1);
-      }
-    }
-
-    table.getColumn("status")?.setFilterValue(newFilterValue.length ? newFilterValue : undefined);
-  };
-
   return (
     <div className="space-y-4 max-w-[1000px]">
       {/* Filters */}
@@ -300,12 +220,12 @@ export default function Component() {
           <div className="relative">
           <Input
             ref={inputRef}
-            placeholder="Filter by name or email..."
+            placeholder="Filter by name..."
             type="text"
             value={table.getColumn("name")?.getFilterValue() ?? ""}
             onChange={(e) => table.getColumn("name")?.setFilterValue(e.target.value)}
             className={cn(
-              "peer min-w-60 ps-9",
+              "peer min-w-60 ps-9 ml-10",
               Boolean(table.getColumn("name")?.getFilterValue()) && "pe-9"
             )}
           />
@@ -327,54 +247,9 @@ export default function Component() {
               </button>
             )}
           </div>
-          {/* Filter by status */}
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button variant="outline">
-                <Filter
-                  className="-ms-1 me-2 opacity-60"
-                  size={16}
-                  strokeWidth={2}
-                  aria-hidden="true"
-                />
-                Status
-                {selectedStatuses.length > 0 && (
-                  <span className="-me-1 ms-3 inline-flex h-5 max-h-full items-center rounded border border-border bg-background px-1 font-[inherit] text-[0.625rem] font-medium text-muted-foreground/70">
-                    {selectedStatuses.length}
-                  </span>
-                )}
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="min-w-36 p-3" align="start">
-              <div className="space-y-3">
-                <div className="text-xs font-medium text-muted-foreground">Filters</div>
-                <div className="space-y-3">
-                  {uniqueStatusValues.map((value, i) => (
-                    <div key={value} className="flex items-center gap-2">
-                      <Checkbox
-                        id={`${id}-${i}`}
-                        checked={selectedStatuses.includes(value)}
-                        onCheckedChange={(checked) => handleStatusChange(checked, value)}
-                      />
-                      <Label
-                        htmlFor={`${id}-${i}`}
-                        className="flex grow justify-between gap-2 font-normal"
-                      >
-                        {value}{" "}
-                        <span className="ms-2 text-xs text-muted-foreground">
-                          {statusCounts.get(value)}
-                        </span>
-                      </Label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </PopoverContent>
-          </Popover>
-          {/* Toggle columns visibility */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline">
+              <Button variant="outline" className="ml-10">
                 <Columns3
                   className="-ms-1 me-2 opacity-60"
                   size={16}
@@ -448,10 +323,14 @@ export default function Component() {
             </AlertDialog>
           )}
           {/* Add user button */}
-          <Button className="ml-auto" variant="outline">
-            <Plus className="-ms-1 me-2 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
-            Add user
-          </Button>
+          <Link to='/admin/addproduct'>
+            <div>
+            <Button className="ml-auto" variant="outline">
+              <Plus className="-ms-1 me-2 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
+              Add Product
+            </Button>
+            </div>
+          </Link>
         </div>
       </div>
 
@@ -641,72 +520,7 @@ export default function Component() {
           </Pagination>
         </div>
       </div>
-      <p className="mt-4 text-center text-sm text-muted-foreground">
-        Example of a more complex table made with{" "}
-        <a
-          className="underline hover:text-foreground"
-          href="https://tanstack.com/table"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          TanStack Table
-        </a>
-      </p>
     </div>
-  );
-}
-
-function RowActions({ row }) {
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <div className="flex justify-end">
-          <Button size="icon" variant="ghost" className="shadow-none" aria-label="Edit item">
-            <Ellipsis size={16} strokeWidth={2} aria-hidden="true" />
-          </Button>
-        </div>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <span>Edit</span>
-            <DropdownMenuShortcut>⌘E</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <span>Duplicate</span>
-            <DropdownMenuShortcut>⌘D</DropdownMenuShortcut>
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <span>Archive</span>
-            <DropdownMenuShortcut>⌘A</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuSub>
-            <DropdownMenuSubTrigger>More</DropdownMenuSubTrigger>
-            <DropdownMenuPortal>
-              <DropdownMenuSubContent>
-                <DropdownMenuItem>Move to project</DropdownMenuItem>
-                <DropdownMenuItem>Move to folder</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Advanced options</DropdownMenuItem>
-              </DropdownMenuSubContent>
-            </DropdownMenuPortal>
-          </DropdownMenuSub>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem>Share</DropdownMenuItem>
-          <DropdownMenuItem>Add to favorites</DropdownMenuItem>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-destructive focus:text-destructive">
-          <span>Delete</span>
-          <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
   );
 }
 
