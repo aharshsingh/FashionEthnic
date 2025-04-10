@@ -27,6 +27,8 @@ router.patch('/updateuser/:userId', userController.updateUser);
 router.get('/getorder/:userId', OrderController.getOrder);
 router.post('/logout', logoutController.logout);
 router.post('/forgotpassword', loginController.forgotPassword);
-router.patch('/resetpassword', loginController.resetPassword)
+router.patch('/resetpassword', loginController.resetPassword);
+router.get('/getalluser', userController.getAllUser);
+router.get('/getallorder', OrderController.getAllOrder);
 module.exports = router;
 

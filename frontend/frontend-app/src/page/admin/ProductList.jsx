@@ -1,5 +1,5 @@
 import React from 'react'
-import Tableproducts from './Tableproducts'
+import Tableproducts from '../../component/Tableproducts'
 export default function products() {
   return (
     <div className='w-full pt-6 pb-20 pl-4 pr-4 lg:pt-12 lg:pb-32 lg:pl-48 lg:pr-48'>

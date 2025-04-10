@@ -1,6 +1,6 @@
 "use client";
 import {Link} from 'react-router-dom';
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,25 +11,25 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../../components/ui/table/alert-dialog";
-import { Button } from "../../components/ui/table/button";
+} from "../components/ui/table/alert-dialog";
+import { Button } from "../components/ui/table/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "../../components/ui/table/dropdown-menu";
-import { Input } from "../../components/ui/table/input";
-import { Label } from "../../components/ui/table/label";
-import { Pagination, PaginationContent, PaginationItem } from "../../components/ui/table/pagination";
+} from "../components/ui/table/dropdown-menu";
+import { Input } from "../components/ui/table/input";
+import { Label } from "../components/ui/table/label";
+import { Pagination, PaginationContent, PaginationItem } from "../components/ui/table/pagination";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../components/ui/table/select";
+} from "../components/ui/table/select";
 import {
   Table,
   TableBody,
@@ -37,7 +37,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../components/ui/table/table";
+} from "../components/ui/table/table";
 import {
   flexRender,
   getCoreRowModel,

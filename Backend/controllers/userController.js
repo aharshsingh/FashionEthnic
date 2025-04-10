@@ -1,4 +1,3 @@
-const Joi = require('joi');
 const User = require('../models/user');
 const registerSchema = require('../validators/userValidator')
 const CustomErrorHandler = require('../services/customErrorHandler');
@@ -91,6 +90,15 @@ const userController = {
             return res.status(200).json({result});
         } catch (error) {
             return next(error);
+        }
+    },
+
+    async getAllUser(req,res,next){
+        try {
+            const result = await User.find();
+            return res.status(200).send(result);
+        } catch (error) {
+            return res.status(500).json({"error": "Internal server error"});
         }
     }
 }
