@@ -16,54 +16,6 @@ const storage = multer.diskStorage({
 const handleMultipartData = multer({ storage, limits:{fileSize: 1000000*5}}).single('image')
 
 const productController = {
-    addProducts(req,res,next) {
-        handleMultipartData(req,res,async (err) => {
-            if(err){
-                console.error(err);
-                return next(CustomErrorHandler.serverError(err.message));
-            }
-            else{
-                const filePath = req.file.path;
-                const { name,price,about,material,care,colour,gender,fit,size,rating,discount } = req.body;
-                const product = new Product({
-                name,
-                price,
-                about,
-                material,
-                care,
-                colour,
-                gender,
-                fit,
-                size,
-                rating,
-                discount,
-                image: filePath
-                });
-                let result
-                try {
-                    result = await product.save();
-                } catch (err) {
-                    return next(err);
-                }
-                console.log(result);
-                res.json('product uploaded successfully');
-            }
-        });
-        // // Validating the client
-        // const { error } = productSchema.validate(req.body);
-        // if (error) {
-        //     return next(error);
-        // }
-        // If user already exists in the database
-        // try {
-        //     const exist = await Product.exists({ pid: req.body.pid });
-        //     if (exist) {
-        //         return next(CustomErrorHandler.alreadyExists('Product already exists in database'));
-        //     }
-        // } catch (err) {
-        //     return next(err);
-        // }
-     },
     async showProducts(req,res,next) {
         let documents;
         try{

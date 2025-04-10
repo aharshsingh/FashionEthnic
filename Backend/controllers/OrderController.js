@@ -28,15 +28,6 @@ const OrderController = {
         } catch (error) {
             return next(error);
         }
-    },
-
-    async getAllOrder(req,res,next){
-        try {
-            const result = await Order.find();
-            return res.status(200).send(result);
-        } catch (error) {
-            return res.status(500).json({"error": "Internal server error"});
-        }
     }
 }
 

@@ -91,15 +91,6 @@ const userController = {
         } catch (error) {
             return next(error);
         }
-    },
-
-    async getAllUser(req,res,next){
-        try {
-            const result = await User.find();
-            return res.status(200).send(result);
-        } catch (error) {
-            return res.status(500).json({"error": "Internal server error"});
-        }
     }
 }
 
