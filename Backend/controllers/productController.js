@@ -1,19 +1,6 @@
 const CustomErrorHandler = require('../services/customErrorHandler');
 const Product  = require('../models/product')
-const multer = require('multer');
-const path = require('path');
-const productSchema = require('../validators/productValidator');
-const product = require('../models/product');
 
-const storage = multer.diskStorage({
-    destination : (req,file, cb) => cb(null, 'uploads/'),
-    filename: (req,file,cb) => {
-        const uniqueName = `${Date.now()}-${Math.round(Math.round()*1E9)}${path.extname(file.originalname)}`;
-        cb(null,uniqueName)
-    }
-})
-
-const handleMultipartData = multer({ storage, limits:{fileSize: 1000000*5}}).single('image')
 
 const productController = {
     async showProducts(req,res,next) {
@@ -24,38 +11,6 @@ const productController = {
             return next(err);
         }
         return res.json(documents);
-    },
-
-    async updateProducts(req,res,next) {
-        let product;
-        handleMultipartData(req,res,async(err)=>{
-            if(err)
-                return next(CustomErrorHandler.serverError(err.message))
-            let filePath;
-            if(req.file)
-                filePath = req.file.path;
-            const {error} = productSchema.validate(req.body);
-            if(error)
-                return next(error);
-            else{
-                const { name,price,about,material,care,colour,gender,fit,size,rating,discount } = req.body;
-                product = await Product.findOneAndUpdate({_id: req.params.id},{
-                name,
-                price,
-                about,
-                material,
-                care,
-                colour,
-                gender,
-                fit,
-                size,
-                rating,
-                discount,
-                ...(req.file && {image: filePath })
-                });
-            }
-        })
-        res.json(product);
     },
 
     async productDetails(req,res,next){

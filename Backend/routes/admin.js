@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const { adminController } = require('../controllers/index');
 const admin = require('../middlewares/admin');
-
+const auth = require('../middlewares/auth');
 router.get('/users', adminController.getAllUser);
 router.get('/orders', adminController.getAllOrder);
 router.post('/add_product', adminController.addProducts);
-
+router.put('/update_products/:id', adminController.updateProducts);
 module.exports = router;

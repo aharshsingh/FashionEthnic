@@ -1,6 +1,9 @@
 const Order = require('../models/order');
 const User = require('../models/user');
 const multer = require('multer');
+const productSchema = require('../validators/productValidator');
+const path = require('path');
+const Product  = require('../models/product')
 
 const storage = multer.diskStorage({
     destination : (req,file, cb) => cb(null, 'uploads/'),
@@ -9,7 +12,6 @@ const storage = multer.diskStorage({
         cb(null,uniqueName)
     }
 })
-
 const handleMultipartData = multer({ storage, limits:{fileSize: 1000000*5}}).single('image')
 
 const adminController = {
@@ -79,6 +81,38 @@ const adminController = {
             //     return next(err);
             // }
          },
+
+          async updateProducts(req,res,next) {
+                 let product;
+                 handleMultipartData(req,res,async(err)=>{
+                     if(err)
+                         return next(CustomErrorHandler.serverError(err.message))
+                     let filePath;
+                     if(req.file)
+                         filePath = req.file.path;
+                     const {error} = productSchema.validate(req.body);
+                     if(error)
+                         return next(error);
+                     else{
+                         const { name,price,about,material,care,colour,gender,fit,size,rating,discount } = req.body;
+                         product = await Product.findOneAndUpdate({_id: req.params.id},{
+                         name,
+                         price,
+                         about,
+                         material,
+                         care,
+                         colour,
+                         gender,
+                         fit,
+                         size,
+                         rating,
+                         discount,
+                         ...(req.file && {image: filePath })
+                         });
+                     }
+                 })
+                 res.json(product);
+             }
 }
 
 module.exports = adminController;
