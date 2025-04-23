@@ -34,7 +34,7 @@ export default function UpdatePhone() {
     }
 
     try {
-      await axios.patch(`https://fashionethnic.onrender.com/updateuser/${user._id}`, {
+      await axios.patch(`https://fashionethnic.onrender.com/api/users/update/${user._id}`, {
         phoneNumber
       });
       const result = await getUser(user._id);

@@ -7,7 +7,7 @@ export default function ProductCarouselPhone({productId}) {
   const [productImage, setImage] = useState({});
   useEffect(()=>{
     const fetchImage = async ()=>{
-       await axios.get(`https://fashionethnic.onrender.com/getImage/${productId}`)
+       await axios.get(`https://fashionethnic.onrender.com//api/products/get_image/${productId}`)
        .then((res) =>{
         setImage(res.data);
        })

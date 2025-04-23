@@ -20,7 +20,7 @@ useEffect(() =>{
 },[user])
   const updateUserId = async (token) => {
     try {
-      const response = await axios.post('https://fashionethnic.onrender.com/userId', { token });
+      const response = await axios.post('https://fashionethnic.onrender.com/api/users/userId', { token });
       if (response.status === 200) {
         const id = response.data._id
         const result = await getUser(id);

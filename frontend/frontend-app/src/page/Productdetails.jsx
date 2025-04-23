@@ -24,7 +24,7 @@ export default function Productdetails() {
 
   const handleWishList = async ()=>{
     try{
-    const response = await axios.post('https://fashionethnic.onrender.com/addProductWishList',{
+    const response = await axios.post('https://fashionethnic.onrender.com/api/wishlist/add_product',{
       userId: user._id,
       productId: params.id
     }) 
@@ -47,7 +47,7 @@ export default function Productdetails() {
 
   useEffect(() =>{
     const fetchProductDetails = async () => {
-    await axios.get(`https://fashionethnic.onrender.com/productDetails/${params.id}`)
+    await axios.get(`https://fashionethnic.onrender.com/api/products/detail/${params.id}`)
     .then((response) => {
       setProduct(response.data);
       setLoading(false)

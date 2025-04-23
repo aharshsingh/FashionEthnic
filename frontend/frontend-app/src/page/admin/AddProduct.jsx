@@ -4,7 +4,17 @@ import { SliderComponent } from '../../component/RatingSlider';
 
 export default function AddProduct() {
 
-    // const [file,setFile] = useState(null);
+  const [name, setName] = useState();
+  const [price, setPrice] = useState();
+  const [about, setAbout] = useState();
+  const [material, setMaterial] = useState();
+  const [care, setCare] = useState();
+  const [colour, setColour] = useState();
+  const [gender, setGender] = useState();
+  const [fit, setFit] = useState();
+  const [rating, setRating] = useState();
+  const [discount, setDiscount] = useState();
+  const [file,setFile] = useState(null);
 
     // const onFileChange = (event) => {
     //     setFile(event.target.files[0]);
@@ -34,19 +44,19 @@ export default function AddProduct() {
                   <div className='flex flex-col gap-3 mt-4'>
                     <div className='flex flex-col gap-2'>
                       <label className='text-base font-medium text-[#FE8551]'>Product Name</label>
-                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
+                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' onChange={(e) => setName(e.target.value)} type='text' />
                     </div>
                     <div className='flex flex-col gap-2'>
                       <label className='text-base font-medium text-[#FE8551]'>About Product</label>
-                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
+                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' onChange={(e) => setName(e.target.value)} type='text'/>
                     </div>
                     <div className='flex flex-col gap-2'>
                       <label className='text-base font-medium text-[#FE8551]'>Product Price</label>
-                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
+                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' onChange={(e) => setName(e.target.value)} type='text'/>
                     </div>
                     <div className='flex flex-col gap-2'>
                       <label className='text-base font-medium text-[#FE8551]'>Discount on Product</label>
-                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
+                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' onChange={(e) => setName(e.target.value)} type='text'/>
                     </div>
                   </div>
                   <div>
@@ -55,11 +65,11 @@ export default function AddProduct() {
                   <div className='flex flex-col gap-3 mt-4'>
                     <div className='flex flex-col gap-2'>
                       <label className='text-base font-medium text-[#FE8551]'>Product Material</label>
-                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
+                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' onChange={(e) => setName(e.target.value)} type='text'/>
                     </div>
                     <div className='flex flex-col gap-2'>
                       <label className='text-base font-medium text-[#FE8551]'>Product Care <span className='text-sm lg:text-base text-gray-500'>(Enter the type of care material needs)</span></label>
-                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
+                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' onChange={(e) => setName(e.target.value)} type='text'/>
                     </div>
                   </div>
                 </div>
@@ -70,28 +80,28 @@ export default function AddProduct() {
                   <div className='flex flex-col gap-3 mt-4'>
                     <div className='flex flex-col gap-2'>
                       <label className='text-base font-medium text-[#FE8551]'>Product Colour</label>
-                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' type='text'/>
+                      <input className='rounded-sm border-1 border-[#999999] w-96 h-10 outline-none pl-2' onChange={(e) => setName(e.target.value)} type='text'/>
                     </div>
                     <div className='flex flex-col gap-2'>
                       <label className='text-base font-medium text-[#FE8551]'>Product Fit</label>
-                      <select id="fit" class="w-96 bg-white border-1 border-[#999999] text-gray-900 text-sm rounded-sm p-2 dark:bg-white dark:text-gray-900 dark:placeholder-gray-500 outline-none">
+                      <select id="fit" onChange={(e) => setName(e.target.value)} class="w-96 bg-white border-1 border-[#999999] text-gray-900 text-sm rounded-sm p-2 dark:bg-white dark:text-gray-900 dark:placeholder-gray-500 outline-none">
                         <option selected>Choose a fit type</option>
-                        <option value="US">Slim fit</option>
-                        <option value="CA">Regular fit</option>
-                        <option value="FR">Loose fit</option>
+                        <option value="Slim">Slim fit</option>
+                        <option value="Regular">Regular fit</option>
+                        <option value="Loose">Loose fit</option>
                       </select>
                     </div>
                     <div className='flex flex-col gap-2'>
                       <label className='text-base font-medium text-[#FE8551]'>Gender</label>
-                      <select id="gender" class="w-96 bg-white border-1 border-[#999999] text-gray-900 text-sm rounded-sm p-2 dark:bg-white dark:text-gray-900 dark:placeholder-gray-500 outline-none">
+                      <select id="gender" onChange={(e) => setName(e.target.value)} class="w-96 bg-white border-1 border-[#999999] text-gray-900 text-sm rounded-sm p-2 dark:bg-white dark:text-gray-900 dark:placeholder-gray-500 outline-none">
                         <option selected>Choose a gender</option>
-                        <option value="US">Male</option>
-                        <option value="CA">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
                       </select>
                     </div>
                     <div className='flex flex-col gap-2'>
                       <label className='text-base font-medium text-[#FE8551]'>Product Size</label>
-                      <select id="size" class="w-96 bg-white border-1 border-[#999999] text-gray-900 text-sm rounded-sm p-2 dark:bg-white dark:text-gray-900 dark:placeholder-gray-500 outline-none">
+                      <select id="size" onChange={(e) => setName(e.target.value)} class="w-96 bg-white border-1 border-[#999999] text-gray-900 text-sm rounded-sm p-2 dark:bg-white dark:text-gray-900 dark:placeholder-gray-500 outline-none">
                         <option selected>Choose a size</option>
                         <option value="S">S</option>
                         <option value="M">M</option>
@@ -106,7 +116,7 @@ export default function AddProduct() {
                   </div>
                   <div className='flex flex-col gap-3 mt-4'>
                     <div className='flex flex-col gap-2'>
-                      <SliderComponent/>
+                      <SliderComponent rating={rating} setRating={setRating} />
                     </div>
                   </div>
                 </div>
@@ -118,33 +128,6 @@ export default function AddProduct() {
           </form>
         </div>
       </div>
-      {/* <form onSubmit = {onSubmit}>
-        <label>Name</label>
-        <input type='text' placeholder='Enter product name'/>
-        <label>Price</label>
-        <input type='text' placeholder='Enter product price' />
-        <label>about</label>
-        <input type='text' placeholder='Enter product information' />
-        <label>material</label>
-        <input type='text' placeholder='eg. cotton' />
-        <label>care</label>
-        <input type='text' placeholder='Enter product name' />
-        <label>colour</label>
-        <input type='text' placeholder='Enter product name' />
-        <label>gender</label>
-        <input type='text' placeholder='Enter product name' />
-        <label>fit</label>
-        <input type='text' placeholder='Enter product name' />
-        <label>size</label>
-        <input type='text' placeholder='Enter product name' />
-        <label>rating</label>
-        <input type='text' placeholder='Enter product name' />
-        <label>discount</label>
-        <input type='text' placeholder='Enter product name' />
-        <label>image</label>
-        <input type="file" name="image" accept="image/*" />
-        <button>Submit</button>
-      </form> */}
     </>
   )
 }

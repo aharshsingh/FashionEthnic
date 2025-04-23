@@ -27,7 +27,7 @@ export default function Bill() {
       address: user.address
     }));
     try {
-      await axios.post(`hhttps://fashionethnic.onrender.com/addorder/${user._id}`,
+      await axios.post(`hhttps://fashionethnic.onrender.com/api/orders/add_order/${user._id}`,
         order);
     } catch (error) {
         console.log(error);
@@ -37,7 +37,7 @@ export default function Bill() {
 const handleAddAddress = async() => {
   if(newAddress !== ''){
   try {
-    await axios.patch(`https://fashionethnic.onrender.com/updateuser/${user._id}`,{
+    await axios.patch(`https://fashionethnic.onrender.com/api/users/update/${user._id}`,{
       address: newAddress
     });
     setUser((prev)=>({

@@ -43,7 +43,7 @@ export default function Signin() {
 
     setLoading(true); 
     try {
-      const response = await axios.post('https://fashionethnic.onrender.com/signup', {
+      const response = await axios.post('https://fashionethnic.onrender.com/api/auth/signup', {
         userName,
         email,
         password

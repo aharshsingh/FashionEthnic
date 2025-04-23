@@ -18,13 +18,13 @@ export default function WishList() {
     useEffect(()=>{
         const getWishlistItems = async()=>{
             try {
-                const response = await axios.get(`https://fashionethnic.onrender.com/getwishlist/${userId}`);
+                const response = await axios.get(`https://fashionethnic.onrender.com/api/wishlist/products/${userId}`);
                 const array = response.data.item;  
                 let fetchedItem = [];
                 for(const item of array){
                     try {
                         const id = item.product;
-                        const wishlistItem = await axios.get(`https://fashionethnic.onrender.com/productDetails/${id}`);
+                        const wishlistItem = await axios.get(`https://fashionethnic.onrender.com/api/products/detail/${id}`);
                         fetchedItem.push(wishlistItem.data);
                     } catch (error) {
                         console.log(error);
@@ -42,7 +42,7 @@ export default function WishList() {
 
     const handleRemove = async (productId)=>{
         try {
-            const response = await axios.patch('https://fashionethnic.onrender.com/removeproduct',{
+            const response = await axios.patch('https://fashionethnic.onrender.com/api/wishlist/remove_product',{
                 userId,
                 productId
             });

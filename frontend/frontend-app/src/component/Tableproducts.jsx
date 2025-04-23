@@ -172,7 +172,7 @@ export default function Component() {
   useEffect(() => {
     async function fetchPosts() {
       const res = await fetch(
-        "http://localhost:7000/showProducts",
+        "http://localhost:7000/api/products/get_products",
       );
       console.log(res.data);
       const data = await res.json();

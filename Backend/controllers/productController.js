@@ -1,7 +1,6 @@
 const CustomErrorHandler = require('../services/customErrorHandler');
 const Product  = require('../models/product')
 
-
 const productController = {
     async showProducts(req,res,next) {
         let documents;
@@ -16,7 +15,7 @@ const productController = {
     async productDetails(req,res,next){
         let document;
         try {
-            document = await product.findOne({_id : req.params.id});
+            document = await Product.findOne({_id : req.params.id});
         } catch (error) {
             return next(CustomErrorHandler.notFound("Product not found!"));
         }
@@ -26,7 +25,7 @@ const productController = {
     async getImage(req,res,next){
         const {id} = req.params;
         try {
-            const result = await product.findById(id).select('image');
+            const result = await Product.findById(id).select('image');
             return res.status(200).json(result);
         } catch (error) {
             return next(error);
@@ -37,7 +36,7 @@ const productController = {
         let result = [];
         try {
             for(let id of idArray){
-                const image = await product.findById(id).select('image');
+                const image = await Product.findById(id).select('image');
                 result.push({id,image});
             }
             return res.status(200).json({result});

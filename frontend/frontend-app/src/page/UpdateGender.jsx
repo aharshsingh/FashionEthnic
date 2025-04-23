@@ -25,7 +25,7 @@ export default function UpdatePhone() {
 
   const handleGender = async()=>{
     try {
-      await axios.patch(`https://fashionethnic.onrender.com/updateuser/${user._id}`,{
+      await axios.patch(`https://fashionethnic.onrender.com/api/users/update/${user._id}`,{
         gender: hoveredGender
       })
       const result = await getUser(user._id);

@@ -8,7 +8,7 @@ export default function Orders() {
   useEffect(()=>{
     const getOrder = async()=>{
       try {
-        const response = await axios.get(`https://fashionethnic.onrender.com/getorder/${user._id}`);
+        const response = await axios.get(`https://fashionethnic.onrender.com/api/orders/get_order/${user._id}`);
         console.log(response.data);
         setOrder(response.data);
       } catch (error) {

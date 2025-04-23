@@ -20,7 +20,7 @@ export default function UpdatePhone() {
   const handleSubmit = async ()=>{
     try {
       console.log(user._id)
-      await axios.patch(`https://fashionethnic.onrender.com/updateuser/${user._id}`, {
+      await axios.patch(`https://fashionethnic.onrender.com/api/users/update/${user._id}`, {
         dob
       });
       const result = await getUser(user._id);
