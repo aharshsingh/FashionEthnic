@@ -52,6 +52,13 @@ export default function Cart() {
     useEffect(() => {
         setIsEmpty(cart.productArray.length === 0);
         const getProductImage = async () => {
+            // Empty cart — nothing to fetch, show the empty state.
+            if (cart.productArray.length === 0) {
+                setCartProducts([]);
+                setOrderArray([]);
+                setLoading(false);
+                return;
+            }
             let idArray = [];
             let orderArray = [];
             cart.productArray.map((product) => {
@@ -67,11 +74,13 @@ export default function Cart() {
                 const response = await axios.post('https://fashionethnic.onrender.com/api/products/get_product_image', {
                     idArray
                 })
+                const result = response.data?.result || [];
                 setCartProducts(() => {
                     let arr = cart.productArray;
                     arr.map((product) => {
-                        const res = response.data.result.find(i => i.id === product.product)
-                        product.image = res.image.image;
+                        const res = result.find(i => i.id === product.product)
+                        // Guard against products missing from the response.
+                        product.image = res?.image?.image || product.image || '';
                         return 0;
                     })
                     return arr;
@@ -79,6 +88,9 @@ export default function Cart() {
                 setLoading(false)
             } catch (error) {
                 console.log(error)
+                // Don't hang on the loader if the image fetch fails.
+                setCartProducts(cart.productArray);
+                setLoading(false)
             }
         }
         getProductImage();
@@ -147,10 +159,10 @@ export default function Cart() {
                             <div className="lg:sticky lg:top-28 lg:self-start">
                                 <div className="rounded-2xl border border-navy/5 bg-white p-5 shadow-soft">
                                     <p className="flex items-center gap-2 text-sm font-semibold text-navy">
-                                        <MapPin className="h-4 w-4 text-coral" /> Deliver to: {user.userName}
+                                        <MapPin className="h-4 w-4 text-coral" /> Deliver to: {user?.userName || 'Guest'}
                                     </p>
                                     <p className="mt-1 text-sm text-navy/60">
-                                        Address: {user.address ? user.address : (<span>N/A</span>)}
+                                        Address: {user?.address ? user.address : (<span>N/A</span>)}
                                     </p>
                                 </div>
 

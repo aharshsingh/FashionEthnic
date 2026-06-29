@@ -9,14 +9,27 @@ const [user, setUser] = useState({});
 const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 useEffect(()=>{
-  const data = localStorage.getItem("user");
-  setUser(JSON.parse(data));
-  const res = localStorage.getItem("isLoggedIn");
-  setIsLoggedIn(JSON.parse(res));
+  try {
+    const data = localStorage.getItem("user");
+    const parsed = data ? JSON.parse(data) : null;
+    // Never let `user` become null — keep it an object so `user._id`,
+    // `user.userName`, etc. are safe to read across the app.
+    if (parsed && typeof parsed === 'object') {
+      setUser(parsed);
+    }
+    const res = localStorage.getItem("isLoggedIn");
+    setIsLoggedIn(res ? JSON.parse(res) : false);
+  } catch (error) {
+    console.error("Failed to load user from localStorage:", error);
+  }
 },[])
 
 useEffect(() =>{
-  localStorage.setItem('user', JSON.stringify(user));
+  // Only persist a real, populated user — don't clobber storage with
+  // `{}`/`null` (which previously poisoned `user` into null on reload).
+  if (user && typeof user === 'object' && Object.keys(user).length > 0) {
+    localStorage.setItem('user', JSON.stringify(user));
+  }
 },[user])
   const updateUserId = async (token) => {
     try {

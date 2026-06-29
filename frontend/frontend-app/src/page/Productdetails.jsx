@@ -39,6 +39,10 @@ export default function Productdetails() {
   const params = useParams();
 
   const handleWishList = async () => {
+    if (!user?._id) {
+      toast.error('Please log in to use your wishlist', { position: "top-center" });
+      return;
+    }
     try {
       const response = await axios.post('https://fashionethnic.onrender.com/api/wishlist/add_product', {
         userId: user._id,
@@ -57,7 +61,7 @@ export default function Productdetails() {
       }
     } catch (error) {
       console.error('Error adding product to wishlist:', error);
-      alert('Failed to add product to wishlist');
+      toast.error('Failed to add product to wishlist', { position: "top-center" });
     }
   }
 

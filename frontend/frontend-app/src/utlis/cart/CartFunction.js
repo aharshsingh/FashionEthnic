@@ -4,8 +4,8 @@ export const fetchCartFromDB = async (userId) => {
   try {
     const response = await axios.get(`https://fashionethnic.onrender.com/api/cart/products/${userId}`);
     let cart = {
-      productArray: response.data.result.item, 
-      totalItems: response.data.result.totalItems,    
+      productArray: response.data?.result?.item || [],
+      totalItems: response.data?.result?.totalItems || 0,
     };
     return cart;
   } catch (error) {

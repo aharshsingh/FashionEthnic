@@ -12,10 +12,16 @@ export default function WishList() {
     const [isEmpty, setIsEmpty] = useState(true);
     const [loading, setLoading] = useState(true);
     const {user} = useContext(UserContext);
-    const userId = user._id;
+    const userId = user?._id;
 
     useEffect(()=>{
         const getWishlistItems = async()=>{
+            if (!userId) {
+                setWhishlistItems([]);
+                setIsEmpty(true);
+                setLoading(false);
+                return;
+            }
             try {
                 const response = await axios.get(`https://fashionethnic.onrender.com/api/wishlist/products/${userId}`);
                 const array = response.data.item;
