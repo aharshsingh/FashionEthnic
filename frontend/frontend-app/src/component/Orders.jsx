@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { Package, MapPin, CalendarDays, Truck } from 'lucide-react'
+import Navbar from './Navbar'
+import Footer from './Footer'
 import Ordersnippet from './OrderSnippet'
 import axios from 'axios'
 import { UserContext } from '../Context/UserContext'
@@ -44,9 +46,14 @@ export default function Orders() {
   };
 
   return (
-    <div className="animate-fade-up">
+    <div className="min-h-screen bg-cream">
+      <Navbar />
+      <main className="mx-auto max-w-4xl animate-fade-up px-4 pb-20 pt-24 sm:px-6 lg:pt-28">
       <div className="border-b border-navy/10 pb-5">
-        <h2 className="font-display text-2xl font-bold text-navy">Order History</h2>
+        <span className="eyebrow">
+          <Package className="h-3.5 w-3.5" /> My Orders
+        </span>
+        <h2 className="mt-4 font-display text-3xl font-bold text-navy sm:text-4xl">Order History</h2>
         <p className="mt-1 text-sm text-navy/50">Track and review your past orders.</p>
       </div>
 
@@ -102,6 +109,8 @@ export default function Orders() {
           ))}
         </div>
       )}
+      </main>
+      <Footer />
     </div>
   )
 }

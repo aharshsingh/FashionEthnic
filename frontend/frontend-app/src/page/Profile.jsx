@@ -1,14 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Dashboard from '../component/Dashboard.jsx';
-import Orders from '../component/Orders.jsx';
 import '../component-css/Profile.css';
 import Navbar from '../component/Navbar.jsx';
 import Footer from '../component/Footer.jsx';
 import { UserContext } from '../Context/UserContext.jsx';
 import {
   User,
-  LayoutDashboard,
   Package,
   ShoppingBag,
   MapPin,
@@ -20,19 +18,7 @@ import {
 } from 'lucide-react';
 
 export default function Profile() {
-  const [activeSection, setActiveSection] = useState('Dashboard');
   const { user } = useContext(UserContext);
-
-  const renderSection = () => {
-    switch (activeSection) {
-      case 'Dashboard':
-        return <Dashboard />;
-      case 'Orders':
-        return <Orders />;
-      default:
-        return null;
-    }
-  };
 
   const initials = (user.userName || 'User')
     .trim()
@@ -42,14 +28,9 @@ export default function Profile() {
     .join('')
     .toUpperCase();
 
-  // Actions handled in-page via section switching
-  const sectionItems = [
-    { key: 'Dashboard', label: 'Dashboard', desc: 'Account overview', icon: LayoutDashboard },
-    { key: 'Orders', label: 'Orders', desc: 'Track your purchases', icon: Package },
-  ];
-
   // Actions that navigate to other routes
   const linkItems = [
+    { to: '/Orders', label: 'Orders', desc: 'Track your purchases', icon: Package },
     { to: '/Profile/Shippingaddress', label: 'Shipping Address', desc: 'Manage addresses', icon: MapPin },
     { to: '/Cart', label: 'Cart', desc: 'Review your bag', icon: ShoppingBag },
     { to: '/Wishlist', label: 'Wishlist', desc: 'Saved for later', icon: Heart },
@@ -86,41 +67,13 @@ export default function Profile() {
           </div>
         </section>
 
-        {/* Sections (in-page) */}
-        <h2 className="mt-12 font-display text-xl font-bold text-navy">Account</h2>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {sectionItems.map(({ key, label, desc, icon: Icon }) => {
-            const active = activeSection === key;
-            return (
-              <button
-                key={key}
-                type="button"
-                onClick={() => setActiveSection(key)}
-                className={`group flex items-center gap-4 rounded-2xl border p-5 text-left shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-card ${
-                  active
-                    ? 'border-coral/40 bg-coral/5 ring-1 ring-coral/20'
-                    : 'border-navy/5 bg-white'
-                }`}
-              >
-                <span
-                  className={`grid h-12 w-12 shrink-0 place-items-center rounded-xl transition-colors ${
-                    active ? 'bg-coral text-white' : 'bg-navy/5 text-navy group-hover:bg-coral/10 group-hover:text-coral'
-                  }`}
-                >
-                  <Icon className="h-5 w-5" />
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block font-semibold text-navy">{label}</span>
-                  <span className="block text-sm text-navy/50">{desc}</span>
-                </span>
-                <ChevronRight className="h-5 w-5 shrink-0 text-navy/30 transition-transform group-hover:translate-x-0.5 group-hover:text-coral" />
-              </button>
-            );
-          })}
-        </div>
+        {/* Profile details */}
+        <section className="mt-10 rounded-3xl border border-navy/5 bg-white p-6 shadow-soft sm:p-8 lg:p-10">
+          <Dashboard />
+        </section>
 
         {/* Quick links */}
-        <h2 className="mt-10 font-display text-xl font-bold text-navy">Quick Links</h2>
+        <h2 className="mt-12 font-display text-xl font-bold text-navy">Quick Links</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {linkItems.map(({ to, label, desc, icon: Icon }) => (
             <Link
@@ -139,11 +92,6 @@ export default function Profile() {
             </Link>
           ))}
         </div>
-
-        {/* Active section content */}
-        <section className="mt-12 rounded-3xl border border-navy/5 bg-white p-6 shadow-soft sm:p-8 lg:p-10">
-          {renderSection()}
-        </section>
       </main>
 
       <Footer />
