@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Dashboard from '../component/Dashboard.jsx';
 import Orders from '../component/Orders.jsx';
-import ShippingAddress from '../component/Shippingaddress.jsx';
 import '../component-css/Profile.css';
 import Navbar from '../component/Navbar.jsx';
 import Footer from '../component/Footer.jsx';
@@ -30,8 +29,6 @@ export default function Profile() {
         return <Dashboard />;
       case 'Orders':
         return <Orders />;
-      case 'ShippingAddress':
-        return <ShippingAddress />;
       default:
         return null;
     }
@@ -49,11 +46,11 @@ export default function Profile() {
   const sectionItems = [
     { key: 'Dashboard', label: 'Dashboard', desc: 'Account overview', icon: LayoutDashboard },
     { key: 'Orders', label: 'Orders', desc: 'Track your purchases', icon: Package },
-    { key: 'ShippingAddress', label: 'Shipping Address', desc: 'Manage addresses', icon: MapPin },
   ];
 
   // Actions that navigate to other routes
   const linkItems = [
+    { to: '/Profile/Shippingaddress', label: 'Shipping Address', desc: 'Manage addresses', icon: MapPin },
     { to: '/Cart', label: 'Cart', desc: 'Review your bag', icon: ShoppingBag },
     { to: '/Wishlist', label: 'Wishlist', desc: 'Saved for later', icon: Heart },
     { to: '/ContactUs', label: 'Contact Us', desc: 'Get in touch', icon: Mail },
