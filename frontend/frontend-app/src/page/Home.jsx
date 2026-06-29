@@ -6,7 +6,7 @@ import '../component-css/Home.css'
 import homeimg from '../photo/K15R-_1_600x.webp'
 import Footer from '../component/Footer'
 import Products from '../component/Products'
-import Dropdown from '../component/Dropdown'
+import SortMenu from '../component/SortMenu'
 
 const trustBadges = [
   { icon: Truck, label: 'Free shipping over ₹999' },
@@ -15,7 +15,7 @@ const trustBadges = [
 ]
 
 export default function Home() {
-  const [filter, setFilter] = useState('')
+  const [filters, setFilters] = useState({ sort: 'featured' })
 
   return (
     <div className="min-h-screen bg-cream">
@@ -140,12 +140,12 @@ export default function Home() {
             </p>
           </div>
           <div className="shrink-0">
-            <Dropdown setFilter={setFilter} />
+            <SortMenu value={filters.sort} onChange={(s) => setFilters({ sort: s })} />
           </div>
         </div>
 
         <div className="mt-10 flex flex-wrap items-stretch justify-center gap-6 lg:gap-8">
-          <Products filter={filter} />
+          <Products filters={filters} />
         </div>
       </section>
 

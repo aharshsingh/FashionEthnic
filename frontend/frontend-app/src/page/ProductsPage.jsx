@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
-import { SlidersHorizontal, Sparkles } from 'lucide-react'
+import { Sparkles } from 'lucide-react'
 import Navbar from '../component/Navbar';
-import Dropdown from '../component/Dropdown';
+import FilterSort from '../component/FilterSort';
 import Products from '../component/Products';
 import Footer from '../component/Footer';
 
 export default function ProductsPage() {
-  const [filter, setFilter] = useState('');
+  const [filters, setFilters] = useState({
+    search: '',
+    genders: [],
+    price: null,
+    onSale: false,
+    sort: 'featured',
+  });
+  const [count, setCount] = useState(0);
 
   return (
     <div className="min-h-screen bg-cream">
@@ -30,17 +37,12 @@ export default function ProductsPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-5 pb-20 lg:px-8 lg:pb-28">
-        <div className="flex flex-col gap-4 border-b border-navy/10 pb-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="filter flex items-center gap-2 text-lg font-semibold text-navy">
-            <SlidersHorizontal className="h-5 w-5 text-coral" /> Filters
-          </p>
-          <div className="shrink-0">
-            <Dropdown setFilter={setFilter} />
-          </div>
+        <div className="border-b border-navy/10 pb-6">
+          <FilterSort filters={filters} setFilters={setFilters} count={count} />
         </div>
 
         <div className="mt-10 flex flex-wrap items-stretch justify-center gap-6 lg:gap-8">
-          <Products filter={filter} />
+          <Products filters={filters} onCount={setCount} />
         </div>
       </section>
 
