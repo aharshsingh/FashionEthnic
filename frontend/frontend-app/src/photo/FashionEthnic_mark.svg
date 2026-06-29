@@ -1,0 +1,15 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="feNavy" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1f3c5e"/>
+      <stop offset="1" stop-color="#132C48"/>
+    </linearGradient>
+  </defs>
+  <!-- Navy disc -->
+  <circle cx="32" cy="32" r="30" fill="url(#feNavy)"/>
+  <!-- Coral accent arc + spark (a stitch of thread) -->
+  <path d="M30 4.2 A28 28 0 0 1 56.5 22" stroke="#FE8551" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <circle cx="50.5" cy="14.5" r="3.4" fill="#FE8551"/>
+  <!-- FE monogram -->
+  <text x="32" y="43" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="27" font-weight="700" fill="#FBF7F2">FE</text>
+</svg>

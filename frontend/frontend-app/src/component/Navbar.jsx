@@ -5,7 +5,7 @@ import {
   MapPin, Mail, FileText, ShieldCheck, LogOut,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
-import logo from '../photo/FashionEthnic_logo.svg';
+import logo from '../photo/FashionEthnic_mark.svg';
 import '../component-css/Navbar.css';
 import NavDrawer from './NavDrawer';
 import { CartContext } from '../Context/CartContext.jsx';

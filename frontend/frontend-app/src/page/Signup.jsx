@@ -3,7 +3,7 @@ import '../component-css/Signup.css';
 import signupImage from '../photo/64e74bb7657e506338faa8c9_1692879799068.jpg';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import logo from '../photo/Screenshot_2025-02-08_232617-removebg-preview.png';
+import logo from '../photo/FashionEthnic_mark.svg';
 import toast from 'react-hot-toast';
 import { User, Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles } from 'lucide-react';
 

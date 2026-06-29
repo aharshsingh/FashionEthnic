@@ -7,7 +7,7 @@ import { UserContext } from '../Context/UserContext';
 import googleImg from '../photo/google.png';
 import { auth, provider } from '../utlis/auth/Firebase';
 import { signInWithPopup } from 'firebase/auth';
-import logo from '../photo/Screenshot_2025-02-08_232617-removebg-preview.png';
+import logo from '../photo/FashionEthnic_mark.svg';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles } from 'lucide-react';

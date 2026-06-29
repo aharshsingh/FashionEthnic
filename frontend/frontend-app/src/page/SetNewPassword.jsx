@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import toast from "react-hot-toast";
 import signupImage from "../photo/64e74bb7657e506338faa8c9_1692879799068.jpg";
 import "../component-css/Signup.css";
-import logo from "../photo/Screenshot_2025-02-08_232617-removebg-preview.png";
+import logo from "../photo/FashionEthnic_mark.svg";
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from "axios";
 import { Lock, Eye, EyeOff, ShieldCheck, ArrowRight, ArrowLeft, Sparkles } from 'lucide-react';
