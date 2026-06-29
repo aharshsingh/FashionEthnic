@@ -50,7 +50,15 @@ export default function Signin() {
 
   const handleFormSubmission = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
+    if (!validateForm()) {
+      const firstError = !email.trim()
+        ? 'Email is required'
+        : !/^\S+@\S+\.\S+$/.test(email)
+          ? 'Enter a valid email address'
+          : 'Password is required';
+      toast.error(firstError);
+      return;
+    }
 
     setLoading(true);
     try {
@@ -67,15 +75,18 @@ export default function Signin() {
         navigate('/');
       }
     } catch (error) {
+      let message;
       if (error.response) {
-        if (error.response.status === 401) {
-          setErrors({ email: '', password: '', auth: 'Invalid email or password' });
-        } else {
-          setErrors({ email: '', password: '', auth: 'Invalid email or password' });
-        }
+        const data = error.response.data;
+        const serverMsg = typeof data === 'string' ? data : (data?.message || data?.error);
+        message = error.response.status === 401
+          ? 'Invalid email or password'
+          : (serverMsg || 'Invalid email or password');
       } else {
-        setErrors({ email: '', password: '', auth: 'Network error. Check your connection.' });
+        message = 'Network error. Check your connection.';
       }
+      setErrors({ email: '', password: '', auth: message });
+      toast.error(message);
     } finally {
       setLoading(false);
     }

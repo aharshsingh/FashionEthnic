@@ -42,7 +42,17 @@ export default function Signin() {
 
   const handleFormSubmission = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
+    if (!validateForm()) {
+      const firstError = !userName.trim()
+        ? 'Username is required'
+        : !email.trim()
+          ? 'Email is required'
+          : !/\S+@\S+\.\S+/.test(email)
+            ? 'Enter a valid email address'
+            : 'Password is required';
+      toast.error(firstError);
+      return;
+    }
 
     setLoading(true);
     try {
@@ -57,6 +67,11 @@ export default function Signin() {
       }
     } catch (error) {
       console.log(error);
+      const data = error.response?.data;
+      const serverMsg = typeof data === 'string' ? data : (data?.message || data?.error);
+      const message = serverMsg
+        || (error.response ? 'Sign up failed. Please try again.' : 'Network error. Check your connection.');
+      toast.error(message);
     } finally {
       setLoading(false);
     }
