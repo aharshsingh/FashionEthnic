@@ -43,7 +43,18 @@ export default function Cart() {
     const { user } = useContext(UserContext);
 
     const handleOrder = async () => {
-        localStorage.setItem('items', JSON.stringify(orderArray));
+        // Store full line items (incl. size/name/image/price) so the Bill page
+        // can display them; the order payload itself maps these down server-side.
+        const billItems = cart.productArray.map((p) => ({
+            productId: p.product,
+            quantity: p.quantity,
+            size: p.size,
+            name: p.name,
+            image: p.image,
+            price: p.price,
+            discount: p.discount,
+        }));
+        localStorage.setItem('items', JSON.stringify(billItems));
         localStorage.setItem('mrpAmount', JSON.stringify(mrpAmount));
         localStorage.setItem('discountAmount', JSON.stringify(discountAmount));
         localStorage.setItem('totalAmount', JSON.stringify(totalAmount))
