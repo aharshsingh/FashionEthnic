@@ -1,44 +1,60 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Check } from 'lucide-react';
 
 export default function ProgressBar({ path }) {
   const steps = [
-    { id: "01", name: "Phone number", link: "/UpdatePhone" },
-    { id: "02", name: "Gender", link: "/UpdateGender" },
-    { id: "03", name: "Date of birth", link: "/UpdateDOB" },
+    { id: 1, name: 'Phone number', link: '/UpdatePhone' },
+    { id: 2, name: 'Gender', link: '/UpdateGender' },
+    { id: 3, name: 'Date of birth', link: '/UpdateDOB' },
   ];
 
+  const currentIndex = steps.findIndex((step) => step.link === path);
+
   return (
-    <div className="w-[1100px] lg:h-[70px] h-12 border-gray-300 border-1 rounded-md">
-      <div className="flex justify-around">
-        {steps.map((step) => {
-          const isActive = path === step.link;
+    <nav aria-label="Profile progress" className="w-full">
+      <ol className="flex items-center pb-8">
+        {steps.map((step, idx) => {
+          const isCompleted = currentIndex > idx;
+          const isActive = currentIndex === idx;
+          const isLast = idx === steps.length - 1;
+
           return (
-            <div key={step.id} className="flex lg:gap-3 gap-2 lg:mt-1 mt-2">
-              <div className="relative lg:mt-[8px] mt-0">
-                <div
-                  className={`rounded-full lg:h-10 lg:w-10 h-7 w-7 flex items-center justify-center transition-all duration-300 ${
-                    isActive ? "border-orange-500 bg-orange-500" : "border-gray-300 border-1 bg-white"
+            <React.Fragment key={step.id}>
+              <li className="relative flex flex-col items-center">
+                <Link to={step.link} className="group" aria-current={isActive ? 'step' : undefined}>
+                  <span
+                    className={`grid h-10 w-10 place-items-center rounded-full border-2 text-sm font-bold transition-all duration-300 ${
+                      isActive
+                        ? 'border-coral bg-coral text-white shadow-glow'
+                        : isCompleted
+                          ? 'border-coral bg-coral/10 text-coral'
+                          : 'border-navy/15 bg-white text-navy/40 group-hover:border-coral/40 group-hover:text-coral'
+                    }`}
+                  >
+                    {isCompleted ? <Check className="h-5 w-5" /> : String(step.id).padStart(2, '0')}
+                  </span>
+                </Link>
+                <span
+                  className={`absolute top-12 whitespace-nowrap text-xs font-semibold transition-colors duration-300 sm:text-sm ${
+                    isActive ? 'text-coral' : isCompleted ? 'text-navy' : 'text-navy/40'
                   }`}
                 >
-                  <p className={`lg:text-lg text-sm font-semibold transition-all duration-300 ${
-                    isActive ? "text-white" : "text-gray-500"
-                  }`}>
-                    {step.id}
-                  </p>
-                </div>
-              </div>
-              <Link to={step.link}>
-                <p className={`lg:mt-3 mt-1 lg:text-lg text-base lg:font-medium font-light transition-all duration-300 ${
-                  isActive ? "text-orange-500" : "text-gray-500"
-                }`}>
                   {step.name}
-                </p>
-              </Link>
-            </div>
+                </span>
+              </li>
+
+              {!isLast && (
+                <div
+                  className={`mx-2 h-0.5 flex-1 rounded-full transition-colors duration-300 ${
+                    isCompleted ? 'bg-coral' : 'bg-navy/15'
+                  }`}
+                />
+              )}
+            </React.Fragment>
           );
         })}
-      </div>
-    </div>
+      </ol>
+    </nav>
   );
 }

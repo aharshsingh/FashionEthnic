@@ -37,7 +37,7 @@ export default function UpdatePhone() {
       <Navbar/>
 
       <main className="mx-auto flex max-w-3xl flex-col items-center px-4 pb-20 pt-24 sm:px-6 lg:pt-28">
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-lg">
           <ProgressBar path={useLocation().pathname}/>
         </div>
 
@@ -49,6 +49,12 @@ export default function UpdatePhone() {
           <p className="mt-1 text-sm text-navy/60">
             We use this to personalize your experience.
           </p>
+
+          {user?.dob && (
+            <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-navy/5 px-3 py-1.5 text-sm text-navy/70">
+              Current: <span className="font-semibold text-navy">{user.dob}</span>
+            </p>
+          )}
 
           <label className="mt-6 block text-sm font-semibold text-navy" htmlFor="dob">
             Date of Birth

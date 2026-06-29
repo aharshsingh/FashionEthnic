@@ -14,17 +14,17 @@ import {getUser} from '../utlis/user/getUser';
 import { Users } from 'lucide-react';
 
 export default function UpdatePhone() {
-  const [hoveredGender, setHoveredGender] = useState('');
   const {user, setUser} = useContext(UserContext);
+  const [hoveredGender, setHoveredGender] = useState(user?.gender || '');
   const renderGender = (gender) => {
     setHoveredGender(gender);
   };
 
-  const removeGender = () => {
-    setHoveredGender('');
-  };
-
   const handleGender = async()=>{
+    if (!hoveredGender) {
+      toast.error('Please select a gender!', { position: "top-center" });
+      return;
+    }
     try {
       await axios.patch(`https://fashionethnic.onrender.com/api/users/update/${user._id}`,{
         gender: hoveredGender
@@ -48,7 +48,7 @@ export default function UpdatePhone() {
       <Navbar />
 
       <main className="mx-auto flex max-w-3xl flex-col items-center px-4 pb-20 pt-24 sm:px-6 lg:pt-28">
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-lg">
           <ProgressBar path={useLocation().pathname} />
         </div>
 
@@ -73,9 +73,7 @@ export default function UpdatePhone() {
                       ? 'border-coral bg-coral/5 ring-1 ring-coral/20'
                       : 'border-navy/10 bg-cream/50 hover:border-coral/40'
                   }`}
-                  onMouseEnter={() => renderGender(label)}
-                  onMouseLeave={removeGender}
-                  onClick={handleGender}
+                  onClick={() => renderGender(label)}
                 >
                   <span
                     className={`grid h-12 w-12 place-items-center rounded-full transition-colors duration-300 ${
@@ -91,6 +89,14 @@ export default function UpdatePhone() {
               );
             })}
           </div>
+
+          <button
+            className='btn-primary mt-6 w-full'
+            type='button'
+            onClick={handleGender}
+          >
+            Update
+          </button>
         </section>
       </main>
 
