@@ -3,9 +3,11 @@ import { MapPin, Plus, Tag, ShieldCheck, MessageCircle } from 'lucide-react'
 import Navbar from '../component/Navbar'
 import Footer from '../component/Footer'
 import '../component-css/Bill.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 import { UserContext } from '../Context/UserContext';
+import { useCart } from '../Context/CartContext';
 import { TextField } from '@mui/material'
 
 export default function Bill() {
@@ -18,19 +20,55 @@ export default function Bill() {
   const [newAddress, setNewAddress] = useState('');
   const [show, setShow] = useState(false);
   const { user, setUser } = useContext(UserContext);
+  const { setCart } = useCart();
   const [error, setError] = useState('');
+  const [placing, setPlacing] = useState(false);
+  const navigate = useNavigate();
 
   const handleOrder = async () => {
-    setOrder((prev) => ({
-      ...prev,
+    if (!user?._id) {
+      toast.error('Please log in to place an order', { position: 'top-center' });
+      return;
+    }
+    if (!user?.address) {
+      toast.error('Please add a delivery address', { position: 'top-center' });
+      return;
+    }
+    if (!order.items || order.items.length === 0) {
+      toast.error('Your cart is empty', { position: 'top-center' });
+      return;
+    }
+
+    // Build the payload directly — relying on setOrder here would post stale state.
+    const payload = {
       userName: user.userName,
-      address: user.address
-    }));
+      address: user.address,
+      items: order.items,
+      mrpAmount: Number(order.mrpAmount) || 0,
+      discountAmount: Number(order.discountAmount) || 0,
+      totalAmount: Number(order.totalAmount) || 0,
+    };
+
+    setPlacing(true);
     try {
-      await axios.post(`hhttps://fashionethnic.onrender.com/api/orders/add_order/${user._id}`,
-        order);
+      const res = await axios.post(
+        `https://fashionethnic.onrender.com/api/orders/add_order/${user._id}`,
+        payload
+      );
+      if (res.status === 201 || res.status === 200) {
+        // Clear the cart and the temporary checkout data.
+        setCart({ productArray: [], totalItems: 0 });
+        ['items', 'mrpAmount', 'discountAmount', 'totalAmount'].forEach((k) =>
+          localStorage.removeItem(k)
+        );
+        toast.success('Order placed successfully!', { position: 'top-center' });
+        navigate('/Orders');
+      }
     } catch (error) {
       console.log(error);
+      toast.error('Failed to place order. Please try again.', { position: 'top-center' });
+    } finally {
+      setPlacing(false);
     }
   }
 
@@ -146,8 +184,12 @@ export default function Bill() {
               <p className="snippet-text1">Total Amount</p>
               <p className="snippet-text1">Rs.{order.totalAmount}</p>
             </div>
-            <button className="order-button btn-primary mt-6 w-full text-base" onClick={handleOrder}>
-              Pay Now
+            <button
+              className={`order-button btn-primary mt-6 w-full text-base ${placing ? 'cursor-not-allowed opacity-60' : ''}`}
+              onClick={handleOrder}
+              disabled={placing}
+            >
+              {placing ? 'Placing order...' : 'Pay Now'}
             </button>
             <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-navy/50">
               <ShieldCheck className="h-3.5 w-3.5 text-coral" /> 100% secure payment
