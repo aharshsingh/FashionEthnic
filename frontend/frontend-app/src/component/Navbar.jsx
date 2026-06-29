@@ -1,6 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Heart, ShoppingBag, User } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import {
+  Heart, ShoppingBag, User, ChevronDown, LayoutDashboard, Package,
+  MapPin, Mail, FileText, ShieldCheck, LogOut,
+} from 'lucide-react';
+import toast from 'react-hot-toast';
 import logo from '../photo/FashionEthnic_logo.svg';
 import '../component-css/Navbar.css';
 import NavDrawer from './NavDrawer';
@@ -9,8 +13,10 @@ import { UserContext } from '../Context/UserContext.jsx';
 
 export default function Navbar() {
   const { cart } = useContext(CartContext);
-  const { user, isLoggedIn } = useContext(UserContext);
+  const { user, isLoggedIn, logout } = useContext(UserContext);
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 24);
@@ -23,6 +29,24 @@ export default function Navbar() {
     { label: 'Shop', to: '/products' },
     { label: 'Contact', to: '/ContactUs' },
   ];
+
+  const menuItems = [
+    { label: 'My Account', to: '/Profile', icon: LayoutDashboard },
+    { label: 'Orders', to: '/Orders', icon: Package },
+    { label: 'Wishlist', to: '/wishlist', icon: Heart },
+    { label: 'Shipping Address', to: '/Profile/Shippingaddress', icon: MapPin },
+    { label: 'Cart', to: '/Cart', icon: ShoppingBag },
+    { label: 'Contact Us', to: '/ContactUs', icon: Mail },
+    { label: 'Terms of Use', to: '/TermsofUse', icon: FileText },
+    { label: 'Privacy Policy', to: '/PrivacyPolicy', icon: ShieldCheck },
+  ];
+
+  const handleLogout = async () => {
+    setMenuOpen(false);
+    await logout();
+    toast.success('Logged out successfully');
+    navigate('/Signin');
+  };
 
   return (
     <>
@@ -89,17 +113,59 @@ export default function Navbar() {
             </Link>
 
             {isLoggedIn ? (
-              <Link
-                to="/Profile"
-                className="ml-1 flex items-center gap-2 rounded-full border border-navy/10 bg-white/70 py-1.5 pl-1.5 pr-4 text-sm font-semibold text-navy shadow-sm backdrop-blur transition-all hover:border-coral/40 hover:shadow-soft"
-              >
-                <span className="grid h-7 w-7 place-items-center rounded-full bg-navy text-white">
-                  <User className="h-4 w-4" />
-                </span>
-                <span className="hidden max-w-[120px] truncate sm:inline">
-                  {user.userName || 'User'}
-                </span>
-              </Link>
+              <div className="relative ml-1">
+                <button
+                  type="button"
+                  onClick={() => setMenuOpen((o) => !o)}
+                  aria-haspopup="menu"
+                  aria-expanded={menuOpen}
+                  className="flex items-center gap-2 rounded-full border border-navy/10 bg-white/70 py-1.5 pl-1.5 pr-3 text-sm font-semibold text-navy shadow-sm backdrop-blur transition-all hover:border-coral/40 hover:shadow-soft"
+                >
+                  <span className="grid h-7 w-7 place-items-center rounded-full bg-navy text-white">
+                    <User className="h-4 w-4" />
+                  </span>
+                  <span className="hidden max-w-[120px] truncate sm:inline">
+                    {user.userName || 'User'}
+                  </span>
+                  <ChevronDown className={`h-4 w-4 text-navy/50 transition-transform ${menuOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                {menuOpen && (
+                  <>
+                    {/* click-away backdrop */}
+                    <div className="fixed inset-0 z-10" onClick={() => setMenuOpen(false)} />
+                    <div className="absolute right-0 z-20 mt-2 w-60 overflow-hidden rounded-2xl border border-navy/10 bg-white p-1.5 shadow-card">
+                      <div className="border-b border-navy/5 px-3 py-2.5">
+                        <p className="text-xs text-navy/50">Signed in as</p>
+                        <p className="truncate text-sm font-bold text-navy">{user.userName || 'User'}</p>
+                      </div>
+                      <div className="py-1">
+                        {menuItems.map(({ label, to, icon: Icon }) => (
+                          <Link
+                            key={label}
+                            to={to}
+                            onClick={() => setMenuOpen(false)}
+                            className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-navy transition-colors hover:bg-navy/5 hover:text-coral"
+                          >
+                            <Icon className="h-4 w-4 text-navy/50" />
+                            {label}
+                          </Link>
+                        ))}
+                      </div>
+                      <div className="border-t border-navy/5 pt-1">
+                        <button
+                          type="button"
+                          onClick={handleLogout}
+                          className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-red-500 transition-colors hover:bg-red-50"
+                        >
+                          <LogOut className="h-4 w-4" />
+                          Log Out
+                        </button>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
             ) : (
               <Link to="/Signup" className="ml-1">
                 <button className="rounded-full bg-coral px-5 py-2 text-sm font-semibold text-white shadow-glow transition-all hover:-translate-y-0.5 hover:bg-coral-500">

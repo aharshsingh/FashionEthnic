@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import Dashboard from '../component/Dashboard.jsx';
 import '../component-css/Profile.css';
 import Navbar from '../component/Navbar.jsx';
@@ -15,10 +16,18 @@ import {
   FileText,
   ShieldCheck,
   ChevronRight,
+  LogOut,
 } from 'lucide-react';
 
 export default function Profile() {
-  const { user } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    toast.success('Logged out successfully');
+    navigate('/Signin');
+  };
 
   const initials = (user.userName || 'User')
     .trim()
@@ -92,6 +101,16 @@ export default function Profile() {
             </Link>
           ))}
         </div>
+
+        {/* Logout */}
+        <button
+          type="button"
+          onClick={handleLogout}
+          className="mt-8 flex w-full items-center justify-center gap-2.5 rounded-2xl border border-red-200 bg-red-50 px-5 py-4 text-sm font-semibold text-red-500 transition-all hover:border-red-300 hover:bg-red-100"
+        >
+          <LogOut className="h-5 w-5" />
+          Log Out
+        </button>
       </main>
 
       <Footer />

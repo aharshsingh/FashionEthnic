@@ -47,8 +47,24 @@ useEffect(() =>{
     }
   };
 
+  const logout = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      // Best-effort server logout; clearing the client session is what matters.
+      await axios.post('https://fashionethnic.onrender.com/api/auth/logout', { token });
+    } catch (error) {
+      console.error('Logout request failed:', error);
+    }
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('userCart');
+    localStorage.removeItem('isLoggedIn');
+    setUser({});
+    setIsLoggedIn(false);
+  };
+
   return (
-    <UserContext.Provider value={{ user, setUser, updateUserId, isLoggedIn }}>
+    <UserContext.Provider value={{ user, setUser, updateUserId, isLoggedIn, logout }}>
       {children}
     </UserContext.Provider>
   );
