@@ -1,25 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { Link } from "react-router-dom";
 import '../component-css/Dashboard.css'
-import axios from 'axios';
 import { UserContext } from '../Context/UserContext';
 import { User, Mail, Phone, Calendar, Users, Pencil, Plus } from 'lucide-react';
 
 export default function Dashboard() {
 
-    const [c_id] = useState(null);
-    const [customerinfo, setCustomerInfo] = useState(null);
     const { user } = useContext(UserContext);
-
-    useEffect(() => {
-        axios.get(`https://fashionethnic.onrender.com/profile/${c_id}`)
-            .then((response) => {
-                setCustomerInfo(response.data);
-            })
-            .catch((error) => {
-                console.error(`Error fetching customer details:`, error);
-            });
-    }, [c_id])
 
     const details = [
         { label: 'Full Name', value: user?.userName, icon: User, editable: false },

@@ -1,5 +1,4 @@
 "use client";
-import {Link} from 'react-router-dom';
 import { cn } from "../lib/utils";
 import {
   AlertDialog,
@@ -58,7 +57,6 @@ import {
   CircleX,
   Columns3,
   ListFilter,
-  Plus,
   Trash,
 } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";

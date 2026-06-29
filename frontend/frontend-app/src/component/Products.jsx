@@ -97,6 +97,7 @@ export default function Products({ filters = {}, onCount, pageSize = 12, paginat
       });
 
     return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, pageSize, filtersKey, search, genders, price, onSale, sort]);
 
   // Client-mode derived view.

@@ -40,7 +40,7 @@ function Footerdemo() {
             <h3 className="mb-4 text-lg font-semibold">Quick Links</h3>
             <nav className="space-y-2 text-sm">
               {['Home', 'About Us', 'Services', 'Products', 'Contact'].map((link, index) => (
-                <a key={index} href="#" className="block transition-colors hover:text-primary">{link}</a>
+                <a key={index} href="/" className="block transition-colors hover:text-primary">{link}</a>
               ))}
             </nav>
           </div>
@@ -84,7 +84,7 @@ function Footerdemo() {
           <p className="text-sm text-muted-foreground">© 2024 Your Company. All rights reserved.</p>
           <nav className="flex gap-4 text-sm">
             {['Privacy Policy', 'Terms of Service', 'Cookie Settings'].map((policy, index) => (
-              <a key={index} href="#" className="transition-colors hover:text-primary">{policy}</a>
+              <a key={index} href="/" className="transition-colors hover:text-primary">{policy}</a>
             ))}
           </nav>
         </div>

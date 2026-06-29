@@ -38,7 +38,6 @@ export default function Cart() {
     const [discountAmount, setDiscountAmount] = useState('');
     const [shipping] = useState(50);
     const [totalAmount, setTotalAmount] = useState('')
-    const [orderArray, setOrderArray] = useState([]);
     const [loading, setLoading] = useState(true)
     const { user } = useContext(UserContext);
 
@@ -84,21 +83,14 @@ export default function Cart() {
             // Empty cart — nothing to fetch, show the empty state.
             if (cart.productArray.length === 0) {
                 setCartProducts([]);
-                setOrderArray([]);
                 setLoading(false);
                 return;
             }
             let idArray = [];
-            let orderArray = [];
             cart.productArray.map((product) => {
                 idArray.push(product.product);
-                orderArray.push({
-                    productId: product.product,
-                    quantity: product.quantity
-                })
                 return 0;
             });
-            setOrderArray(orderArray);
             try {
                 const response = await axios.post('https://fashionethnic.onrender.com/api/products/get_product_image', {
                     idArray

@@ -4,9 +4,6 @@ import signupImage from '../photo/64e74bb7657e506338faa8c9_1692879799068.jpg';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../Context/UserContext';
-import googleImg from '../photo/google.png';
-import { auth, provider } from '../utlis/auth/Firebase';
-import { signInWithPopup } from 'firebase/auth';
 import logo from '../photo/FashionEthnic_mark.svg';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
@@ -21,11 +18,6 @@ export default function Signin() {
 
   const navigate = useNavigate();
   const { updateUserId } = useContext(UserContext);
-
-  const googleLogin = async () => {
-    const response = await signInWithPopup(auth, provider);
-    console.log(response);
-  };
 
   const validateForm = () => {
     let valid = true;

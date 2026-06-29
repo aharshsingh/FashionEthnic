@@ -6,7 +6,7 @@ import { ImagePlus, X, Upload, Trash2 } from "lucide-react";
 import { useCallback, useState } from "react";
 import { cn } from "../lib/utils";
 
-export function ImageUploadDemo() {
+export function ImageUploadDemo({ onFileSelect }) {
   const {
     previewUrl,
     fileName,
@@ -51,9 +51,10 @@ export function ImageUploadDemo() {
           },
         };
         handleFileChange(fakeEvent);
+        onFileSelect?.(file);
       }
     },
-    [handleFileChange]
+    [handleFileChange, onFileSelect]
   );
 
   return (
@@ -70,7 +71,10 @@ export function ImageUploadDemo() {
         accept="image/*"
         className="hidden"
         ref={fileInputRef}
-        onChange={handleFileChange}
+        onChange={(e) => {
+          handleFileChange(e);
+          onFileSelect?.(e.target.files?.[0] || null);
+        }}
       />
 
       {!previewUrl ? (
