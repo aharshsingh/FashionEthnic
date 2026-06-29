@@ -144,8 +144,8 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-wrap items-stretch justify-center gap-6 lg:gap-8">
-          <Products filters={filters} />
+        <div className="mt-10">
+          <Products filters={filters} pageSize={8} paginate={false} />
         </div>
       </section>
 

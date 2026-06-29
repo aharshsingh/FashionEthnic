@@ -41,8 +41,8 @@ export default function ProductsPage() {
           <FilterSort filters={filters} setFilters={setFilters} count={count} />
         </div>
 
-        <div className="mt-10 flex flex-wrap items-stretch justify-center gap-6 lg:gap-8">
-          <Products filters={filters} onCount={setCount} />
+        <div className="mt-10">
+          <Products filters={filters} onCount={setCount} pageSize={12} />
         </div>
       </section>
 
