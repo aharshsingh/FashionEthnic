@@ -8,6 +8,7 @@ import axios from 'axios'
 import { UserContext } from '../Context/UserContext'
 import toast from 'react-hot-toast'
 import { getUser } from '../utlis/user/getUser';
+import { Phone } from 'lucide-react'
 
 export default function UpdatePhone() {
   const [phoneNumber, setPhoneNumber] = useState('')
@@ -18,7 +19,7 @@ export default function UpdatePhone() {
   }
 
   const validatePhoneNumber = (phone) => {
-    const phoneRegex = /^[0-9]{10}$/; 
+    const phoneRegex = /^[0-9]{10}$/;
     return phoneRegex.test(phone);
   }
 
@@ -46,31 +47,46 @@ export default function UpdatePhone() {
   }
 
   return (
-    <>
+    <div className="min-h-screen bg-cream">
       <Navbar />
-      <div className='mt-40 flex justify-center items-center'>
-        <ProgressBar path={useLocation().pathname} />
-      </div>
-      <div className='flex flex-col gap-2 justify-center items-center mt-52'>
-        <p className='text-base font-medium -ml-44'>Phone Number</p>
-        <input
-          className='border-1 border-[#a1a1a1] w-72 h-10 pl-3'
-          type='tel'
-          placeholder='0000000000'
-          value={phoneNumber}
-          onChange={handlePhoneChange}
-        />
-        <button
-          className='-ml-52 bg-[#FE8551] text-[#132C48] p-1 text-sm rounded-sm w-20 h-8'
-          type='button'
-          onClick={handleSubmit}
-        >
-          Update
-        </button>
-      </div>
-      <div className='mt-[400px]'>
-        <Footer />
-      </div>
-    </>
+
+      <main className="mx-auto flex max-w-3xl flex-col items-center px-4 pb-20 pt-24 sm:px-6 lg:pt-28">
+        <div className="w-full max-w-md">
+          <ProgressBar path={useLocation().pathname} />
+        </div>
+
+        <section className="animate-fade-up mt-10 w-full max-w-md rounded-3xl border border-navy/5 bg-white p-8 shadow-card">
+          <span className="grid h-14 w-14 place-items-center rounded-2xl bg-coral/10 text-coral">
+            <Phone className="h-6 w-6" />
+          </span>
+          <h1 className="mt-5 font-display text-2xl font-bold text-navy">Update Phone Number</h1>
+          <p className="mt-1 text-sm text-navy/60">
+            Enter a valid 10-digit mobile number for your account.
+          </p>
+
+          <label className="mt-6 block text-sm font-semibold text-navy" htmlFor="phoneNumber">
+            Phone Number
+          </label>
+          <input
+            id="phoneNumber"
+            className="mt-2 w-full rounded-xl border border-navy/15 bg-cream/50 px-4 py-3 text-navy placeholder:text-navy/30 transition-all focus:border-coral focus:bg-white focus:outline-none focus:ring-4 focus:ring-coral/20"
+            type='tel'
+            placeholder='0000000000'
+            value={phoneNumber}
+            onChange={handlePhoneChange}
+          />
+
+          <button
+            className='btn-primary mt-6 w-full'
+            type='button'
+            onClick={handleSubmit}
+          >
+            Update
+          </button>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
   )
 }

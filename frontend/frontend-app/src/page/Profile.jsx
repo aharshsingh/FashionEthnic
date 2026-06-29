@@ -7,6 +7,18 @@ import '../component-css/Profile.css';
 import Navbar from '../component/Navbar.jsx';
 import Footer from '../component/Footer.jsx';
 import { UserContext } from '../Context/UserContext.jsx';
+import {
+  User,
+  LayoutDashboard,
+  Package,
+  ShoppingBag,
+  MapPin,
+  Heart,
+  Mail,
+  FileText,
+  ShieldCheck,
+  ChevronRight,
+} from 'lucide-react';
 
 export default function Profile() {
   const [activeSection, setActiveSection] = useState('Dashboard');
@@ -25,35 +37,119 @@ export default function Profile() {
     }
   };
 
+  const initials = (user.userName || 'User')
+    .trim()
+    .split(' ')
+    .map((part) => part[0])
+    .slice(0, 2)
+    .join('')
+    .toUpperCase();
+
+  // Actions handled in-page via section switching
+  const sectionItems = [
+    { key: 'Dashboard', label: 'Dashboard', desc: 'Account overview', icon: LayoutDashboard },
+    { key: 'Orders', label: 'Orders', desc: 'Track your purchases', icon: Package },
+    { key: 'ShippingAddress', label: 'Shipping Address', desc: 'Manage addresses', icon: MapPin },
+  ];
+
+  // Actions that navigate to other routes
+  const linkItems = [
+    { to: '/Cart', label: 'Cart', desc: 'Review your bag', icon: ShoppingBag },
+    { to: '/Wishlist', label: 'Wishlist', desc: 'Saved for later', icon: Heart },
+    { to: '/ContactUs', label: 'Contact Us', desc: 'Get in touch', icon: Mail },
+    { to: '/TermsofUse', label: 'Terms of Use', desc: 'Our policies', icon: FileText },
+    { to: '/PrivacyPolicy', label: 'Privacy Policy', desc: 'Your data, protected', icon: ShieldCheck },
+  ];
+
   return (
-    <>
+    <div className="min-h-screen bg-cream">
       <Navbar />
-      <div className='flex flex-col justify-center items-center lg:mt-28 mt-6'>
-      <div className="flex justify-start w-full lg:w-[1100px] px-5">
-        <div className="mb-2">
-          <p className="ac font-semibold">Account</p>
-          <p className="text-sm">{user.userName}</p>
+
+      <main className="mx-auto max-w-7xl px-4 pb-20 pt-24 sm:px-6 lg:px-8 lg:pt-28">
+        {/* Profile header card */}
+        <section className="animate-fade-up overflow-hidden rounded-3xl border border-navy/5 bg-white shadow-card">
+          <div className="bg-hero-radial bg-navy px-6 py-8 sm:px-10 sm:py-10">
+            <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:text-left">
+              <span className="grid h-20 w-20 shrink-0 place-items-center rounded-full bg-white/10 text-2xl font-bold text-white ring-4 ring-white/10 backdrop-blur sm:h-24 sm:w-24">
+                {initials || <User className="h-9 w-9" />}
+              </span>
+              <div>
+                <p className="eyebrow border-white/20 bg-white/10 text-coral-200">My Account</p>
+                <h1 className="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">
+                  {user.userName || 'User'}
+                </h1>
+                {user.email && (
+                  <p className="mt-1 flex items-center justify-center gap-2 text-sm text-white/70 sm:justify-start">
+                    <Mail className="h-4 w-4" />
+                    {user.email}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Sections (in-page) */}
+        <h2 className="mt-12 font-display text-xl font-bold text-navy">Account</h2>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {sectionItems.map(({ key, label, desc, icon: Icon }) => {
+            const active = activeSection === key;
+            return (
+              <button
+                key={key}
+                type="button"
+                onClick={() => setActiveSection(key)}
+                className={`group flex items-center gap-4 rounded-2xl border p-5 text-left shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-card ${
+                  active
+                    ? 'border-coral/40 bg-coral/5 ring-1 ring-coral/20'
+                    : 'border-navy/5 bg-white'
+                }`}
+              >
+                <span
+                  className={`grid h-12 w-12 shrink-0 place-items-center rounded-xl transition-colors ${
+                    active ? 'bg-coral text-white' : 'bg-navy/5 text-navy group-hover:bg-coral/10 group-hover:text-coral'
+                  }`}
+                >
+                  <Icon className="h-5 w-5" />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block font-semibold text-navy">{label}</span>
+                  <span className="block text-sm text-navy/50">{desc}</span>
+                </span>
+                <ChevronRight className="h-5 w-5 shrink-0 text-navy/30 transition-transform group-hover:translate-x-0.5 group-hover:text-coral" />
+              </button>
+            );
+          })}
         </div>
-      </div>
-      <div className='profile-underline border-[#dddddd] lg:w-[1100px] w-[350px] ml-4'></div>
-      <div className='profile-outer-container'>
-        <ul className='list lg:block hidden'>
-          <li className='list-content cursor-pointer' onClick={() => setActiveSection('Dashboard')}>Dashboard</li>
-          <li className='list-content cursor-pointer' onClick={() => setActiveSection('Orders')}>Orders</li>
-          <Link to='/Cart' className='link'><li className='list-content'>Cart</li></Link>
-          <li className='list-content cursor-pointer' onClick={() => setActiveSection('ShippingAddress')}>Shipping Address</li>
-          <Link to='/Wishlist' className='link'><li className='list-content'>Wishlist</li></Link>
-          <Link to='/ContactUs' className='link'><li className='list-content'>Contact Us</li></Link>
-          <Link to='/TermsofUse' className='link'><li className='list-content'>Terms of Use</li></Link>
-          <Link to='/PrivacyPolicy' className='link'><li className='list-content'>Privacy Policy</li></Link>
-        </ul>
-        <div className='profile-underline1 border-[#dddddd] lg:block hidden'></div>
-        <div className='lg:p-14 mt-4 mb-4 lg:mt-0 lg:mb-0'>
+
+        {/* Quick links */}
+        <h2 className="mt-10 font-display text-xl font-bold text-navy">Quick Links</h2>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {linkItems.map(({ to, label, desc, icon: Icon }) => (
+            <Link
+              key={label}
+              to={to}
+              className="group flex items-center gap-4 rounded-2xl border border-navy/5 bg-white p-5 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-card"
+            >
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-navy/5 text-navy transition-colors group-hover:bg-coral/10 group-hover:text-coral">
+                <Icon className="h-5 w-5" />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block font-semibold text-navy">{label}</span>
+                <span className="block text-sm text-navy/50">{desc}</span>
+              </span>
+              <ChevronRight className="h-5 w-5 shrink-0 text-navy/30 transition-transform group-hover:translate-x-0.5 group-hover:text-coral" />
+            </Link>
+          ))}
+        </div>
+
+        {/* Active section content */}
+        <section className="mt-12 rounded-3xl border border-navy/5 bg-white p-6 shadow-soft sm:p-8 lg:p-10">
           {renderSection()}
-        </div>
-      </div>
-      </div>
+        </section>
+      </main>
+
       <Footer />
-    </>
+    </div>
   );
 }
