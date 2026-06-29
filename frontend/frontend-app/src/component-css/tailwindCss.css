@@ -1,10 +1,76 @@
-/* src/styles/tailwind.css */
+/* src/component-css/tailwindCss.css — global design foundation */
 
-/* Import Tailwind's base styles */
 @tailwind base;
-
-/* Import Tailwind's component styles */
 @tailwind components;
-
-/* Import Tailwind's utility styles */
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --navy: #132c48;
+    --coral: #fe8551;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "Plus Jakarta Sans", Inter, system-ui, sans-serif;
+    color: #132c48;
+    background-color: #fbf7f2;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: "Playfair Display", serif;
+  }
+
+  ::selection {
+    background-color: rgba(254, 133, 81, 0.25);
+    color: #132c48;
+  }
+
+  /* Refined scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(19, 44, 72, 0.28);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(19, 44, 72, 0.5);
+    background-clip: content-box;
+  }
+}
+
+@layer components {
+  /* Primary brand button */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-coral px-7 py-3 font-semibold text-white shadow-glow transition-all duration-300 hover:-translate-y-0.5 hover:bg-coral-500 active:translate-y-0;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-navy/15 bg-white/70 px-7 py-3 font-semibold text-navy backdrop-blur transition-all duration-300 hover:border-navy/40 hover:bg-white;
+  }
+
+  /* Eyebrow / section kicker */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-coral/30 bg-coral/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-coral-600;
+  }
+
+  /* Skeleton shimmer */
+  .skeleton {
+    @apply relative overflow-hidden bg-navy-100/60;
+  }
+  .skeleton::after {
+    content: "";
+    @apply absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/60 to-transparent;
+  }
+}
